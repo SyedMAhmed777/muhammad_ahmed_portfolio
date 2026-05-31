@@ -95,6 +95,12 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [, navigate] = useLocation();
 
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const getAssetUrl = (url: string) => {
+    if (!url) return "";
+    return url.startsWith("http") ? url : `${basePath}/${url.replace(/^\//, "")}`;
+  };
+
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
     const card = scrollRef.current.querySelector("[data-card]") as HTMLElement;
@@ -188,7 +194,7 @@ export default function Projects() {
                   {project.thumbnail ? (
                     <>
                       <img
-                        src={project.thumbnail}
+                        src={getAssetUrl(project.thumbnail)}
                         alt={project.name}
                         className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
@@ -216,7 +222,7 @@ export default function Projects() {
                               }}
                             >
                               <img
-                                src={src}
+                                src={getAssetUrl(src)}
                                 alt=""
                                 style={{
                                   borderRadius: 16,

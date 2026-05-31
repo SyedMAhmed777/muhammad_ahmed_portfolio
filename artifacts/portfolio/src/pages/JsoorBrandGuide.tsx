@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
-const pages = Array.from({ length: 26 }, (_, i) => `/jsoor/${String(i + 1).padStart(2, "0")}.png`);
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+const pages = Array.from({ length: 26 }, (_, i) => `${basePath}/jsoor/${String(i + 1).padStart(2, "0")}.png`);
 
 export default function JsoorBrandGuide() {
   const [, navigate] = useLocation();

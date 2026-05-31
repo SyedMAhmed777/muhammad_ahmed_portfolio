@@ -24,6 +24,8 @@ const DARK2  = "#181A1F";
 
 /* ── primitives ───────────────────────────────────────────── */
 function Phone({ src, alt }: { src: string; alt: string }) {
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const fullSrc = src.startsWith("http") ? src : `${basePath}/${src.replace(/^\//, "")}`;
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -38,7 +40,7 @@ function Phone({ src, alt }: { src: string; alt: string }) {
         cursor: "default",
       }}
     >
-      <img src={src} alt={alt} style={{ borderRadius: 30, display: "block", width: "100%", height: "auto" }} />
+      <img src={fullSrc} alt={alt} style={{ borderRadius: 30, display: "block", width: "100%", height: "auto" }} />
     </motion.div>
   );
 }
