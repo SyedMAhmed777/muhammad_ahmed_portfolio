@@ -84,7 +84,7 @@ const projects = [
     accent: "from-emerald-500 to-green-400",
     icon: Gamepad2,
     href: "/case-study/nicotina",
-    thumbnail: "/nicotina/v3.png",
+    thumbnail: "/nicotina/thumbnail.png",
     chipColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
   },
 ];
