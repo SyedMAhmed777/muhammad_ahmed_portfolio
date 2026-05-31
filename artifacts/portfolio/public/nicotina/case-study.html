@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nicotina — Game On, Nicotine Gone</title>
+<meta name="description" content="Nicotina — a gamified quit-smoking companion app. Onboarding, personalization, daily diary, rewards economy, calculators and habit replacement — across 29 screens." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          mint: { DEFAULT: '#3DCB7A', dark: '#2EBC6E', light: '#E8F9EF', mid: '#c0ecd4' },
+          coral: { DEFAULT: '#FF5A5F', light: '#FFF0F0' },
+          sun: { DEFAULT: '#FFB840', light: '#FFF8E7' },
+        },
+        fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+      }
+    }
+  }
+</script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', sans-serif; background: #fff; color: #111; line-height: 1.6; }
+
+  /* ── Nav ── */
+  .nav-link { font-size: 13px; color: #666; transition: color .15s; }
+  .nav-link:hover { color: #111; }
+
+  /* ── Eyebrow ── */
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: #3DCB7A;
+  }
+
+  /* ── Phone frame ── */
+  .phone {
+    border-radius: 36px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    padding: 7px;
+    box-shadow: 0 20px 50px -15px rgba(0,0,0,.12), 0 4px 12px -4px rgba(0,0,0,.06);
+  }
+  .phone img { display: block; width: 100%; border-radius: 30px; }
+
+  /* ── Divider ── */
+  .rule { border: none; border-top: 1px solid #f0f0f0; margin: 0; }
+
+  /* ── Stat number ── */
+  .stat-num { font-size: clamp(52px, 6vw, 80px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+
+  /* ── Section number watermark ── */
+  .section-num {
+    font-size: clamp(80px, 10vw, 140px);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #f3f3f3;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ── Quote ── */
+  .big-quote { font-size: clamp(20px, 2.2vw, 28px); font-weight: 500; line-height: 1.5; color: #222; }
+
+  /* ── Badges on hero ── */
+  .hero-badge {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    padding: 8px 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid #f0f0f0;">
+  <div style="max-width:72rem;margin:0 auto;padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;gap:2rem;">
+    <a href="/" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#666;text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Portfolio
+    </a>
+
+    <a href="#top" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;">
+      <span style="width:28px;height:28px;background:#3DCB7A;border-radius:8px;display:grid;place-items:center;">
+        <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" viewBox="0 0 24 24"><path d="M12 3c2 2.5 5 4 5 8a5 5 0 1 1-10 0c0-4 3-5.5 5-8Z"/><path d="M10 7c-.5 1-1 2-1 3"/></svg>
+      </span>
+      <span style="font-size:14px;font-weight:700;letter-spacing:-.02em;color:#111;">Nicotina <span style="color:#3DCB7A;">·</span> Project</span>
+    </a>
+
+    <nav style="display:flex;align-items:center;gap:28px;">
+      <a href="#overview" class="nav-link">Overview</a>
+      <a href="#problem" class="nav-link">Problem</a>
+      <a href="#screens" class="nav-link">Screens</a>
+      <a href="#outcome" class="nav-link">Outcome</a>
+      <a href="#screens" style="height:34px;padding:0 18px;background:#111;color:#fff;border-radius:100px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:opacity .15s;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        View screens
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ── HERO ── -->
+<section id="top" style="background:#fff;border-bottom:1px solid #f0f0f0;overflow:hidden;">
+  <div style="max-width:72rem;margin:0 auto;padding:6rem 2rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+
+    <div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2rem;">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#666;border:1px solid #e5e5e5;border-radius:100px;padding:4px 12px;">2024 · Mobile App</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#3DCB7A;border:1px solid #c0ecd4;border-radius:100px;padding:4px 12px;background:#E8F9EF;">iOS · Android</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#FF5A5F;border:1px solid #ffd0d2;border-radius:100px;padding:4px 12px;background:#FFF0F0;">Behavioural · Gamified</span>
+      </div>
+
+      <h1 style="font-size:clamp(44px,5.5vw,72px);font-weight:900;letter-spacing:-.04em;line-height:1.02;color:#111;margin-bottom:1.5rem;">
+        Quit smoking,<br/>
+        <span style="color:#3DCB7A;">one tomato</span><br/>
+        at a time.
+      </h1>
+
+      <p style="font-size:17px;color:#555;line-height:1.7;max-width:480px;margin-bottom:2.5rem;">
+        <strong style="color:#111;">Nicotina</strong> turns one of the hardest behavioural changes into a daily game. A friendly veggie avatar tracks your habits, your money, and your lungs — and rewards you for showing up, even on the days you slip. Designed end-to-end across <strong style="color:#111;">29 screens</strong>.
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;padding-top:.5rem;border-top:1px solid #f0f0f0;margin-bottom:2.5rem;">
+        <div><p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3DCB7A;margin-bottom:4px;">Role</p><p style="font-size:13px;font-weight:600;color:#111;">Lead Product Designer</p></div>
+        <div><p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3DCB7A;margin-bottom:4px;">Timeline</p><p style="font-size:13px;font-weight:600;color:#111;">10 weeks</p></div>
+        <div><p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3DCB7A;margin-bottom:4px;">Platform</p><p style="font-size:13px;font-weight:600;color:#111;">iOS · Android</p></div>
+        <div><p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3DCB7A;margin-bottom:4px;">Tools</p><p style="font-size:13px;font-weight:600;color:#111;">Figma · Notion</p></div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a href="#screens" style="height:44px;padding:0 24px;background:#3DCB7A;color:#fff;border-radius:100px;font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:opacity .15s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+          Explore screens
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#problem" style="height:44px;padding:0 24px;background:transparent;color:#111;border-radius:100px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid #e5e5e5;transition:border-color .15s;" onmouseover="this.style.borderColor='#bbb'" onmouseout="this.style.borderColor='#e5e5e5'">
+          Read the story
+        </a>
+      </div>
+    </div>
+
+    <div style="position:relative;padding-bottom:3rem;">
+      <div style="transform:rotate(-4deg);">
+        <div class="phone"><img src="v3.png" alt="Daily home dashboard" /></div>
+      </div>
+      <div style="position:absolute;bottom:0;right:-1rem;width:58%;transform:rotate(5deg);">
+        <div class="phone"><img src="Levels.png" alt="Levels and trophies" /></div>
+      </div>
+      <div class="hero-badge" style="position:absolute;top:0;left:-1rem;transform:rotate(-6deg);">
+        <span style="width:22px;height:22px;background:#FFB840;border-radius:50%;display:grid;place-items:center;font-size:11px;">★</span>
+        +5 stars
+      </div>
+      <div class="hero-badge" style="position:absolute;top:40%;right:-1rem;transform:rotate(6deg);">
+        <span style="width:22px;height:22px;background:#E8F9EF;border-radius:50%;display:grid;place-items:center;font-size:11px;">🔥</span>
+        12-day streak
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ── 01 OVERVIEW ── -->
+<section id="overview" style="padding:7rem 2rem;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;">
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem;">01 — Overview</p>
+        <h2 style="font-size:clamp(32px,3.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#111;">
+          A pet you keep alive by keeping yourself <span style="color:#3DCB7A;">alive</span>.
+        </h2>
+      </div>
+      <div>
+        <p style="font-size:17px;color:#555;line-height:1.75;margin-bottom:1.25rem;">
+          Most quit-smoking apps are built like spreadsheets — counters, charts, "days clean" badges that feel either preachy or punishing. Nicotina takes the opposite stance: it's a game, with a tiny tomato (or cucumber, or mushroom) that you're keeping company on a journey out of nicotine.
+        </p>
+        <p style="font-size:17px;color:#555;line-height:1.75;margin-bottom:3rem;">
+          The product blends habit-tracking, behavioural nudging and a virtual reward economy so that choosing not to smoke <strong style="color:#111;font-weight:600;">earns</strong> you something tangible — XP, gems, a new hat for your veggie, hours added to a "Life Won" counter, or a real-world cost comparison.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#f0f0f0;border:1px solid #f0f0f0;border-radius:16px;overflow:hidden;">
+          <div style="background:#fff;padding:1.5rem;">
+            <p class="stat-num" style="color:#3DCB7A;">29</p>
+            <p style="font-size:13px;color:#888;margin-top:6px;">Screens designed</p>
+          </div>
+          <div style="background:#fff;padding:1.5rem;">
+            <p class="stat-num" style="color:#FF5A5F;">3</p>
+            <p style="font-size:13px;color:#888;margin-top:6px;">Mascot personalities</p>
+          </div>
+          <div style="background:#fff;padding:1.5rem;">
+            <p class="stat-num" style="color:#FFB840;">10</p>
+            <p style="font-size:13px;color:#888;margin-top:6px;">Feature areas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── 02 PROBLEM ── -->
+<section id="problem" style="padding:7rem 2rem;background:#fafafa;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;margin-bottom:4rem;">
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem;">02 — The Problem</p>
+        <h2 style="font-size:clamp(32px,3.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#111;margin-bottom:1.25rem;">
+          Quitting feels like punishment. It shouldn't.
+        </h2>
+        <p style="font-size:15px;color:#777;line-height:1.7;">
+          Through interviews with people on (and off) quit attempts and a teardown of the leading apps, four patterns kept surfacing — each one a moment where motivation collapsed.
+        </p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e8e8e8;border:1px solid #e8e8e8;border-radius:20px;overflow:hidden;">
+        <div style="background:#fff;padding:1.75rem;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#3DCB7A;margin-bottom:.75rem;">01</p>
+          <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:.5rem;">Streaks become anxiety</h3>
+          <p style="font-size:13px;color:#888;line-height:1.65;">A 47-day streak is glorious — until day 48 turns it into a 0. Many users delete the app rather than face the reset.</p>
+        </div>
+        <div style="background:#fff;padding:1.75rem;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#3DCB7A;margin-bottom:.75rem;">02</p>
+          <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:.5rem;">Savings feel abstract</h3>
+          <p style="font-size:13px;color:#888;line-height:1.65;">"$120 saved" doesn't motivate when it's just a number. People want to see what that money <em>becomes</em>.</p>
+        </div>
+        <div style="background:#fff;padding:1.75rem;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#3DCB7A;margin-bottom:.75rem;">03</p>
+          <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:.5rem;">Slip-ups feel like failure</h3>
+          <p style="font-size:13px;color:#888;line-height:1.65;">Apps treat a relapse as the end of the world; behavioural research treats it as data. Most products don't reflect the science.</p>
+        </div>
+        <div style="background:#fff;padding:1.75rem;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#3DCB7A;margin-bottom:.75rem;">04</p>
+          <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:.5rem;">There's a void where the cigarette was</h3>
+          <p style="font-size:13px;color:#888;line-height:1.65;">No one talks about the 3pm hand-to-mouth ritual. Without a replacement habit, willpower runs out around week two.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div style="border-left:3px solid #3DCB7A;padding:2rem 2.5rem;background:#fff;border-radius:0 16px 16px 0;">
+      <p class="big-quote">"Every app I tried felt like a doctor wagging a finger at me. I needed something that cheered when I did the right thing — not just guilt-tripped me when I didn't."</p>
+      <p style="font-size:13px;color:#999;margin-top:1rem;font-weight:500;">— User interview, 31, third quit attempt</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── 03 GOALS ── -->
+<section style="padding:7rem 2rem;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;">
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem;">03 — Goals</p>
+        <h2 style="font-size:clamp(32px,3.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#111;">
+          Four principles guided every screen.
+        </h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.75rem;">
+        <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem;border:1px solid #f0f0f0;border-radius:14px;background:#fff;">
+          <div style="width:36px;height:36px;background:#E8F9EF;border-radius:10px;display:grid;place-items:center;flex-shrink:0;margin-top:2px;">
+            <svg width="16" height="16" fill="none" stroke="#3DCB7A" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:4px;">Make progress feel <em>earned</em>, not measured</h3>
+            <p style="font-size:13px;color:#888;line-height:1.65;">XP, levels and trophies — not just counters. Every healthy choice produces a small, visible reward.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem;border:1px solid #f0f0f0;border-radius:14px;background:#fff;">
+          <div style="width:36px;height:36px;background:#FFF0F0;border-radius:10px;display:grid;place-items:center;flex-shrink:0;margin-top:2px;">
+            <svg width="16" height="16" fill="none" stroke="#FF5A5F" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-7 11-7 11Z"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:4px;">Replace the cigarette with a habit, not a void</h3>
+            <p style="font-size:13px;color:#888;line-height:1.65;">A daily Alternatives card suggests a small, concrete action — sugar-free gum, a 5-min walk, an apple — to fill the ritual gap.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem;border:1px solid #f0f0f0;border-radius:14px;background:#fff;">
+          <div style="width:36px;height:36px;background:#FFF8E7;border-radius:10px;display:grid;place-items:center;flex-shrink:0;margin-top:2px;">
+            <svg width="16" height="16" fill="none" stroke="#FFB840" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 2v20M5 7h11a3 3 0 0 1 0 6H8a3 3 0 0 0 0 6h11"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:4px;">Show the cost in human terms</h3>
+            <p style="font-size:13px;color:#888;line-height:1.65;">Money saved isn't a number — it's a smartphone, a vacation, a year of Spotify. The Wealth Calculator makes the trade-off visceral.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem;border:1px solid #f0f0f0;border-radius:14px;background:#fff;">
+          <div style="width:36px;height:36px;background:#E8F9EF;border-radius:10px;display:grid;place-items:center;flex-shrink:0;margin-top:2px;">
+            <svg width="16" height="16" fill="none" stroke="#3DCB7A" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:15px;font-weight:700;color:#111;margin-bottom:4px;">Treat slip-ups as data, not shame</h3>
+            <p style="font-size:13px;color:#888;line-height:1.65;">The diary asks "did you smoke?" and "how did you feel?" — never "did you fail?" Streaks measure check-ins, not perfection.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── 04 PERSONAS ── -->
+<section style="padding:7rem 2rem;background:#fafafa;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <p class="eyebrow" style="margin-bottom:1rem;">04 — Who we're designing for</p>
+    <h2 style="font-size:clamp(32px,3.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#111;margin-bottom:3rem;">Two stories, one game.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:20px;padding:2.5rem;">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:1.5rem;">
+          <div style="width:52px;height:52px;background:#FFF0F0;border-radius:14px;display:grid;place-items:center;font-size:24px;">🍅</div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#111;">Lara, 26</h3>
+            <p style="font-size:13px;color:#888;">Junior designer · Social vaper, wants to stop early</p>
+          </div>
+        </div>
+        <p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:1.5rem;">Vapes when she drinks. Realises she's been doing it for two years and "doesn't feel like a smoker" — but knows that's how it starts. Wants something low-stakes, fun, that doesn't make her admit she has a "problem" yet.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div>
+            <p style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#3DCB7A;margin-bottom:8px;">Needs</p>
+            <ul style="list-style:none;font-size:13px;color:#555;line-height:2;">
+              <li>· Soft on-ramp, no medical tone</li>
+              <li>· Visible early wins</li>
+              <li>· A reason to open it daily</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#FF5A5F;margin-bottom:8px;">Frustrations</p>
+            <ul style="list-style:none;font-size:13px;color:#555;line-height:2;">
+              <li>· Apps that assume the worst</li>
+              <li>· Cold, clinical UI</li>
+              <li>· Guilt-trip notifications</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8e8e8;border-radius:20px;padding:2.5rem;">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:1.5rem;">
+          <div style="width:52px;height:52px;background:#E8F9EF;border-radius:14px;display:grid;place-items:center;font-size:24px;">🥒</div>
+          <div>
+            <h3 style="font-size:17px;font-weight:700;color:#111;">Marcus, 38</h3>
+            <p style="font-size:13px;color:#888;">Operations manager · Pack-a-day for 15 years, third attempt</p>
+          </div>
+        </div>
+        <p style="font-size:14px;color:#666;line-height:1.7;margin-bottom:1.5rem;">Has tried cold-turkey twice. Knows willpower alone won't work. Wants tooling that respects his intelligence — show him the science, the money, the lung-capacity gain — but also gives him something to do at 3pm when the craving hits hardest.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div>
+            <p style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#3DCB7A;margin-bottom:8px;">Needs</p>
+            <ul style="list-style:none;font-size:13px;color:#555;line-height:2;">
+              <li>· Hard data + soft motivation</li>
+              <li>· Replacement-habit prompts</li>
+              <li>· Forgiving relapse model</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#FF5A5F;margin-bottom:8px;">Frustrations</p>
+            <ul style="list-style:none;font-size:13px;color:#555;line-height:2;">
+              <li>· "Day 1" reset shame</li>
+              <li>· Vague "money saved" stats</li>
+              <li>· Subscription paywalls early</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── 05 CORE LOOP ── -->
+<section style="padding:7rem 2rem;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;margin-bottom:4rem;">
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem;">05 — Core Loop</p>
+        <h2 style="font-size:clamp(32px,3.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#111;">From "I'm thinking about it" to "I'm playing daily."</h2>
+      </div>
+      <p style="font-size:17px;color:#555;line-height:1.75;align-self:center;">The core loop is small on purpose: open the app, log the day, watch your veggie react, cash in your rewards. Every other surface lives one tab away so the daily check-in stays under 30 seconds.</p>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:0;border:1px solid #e8e8e8;border-radius:20px;overflow:hidden;">
+      <div style="flex:1;padding:2rem 1.5rem;text-align:center;border-right:1px solid #f0f0f0;">
+        <div style="width:40px;height:40px;background:#E8F9EF;border-radius:12px;margin:0 auto 1rem;display:grid;place-items:center;">
+          <svg width="18" height="18" fill="none" stroke="#3DCB7A" stroke-width="2.2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3DCB7A;margin-bottom:6px;">01</p>
+        <p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Sign up</p>
+        <p style="font-size:11px;color:#aaa;">Or continue as guest</p>
+      </div>
+      <div style="flex:1;padding:2rem 1.5rem;text-align:center;border-right:1px solid #f0f0f0;background:#fafafa;">
+        <div style="width:40px;height:40px;background:#E8F9EF;border-radius:12px;margin:0 auto 1rem;display:grid;place-items:center;">
+          <svg width="18" height="18" fill="none" stroke="#3DCB7A" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 6h18M5 12h14M7 18h10"/></svg>
+        </div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3DCB7A;margin-bottom:6px;">02</p>
+        <p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Personalize</p>
+        <p style="font-size:11px;color:#aaa;">Habit, target, avatar</p>
+      </div>
+      <div style="flex:1;padding:2rem 1.5rem;text-align:center;border-right:1px solid #f0f0f0;">
+        <div style="width:40px;height:40px;background:#E8F9EF;border-radius:12px;margin:0 auto 1rem;display:grid;place-items:center;">
+          <svg width="18" height="18" fill="none" stroke="#3DCB7A" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>
+        </div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#3DCB7A;margin-bottom:6px;">03</p>
+        <p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Daily check-in</p>
+        <p style="font-size:11px;color:#aaa;">Smoked? · Mood?</p>
+      </div>
+      <div style="flex:1;padding:2rem 1.5rem;text-align:center;border-right:1px solid #f0f0f0;background:#fafafa;">
+        <div style="width:40px;height:40px;background:#FFF8E7;border-radius:12px;margin:0 auto 1rem;display:grid;place-items:center;">
+          <svg width="18" height="18" fill="none" stroke="#FFB840" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4l-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z"/></svg>
+        </div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FFB840;margin-bottom:6px;">04</p>
+        <p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Earn rewards</p>
+        <p style="font-size:11px;color:#aaa;">XP · Stars · Gems</p>
+      </div>
+      <div style="flex:1;padding:2rem 1.5rem;text-align:center;">
+        <div style="width:40px;height:40px;background:#111;border-radius:12px;margin:0 auto 1rem;display:grid;place-items:center;">
+          <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 7h18l-2 13H5L3 7Z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
+        </div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#111;margin-bottom:6px;">05</p>
+        <p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Cash in</p>
+        <p style="font-size:11px;color:#aaa;">Shop · Calculator · Level up</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── 07 SCREENS ── -->
+<section id="screens" style="padding:7rem 2rem;background:#fafafa;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <p class="eyebrow" style="margin-bottom:1rem;">07 — Key Screens</p>
+    <h2 style="font-size:clamp(32px,3.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#111;margin-bottom:.75rem;max-width:32rem;">Every screen, organized by what the user is trying to do.</h2>
+    <p style="font-size:15px;color:#888;margin-bottom:5rem;">29 screens across 10 feature areas.</p>
+
+    <!-- 7.1 Welcome -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.1 — Welcome</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">A first impression that doesn't lecture.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">Mascots and a hand-lettered logo set the tone in three seconds: this is going to be playful, low-stakes, and a little weird in the best way.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+        <div><div class="phone"><img src="Splash.png" alt="Splash" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Splash</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Hand-drawn logo + the two heroes say "this is a game" before any words do.</p></div></div>
+        <div><div class="phone"><img src="get started.png" alt="Get started" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Get Started</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Honest framing: "this app only works if you do 2 things." Sets expectations early — no false promises.</p></div></div>
+        <div><div class="phone"><img src="How to play.png" alt="How to play" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">How to Play</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">A single page that explains the entire mechanic — red when you slip, blue when you replace.</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7.2 Auth -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.2 — Authentication</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">Sign in, or skip the form altogether.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">A "Continue as guest" path lowers the bar to entry — habit data first, account later. Error states stay friendly, never red-screen-of-death.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;">
+        <div><div class="phone"><img src="Sign in.png" alt="Sign in" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Sign in</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Username/email + password, with "Continue as guest" right under the primary.</p></div></div>
+        <div><div class="phone"><img src="Sign up.png" alt="Sign up empty" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Sign up — empty</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Four fields max. Social SSO at the bottom for the "I'll use Google" crowd.</p></div></div>
+        <div><div class="phone"><img src="Sign up-2.png" alt="Sign up filled" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Sign up — filled</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">CTA stays calmly disabled until validation passes. Inline helper text, no shouting.</p></div></div>
+        <div><div class="phone"><img src="Sign up-1.png" alt="Sign up error" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Sign up — error</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">A worried cucumber softens the "Ooops!" — even the failure state is in-character.</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7.3 Personalization -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.3 — Personalization</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">Five questions, one avatar.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">A short quiz tunes the entire experience: what you smoke, how often, your goal, your reminder cadence, and the veggie that'll keep you company.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;">
+        <div><div class="phone"><img src="onboarding-1.png" alt="What you smoke" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">What you smoke</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Pill-style multi-choice + cost + nicotine content from a database lookup.</p></div></div>
+        <div><div class="phone"><img src="onboarding-2.png" alt="How often" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">How often</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Two stacked sliders + an honest "Not Sure" — no guilt for not knowing.</p></div></div>
+        <div><div class="phone"><img src="onboarding-3.png" alt="Your target" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Your target</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Stop · Decrease · Maintain. Three different games inside one app.</p></div></div>
+        <div><div class="phone"><img src="onboarding-4.png" alt="Choose avatar" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Choose your veggie</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Three personalities to pick from — and you name them.</p></div></div>
+        <div><div class="phone"><img src="Reminder.png" alt="Reminder timing" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Reminder timing</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Wheel-style time picker. "Never" is a valid answer — no dark patterns.</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7.4 Home -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.4 — Home Screen</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">Where the whole product earns its keep.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">The home is the 30-second daily ritual: see your level, check the mood strip, press the big red or blue button, and move on with your day.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center;">
+        <div class="phone"><img src="v3.png" alt="Daily home dashboard" /></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e8e8e8;border-radius:16px;overflow:hidden;border:1px solid #e8e8e8;">
+          <div style="background:#fff;padding:1.5rem;"><p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Level + XP at the top</p><p style="font-size:12px;color:#888;line-height:1.65;">Progress is the first thing you see — a soft, persistent reminder that you're moving forward.</p></div>
+          <div style="background:#fff;padding:1.5rem;"><p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Stars and gems, top right</p><p style="font-size:12px;color:#888;line-height:1.65;">Two currencies: stars for streaks, gems for milestones. Spend them in the shop without ever paying real money.</p></div>
+          <div style="background:#fff;padding:1.5rem;"><p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Mood strip — a single tap</p><p style="font-size:12px;color:#888;line-height:1.65;">😵 → 😟 → 😐 → 😊 fills the data the diary needs without making the user "journal".</p></div>
+          <div style="background:#fff;padding:1.5rem;"><p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">The two buttons</p><p style="font-size:12px;color:#888;line-height:1.65;">Blue = "I replaced". Red = "I smoked". The whole behavioural model, reduced to two pixels of intent.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7.5 Diary -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.5 — Diary</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">Honest with yourself, one tap at a time.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">A small, scrollable list of every day you logged — paired with a single feeling. No paragraph-writing required.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;">
+        <div><div class="phone"><img src="diary.png" alt="Diary list" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Diary</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Each row tells a tiny story: "Smoked · I felt really bad" / "Didn't smoke · I felt superb."</p></div></div>
+        <div><div class="phone"><img src="add diary.png" alt="Add diary entry" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Add entry</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Calendar → Yes/No → 5 mood pills → optional note. Logging a day takes under 8 seconds.</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7.6 Progress -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.6 — Progress & Reporting</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">Numbers that feel like a win.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">Two surfaces: the bright-and-loud Levels view (XP, trophies, streak), and the quiet-and-deep Reporting view (calendar, money saved, mood trend).</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;">
+        <div><div class="phone"><img src="Levels.png" alt="Levels and trophies" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Levels</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Hexagons unlock left-to-right. Trophies sit in a quiet shelf below — present, but not nagging.</p></div></div>
+        <div><div class="phone"><img src="Stats.png" alt="Reporting view" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Reporting</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Daily/Weekly/Monthly/Yearly tabs. Money saved + life regained sit right under the calendar.</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7.7 Calculators -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.7 — The Calculators</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">Make the cost <em>visceral</em>.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">Two tools turn abstract numbers into something you can feel: time you'd win back, and the things that money becomes.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+        <div><div class="phone"><img src="Calculators.png" alt="Calculators hub" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Hub</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Two simple cards. No nested menus, no "advanced settings" hidden behind a gear.</p></div></div>
+        <div><div class="phone"><img src="Life Calculator.png" alt="Life Calculator" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Life Calculator</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Slider-driven. Output: time won + money saved + nicotine avoided — three concrete numbers.</p></div></div>
+        <div><div class="phone"><img src="Life Calculator-1.png" alt="Wealth Calculator" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Wealth Calculator</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">A car. A vacation. A laptop. Pink cards = out of reach. Green = within reach.</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7.8 Alternatives -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.8 — Habit Replacement</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">A new ritual, every day.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">Behavioural science says quitting is easier when you replace, not just remove. A new card unlocks each day — small, doable, and finite.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center;">
+        <div class="phone"><img src="Alternatives.png" alt="Alternatives screen" /></div>
+        <div style="display:flex;flex-direction:column;gap:.75rem;">
+          <div style="padding:1.5rem;border:1px solid #f0f0f0;border-radius:14px;background:#fff;"><p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">One alternative per day, locked ahead</p><p style="font-size:12px;color:#888;line-height:1.65;">"Day 1: Sugar Free Gum" → "Day 2: Eat an Apple". The ? cards build curiosity without overwhelming.</p></div>
+          <div style="padding:1.5rem;border:1px solid #f0f0f0;border-radius:14px;background:#fff;"><p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Tied to the daily check-in</p><p style="font-size:12px;color:#888;line-height:1.65;">Marking "I replaced" on the home screen is what unlocks the next day's card — the loop closes.</p></div>
+          <div style="padding:1.5rem;border:1px solid #f0f0f0;border-radius:14px;background:#fff;"><p style="font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Curated, not generated</p><p style="font-size:12px;color:#888;line-height:1.65;">Suggestions come from a vetted list of 90+ research-backed substitutes — not an LLM hallucination.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7.9 Shop -->
+    <div style="margin-bottom:5rem;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.9 — Reward Economy</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">A reason to come back tomorrow.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">Stars and gems earned through daily check-ins buy cosmetic items for your veggie. No pay-to-progress, ever — premium items are clearly labelled "Subscriber only".</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;">
+        <div><div class="phone"><img src="shop.png" alt="Shop categories" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Shop · Categories</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Background, Wall, Pot, Table, Decoration — your veggie has a whole apartment.</p></div></div>
+        <div><div class="phone"><img src="shop-1.png" alt="Shop accessories" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Shop · Accessories</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Glasses and hats. Tiny dopamine, repeatable forever.</p></div></div>
+        <div><div class="phone"><img src="Items.png" alt="Items to buy" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Items · Buy</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Star-priced and gem-priced items side-by-side. "Subscriber only" is honest, not sneaky.</p></div></div>
+        <div><div class="phone"><img src="Owned.png" alt="Owned tab" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Owned · Equip</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">A separate tab so the act of "wearing" stays distinct from buying.</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7.10 Account -->
+    <div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid #ececec;">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem;">7.10 — Account & Community</p>
+          <h3 style="font-size:24px;font-weight:800;color:#111;letter-spacing:-.02em;">The boring screens, designed with the same care.</h3>
+        </div>
+        <p style="font-size:13px;color:#888;max-width:360px;line-height:1.65;">Profile, Settings, Spotlight (community events) and Notifications. Familiar patterns — every list row has the same warmth as the rest of the app.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;">
+        <div><div class="phone"><img src="Profile.png" alt="Profile" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Profile</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Your veggie up top, then a calm list — Achievements, Notifications, Community, Stats…</p></div></div>
+        <div><div class="phone"><img src="Settings.png" alt="Settings" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Settings</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Five rows. The dangerous one ("Delete All Data") gets a coral icon — earning attention without alarming.</p></div></div>
+        <div><div class="phone"><img src="spotlight.png" alt="Spotlight community" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Spotlight</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Community events, IRL meetups, and seasonal campaigns ("Nicotine-free February").</p></div></div>
+        <div><div class="phone"><img src="Notification.png" alt="Notifications" /></div><div style="margin-top:1rem;"><p style="font-size:13px;font-weight:700;color:#111;">Notifications</p><p style="font-size:12px;color:#999;margin-top:4px;line-height:1.6;">Two clear actions per row — Mark as Read · Delete. No nested swipe gestures.</p></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── 08 OUTCOMES ── -->
+<section id="outcome" style="padding:7rem 2rem;">
+  <div style="max-width:72rem;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start;margin-bottom:4rem;">
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem;">08 — Outcomes</p>
+        <h2 style="font-size:clamp(32px,3.5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#111;">What changed once people started playing.</h2>
+      </div>
+      <p style="font-size:17px;color:#555;line-height:1.75;align-self:center;">Tested with 9 participants in moderated sessions over two weeks — 4 social vapers, 5 long-term smokers. Tasks included finishing onboarding, logging a "smoked" day without rage-quitting, and using the Wealth Calculator to set a personal goal.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e8e8e8;border:1px solid #e8e8e8;border-radius:20px;overflow:hidden;margin-bottom:3rem;">
+      <div style="background:#fff;padding:2.5rem;">
+        <p class="stat-num" style="color:#3DCB7A;">9/9</p>
+        <p style="font-size:13px;color:#888;margin-top:.75rem;line-height:1.65;">Completed personalization without skipping — the avatar reveal kept everyone hooked to the end.</p>
+      </div>
+      <div style="background:#fff;padding:2.5rem;">
+        <p class="stat-num" style="color:#FF5A5F;">0</p>
+        <p style="font-size:13px;color:#888;margin-top:.75rem;line-height:1.65;">Participants who deleted the app after their first "smoked" log — the diary's gentle framing held.</p>
+      </div>
+      <div style="background:#fff;padding:2.5rem;">
+        <p class="stat-num" style="color:#FFB840;">4.7<span style="font-size:2rem;font-weight:800;">/5</span></p>
+        <p style="font-size:13px;color:#888;margin-top:.75rem;line-height:1.65;">"Feels like a game I want to play" rating — vs. 2.4/5 for the leading competitor in the same test.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+      <div style="padding:2rem;border:1px solid #f0f0f0;border-radius:16px;">
+        <p style="font-size:13px;font-weight:700;color:#3DCB7A;margin-bottom:1rem;letter-spacing:.05em;">WHAT WORKED</p>
+        <ul style="list-style:none;font-size:13px;color:#666;line-height:1.9;">
+          <li>· The Wealth Calculator was the most-screenshotted screen — users showed it to partners and friends, turning the app into a conversation.</li>
+          <li style="margin-top:.5rem;">· The two-button home (red/blue) made the daily action obvious. Average check-in time: 11 seconds.</li>
+          <li style="margin-top:.5rem;">· The mascot reveal at the end of personalization had the highest "delight" score in unprompted feedback.</li>
+          <li style="margin-top:.5rem;">· Coral was correctly read as "this is the bad-day option" without any explanation in 8/9 tests.</li>
+        </ul>
+      </div>
+      <div style="padding:2rem;border:1px solid #f0f0f0;border-radius:16px;">
+        <p style="font-size:13px;font-weight:700;color:#FFB840;margin-bottom:1rem;letter-spacing:.05em;">WHAT I'D CHANGE NEXT</p>
+        <ul style="list-style:none;font-size:13px;color:#666;line-height:1.9;">
+          <li>· Build a real empty state for the home — first-time users see "0/0" stats and no XP, which feels lifeless.</li>
+          <li style="margin-top:.5rem;">· Add a "soft slip" pattern: when a user logs a smoke, the avatar should react with care, not just reset the streak to 0.</li>
+          <li style="margin-top:.5rem;">· Surface the Alternatives suggestion before the user reaches for the red button — pre-empting the craving.</li>
+          <li style="margin-top:.5rem;">· Explore a buddy system in Spotlight — pair quitters at similar stages so the social fabric isn't only one-way.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ── FOOTER ── -->
+<footer style="padding:2.5rem 2rem;">
+  <div style="max-width:72rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <p style="font-size:13px;color:#bbb;">© Nicotina · A UX/UI Project</p>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="#overview" style="font-size:13px;color:#999;text-decoration:none;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">Overview</a>
+      <a href="#screens" style="font-size:13px;color:#999;text-decoration:none;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">Screens</a>
+      <a href="#outcome" style="font-size:13px;color:#999;text-decoration:none;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">Outcome</a>
+      <a href="/" style="height:34px;padding:0 16px;background:#111;color:#fff;border-radius:100px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;text-decoration:none;">
+        ← Portfolio
+      </a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
