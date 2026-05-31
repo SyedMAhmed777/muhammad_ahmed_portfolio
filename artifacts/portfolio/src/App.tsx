@@ -32,7 +32,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
         <TooltipProvider>
-          <WouterRouter hook={useHashLocation} base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+          <WouterRouter hook={useHashLocation}>
             <Router />
           </WouterRouter>
           <Toaster />
