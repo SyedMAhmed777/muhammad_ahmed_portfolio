@@ -76,7 +76,7 @@ const projects = [
     id: 4,
     name: "Nicotina",
     subtitle: "Gamified Quit-Smoking App",
-    description: "A gamified quit-smoking companion for iOS & Android. A veggie mascot tracks your habits, money saved, and lungs — and rewards you for showing up, even on days you slip. Designed across 29 screens including onboarding, diary, calculators, reward shop, and community.",
+    description: "A gamified quit-smoking companion for iOS & Android. A veggie mascot tracks your habits, money saved, and lungs, rewarding you for showing up even on days you slip. Designed across 29 screens including onboarding, diary, calculators, reward shop, and community.",
     tools: ["Figma", "UX Research", "Interaction Design", "Prototyping", "Notion"],
     category: "Mobile App",
     badge: "Project",
@@ -294,7 +294,7 @@ export default function Projects() {
                   </p>
 
                   <p className="text-xs text-muted-foreground/70 tracking-wide">
-                    {project.tools.join(" — ")}
+                    {project.tools.join(" · ")}
                   </p>
                 </div>
               </motion.div>
