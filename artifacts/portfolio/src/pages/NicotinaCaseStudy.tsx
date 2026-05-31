@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "wouter";
+import { useHashLocation } from "@/hooks/use-hash-location";
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -262,7 +262,7 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
 
 /* ── main page ───────────────────────────────────────────── */
 export default function NicotinaCaseStudy() {
-  const [, navigate] = useLocation();
+  const [, navigate] = useHashLocation();
   const [activeCat, setActiveCat] = useState<CategoryItem>(CATEGORIES[0]);
   const [activeScreenIndex, setActiveScreenIndex] = useState(0);
 

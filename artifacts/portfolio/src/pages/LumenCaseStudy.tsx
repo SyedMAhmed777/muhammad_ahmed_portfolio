@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, Fragment } from "react";
-import { useLocation } from "wouter";
+import { useHashLocation } from "@/hooks/use-hash-location";
 import { ArrowLeft, ArrowRight, Check, AlertCircle, Wifi, Clock, Layers, Plus, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -169,7 +169,7 @@ function InfoCard({ title, body, wide }: { title: string; body: string; wide?: b
 
 /* ── main page ───────────────────────────────────────────── */
 export default function LumenCaseStudy() {
-  const [, navigate] = useLocation();
+  const [, navigate] = useHashLocation();
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (

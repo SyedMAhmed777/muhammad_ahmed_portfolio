@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useLocation } from "wouter";
+import { useHashLocation } from "@/hooks/use-hash-location";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, LayoutDashboard, ChevronLeft, ChevronRight, Smartphone, Palette, Gamepad2 } from "lucide-react";
 
@@ -93,7 +93,7 @@ export default function Projects() {
   const ref = useRef(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const [, navigate] = useLocation();
+  const [, navigate] = useHashLocation();
 
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
   const getAssetUrl = (url: string) => {

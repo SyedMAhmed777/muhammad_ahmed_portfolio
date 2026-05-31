@@ -1,8 +1,8 @@
-import { useLocation } from "wouter";
+import { useHashLocation } from "@/hooks/use-hash-location";
 import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
-  const [, navigate] = useLocation();
+  const [, navigate] = useHashLocation();
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background">

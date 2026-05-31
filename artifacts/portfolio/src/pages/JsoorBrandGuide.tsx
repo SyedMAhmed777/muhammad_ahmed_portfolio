@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useLocation } from "wouter";
+import { useHashLocation } from "@/hooks/use-hash-location";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 const pages = Array.from({ length: 26 }, (_, i) => `${basePath}/jsoor/${String(i + 1).padStart(2, "0")}.png`);
 
 export default function JsoorBrandGuide() {
-  const [, navigate] = useLocation();
+  const [, navigate] = useHashLocation();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 

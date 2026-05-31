@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "wouter";
+import { useHashLocation } from "@/hooks/use-hash-location";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
 const slides = [
@@ -18,7 +18,7 @@ const slides = [
 ];
 
 export default function PayGoDashCaseStudy() {
-  const [, navigate] = useLocation();
+  const [, navigate] = useHashLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
