@@ -17,5 +17,5 @@ export function useHashLocation() {
     window.location.hash = to;
   };
 
-  return [loc, navigate] as const;
+  return [loc, navigate] as [string, (to: string) => void];
 }
