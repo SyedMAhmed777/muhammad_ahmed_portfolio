@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -31,8 +32,8 @@ const socialLinks = [
 //   4. Account → API Keys → copy your Public Key
 // ──────────────────────────────────────────────────────────────────────────────
 const EMAILJS_SERVICE_ID  = "service_iwgdx5k";    // ✅ Gmail service
-const EMAILJS_TEMPLATE_ID = "template_toximko";   // ✅ Contact Us template
-const EMAILJS_PUBLIC_KEY  = "HbIdAcYe2JjIktnxE";  // ✅ Public key
+const EMAILJS_TEMPLATE_ID = "fexlmko";            // ✅ Contact Us template ID from url
+const EMAILJS_PUBLIC_KEY  = "HbIdAcYe2iJiktnxE";  // ✅ Public key with lowercase 'i'
 
 export default function Contact() {
   const ref = useRef(null);
@@ -46,7 +47,6 @@ export default function Contact() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const emailjs = await import("@emailjs/browser");
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -63,11 +63,11 @@ export default function Contact() {
         description: "Thanks for reaching out. I'll get back to you shortly.",
       });
       form.reset();
-    } catch (err) {
+    } catch (err: any) {
       console.error("EmailJS error:", err);
       toast({
         title: "Couldn't send message",
-        description: "Please email me directly at muhammad.ahmed.9760@gmail.com",
+        description: `Error: ${err?.text || err?.message || "Failed to send"}`,
         variant: "destructive",
       });
     }
