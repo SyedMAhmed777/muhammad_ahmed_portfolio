@@ -30,7 +30,7 @@ const socialLinks = [
 //   3. Create Email Template → copy the Template ID
 //   4. Account → API Keys → copy your Public Key
 // ──────────────────────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID  = "service_lwgdx5k";    // ✅ Gmail service
+const EMAILJS_SERVICE_ID  = "service_iwgdx5k";    // ✅ Gmail service
 const EMAILJS_TEMPLATE_ID = "template_toximko";   // ✅ Contact Us template
 const EMAILJS_PUBLIC_KEY  = "HbIdAcYe2JjIktnxE";  // ✅ Public key
 
