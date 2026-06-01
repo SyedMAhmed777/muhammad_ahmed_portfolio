@@ -99,11 +99,7 @@ const projects = [
     accent: "from-[#5E8B7E] to-[#C3D9D1]",
     icon: Smartphone,
     href: "/case-study/serene",
-    screens: [
-      "/serene/Home-client.png",
-      "/serene/Profile.png",
-      "/serene/Therapist  Dashboard.png",
-    ],
+    mockupThumbnail: "/serene/Home-client.png",
     chipColor: "text-[#5E8B7E] bg-[#5E8B7E]/10 border-[#5E8B7E]/20",
   },
 ];
@@ -210,7 +206,44 @@ export default function Projects() {
               >
                 {/* Card thumbnail / placeholder */}
                 <div className={`relative h-52 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
-                  {project.thumbnail ? (
+                  {(project as any).mockupThumbnail ? (
+                    <>
+                      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80`} />
+                      <div className="relative flex items-center justify-center w-full h-full pt-4 pb-0">
+                        <div 
+                          style={{ width: 104, transformOrigin: "bottom center" }}
+                          className="relative transition-all duration-500 transform translate-y-4 -rotate-3 group-hover:translate-y-2 group-hover:rotate-0 group-hover:scale-105"
+                        >
+                          <div style={{
+                            borderRadius: 18,
+                            background: "#fff",
+                            padding: 2.5,
+                            border: "1.5px solid #d2d2d2",
+                            boxShadow: "0 12px 30px -8px rgba(0,0,0,0.22)",
+                            overflow: "hidden",
+                            position: "relative"
+                          }}>
+                            {/* Phone Notch in preview */}
+                            <div style={{
+                              position: "absolute", top: 3, left: "50%", transform: "translateX(-50%)",
+                              width: 32, height: 5, borderRadius: 100, background: "#0F1417", zIndex: 10
+                            }} />
+                            <img
+                              src={getAssetUrl((project as any).mockupThumbnail)}
+                              alt={project.name}
+                              style={{
+                                borderRadius: 15,
+                                display: "block",
+                                width: "100%",
+                                height: "auto",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" />
+                    </>
+                  ) : project.thumbnail ? (
                     <>
                       <img
                         src={getAssetUrl(project.thumbnail)}
