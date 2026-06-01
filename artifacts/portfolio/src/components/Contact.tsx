@@ -32,7 +32,7 @@ const socialLinks = [
 //   4. Account → API Keys → copy your Public Key
 // ──────────────────────────────────────────────────────────────────────────────
 const EMAILJS_SERVICE_ID  = "service_iwgdx5k";    // ✅ Gmail service
-const EMAILJS_TEMPLATE_ID = "fexlmko";            // ✅ Contact Us template ID from url
+const EMAILJS_TEMPLATE_ID = "template_fexlmko";   // ✅ Template ID with template_ prefix
 const EMAILJS_PUBLIC_KEY  = "HbIdAcYe2iJiktnxE";  // ✅ Public key with lowercase 'i'
 
 export default function Contact() {
