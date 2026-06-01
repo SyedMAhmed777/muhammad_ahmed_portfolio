@@ -702,18 +702,13 @@ export default function SereneCaseStudy() {
       </section>
 
       {/* ── FOOTER ─────────────────────────────────────────── */}
-      <footer style={{ borderTop: `1px solid ${INK_900}10`, padding: "32px 0", width: "100%" }}>
+      <footer style={{ borderTop: `1px solid ${INK_900}10`, padding: "24px 0", width: "100%" }}>
         <div style={{
           maxWidth: "72rem", margin: "0 auto", padding: "0 32px",
-          display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16,
-          fontSize: 13, color: INK_500
+          display: "flex", justifyContent: "center", alignItems: "center",
+          fontSize: 12, color: INK_500
         }}>
-          <div>© Serene · A UI/UX Showcase by Muhammad Ahmed</div>
-          <div style={{ display: "flex", gap: 24 }}>
-            <a href="#top" style={{ color: INK_500, textDecoration: "none" }}>Top</a>
-            <a href="#gallery" style={{ color: INK_500, textDecoration: "none" }}>Interactive Showcase</a>
-            <a href="#system" style={{ color: INK_500, textDecoration: "none" }}>Design System</a>
-          </div>
+          <span>© Serene · A UI/UX Project by Muhammad Ahmed</span>
         </div>
       </footer>
 
