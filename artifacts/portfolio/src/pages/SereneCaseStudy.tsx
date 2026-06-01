@@ -17,13 +17,14 @@ import { motion, AnimatePresence } from "framer-motion";
 const SAGE_PRIMARY = "#5E8B7E";
 const SAGE_DARK = "#314D45";
 const SAGE_LIGHT = "#E1ECE7";
-const SAGE_BG = "#F2F6F4";
+const SAGE_MID = "#C3D9D1";
 
 const INK_900 = "#0F1417";
 const INK_700 = "#2A323A";
 const INK_500 = "#5B6670";
 const INK_300 = "#9AA3AC";
-const INK_50 = "#FAFAF7";
+const INK_100 = "#ECECEC";
+const INK_50  = "#FAFAF7";
 
 const CREAM = "#F5F2EC";
 const WHITE = "#FFFFFF";
@@ -46,7 +47,7 @@ interface CategoryItem {
 const CATEGORIES: CategoryItem[] = [
   {
     id: "onboarding",
-    name: "Onboarding",
+    name: "Onboarding Experience",
     icon: "👋",
     description: "A welcoming, secure first 30 seconds. Social options, minimal fields, and clear status feedback to lower the bar of entry.",
     screens: [
@@ -141,7 +142,7 @@ const CATEGORIES: CategoryItem[] = [
 ];
 
 /* ── primitives ───────────────────────────────────────────── */
-function Tag({ children, type = "sage" }: { children: React.ReactNode; type?: "sage" | "ink" | "cream" }) {
+function Tag({ children, type = "sage" }: { children: React.ReactNode; type?: "sage" | "ink" | "cream" | "neutral" }) {
   let color = SAGE_PRIMARY;
   let bg = SAGE_LIGHT;
   let border = `1px solid ${SAGE_PRIMARY}30`;
@@ -154,6 +155,10 @@ function Tag({ children, type = "sage" }: { children: React.ReactNode; type?: "s
     color = SAGE_DARK;
     bg = CREAM;
     border = `1px solid ${SAGE_DARK}20`;
+  } else if (type === "neutral") {
+    color = INK_700;
+    bg = INK_50;
+    border = `1px solid ${INK_100}`;
   }
 
   return (
@@ -180,25 +185,19 @@ function Section({ children, noPad, background = WHITE, id }: { children: React.
 
 export default function SereneCaseStudy() {
   const [, navigate] = useHashLocation();
-  const [activeCat, setActiveCat] = useState("home");
+  const [activeCat, setActiveCat] = useState<CategoryItem>(CATEGORIES[0]);
   const [activeScreenIndex, setActiveScreenIndex] = useState(0);
   
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-  const getAssetUrl = (url: string) => {
-    if (!url) return "";
-    return url.startsWith("http") ? url : `${basePath}/${url.replace(/^\//, "")}`;
-  };
+  const activeScreen = activeCat.screens[activeScreenIndex] || activeCat.screens[0];
+  const fullSrc = `${basePath}/${activeScreen.src.replace(/^\//, "")}`;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
-  const category = CATEGORIES.find(c => c.id === activeCat) || CATEGORIES[0];
-  const screens = category.screens;
-  const currentScreen = screens[activeScreenIndex] || screens[0];
-
-  const handleCatChange = (catId: string) => {
-    setActiveCat(catId);
+  const handleCatChange = (cat: CategoryItem) => {
+    setActiveCat(cat);
     setActiveScreenIndex(0);
   };
 
@@ -206,7 +205,7 @@ export default function SereneCaseStudy() {
     <div style={{
       fontFamily: "'Inter', sans-serif",
       color: INK_900,
-      background: INK_50,
+      background: WHITE,
       minHeight: "100vh",
       overflowX: "hidden"
     }}>
@@ -232,521 +231,311 @@ export default function SereneCaseStudy() {
       {/* ── TOP NAV BAR ────────────────────────────────────── */}
       <header style={{
         position: "sticky", top: 0, zIndex: 40,
-        background: `${INK_50}F0`, backdropFilter: "blur(8px)",
-        borderBottom: `1px solid ${INK_900}10`,
+        background: `rgba(255,255,255,0.92)`, backdropFilter: "blur(12px)",
+        borderBottom: `1px solid ${INK_900}0f`,
         width: "100%"
       }}>
         <div style={{
           maxWidth: "72rem", margin: "0 auto", padding: "0 32px",
-          height: 64, display: "flex", alignItems: "center", justifyContent: "space-between"
+          height: 60, display: "flex", alignItems: "center", justifyContent: "space-between"
         }}>
           <button 
             onClick={() => navigate("/")}
             style={{
               display: "flex", alignItems: "center", gap: 8,
               background: "none", border: "none", cursor: "pointer",
-              fontSize: 14, fontWeight: 600, color: INK_700, padding: 0
+              fontSize: 13, fontWeight: 600, color: INK_500, padding: 0
             }}
+            onMouseEnter={e => (e.currentTarget.style.color = INK_900)}
+            onMouseLeave={e => (e.currentTarget.style.color = INK_500)}
           >
-            <ArrowLeft size={16} /> Back to Portfolio
+            <ArrowLeft size={14} /> Back to Portfolio
           </button>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <a href="#top" style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
             <span style={{
-              width: 32, height: 32, borderRadius: 10, background: SAGE_PRIMARY,
+              width: 28, height: 28, borderRadius: 8, background: SAGE_PRIMARY,
               display: "grid", placeItems: "center", color: WHITE, fontWeight: 700
             }}>S</span>
-            <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: "-0.02em" }}>
-              Serene<span style={{ color: SAGE_PRIMARY }}>.</span>
+            <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: "-0.02em", color: INK_900 }}>
+              Serene<span style={{ color: SAGE_PRIMARY, marginLeft: 2, marginRight: 2 }}>·</span>Interactive Showcase
             </span>
-          </div>
+          </a>
         </div>
       </header>
 
       {/* ── HERO SECTION ───────────────────────────────────── */}
-      <section style={{
-        background: `radial-gradient(1200px 600px at 10% 0%, ${SAGE_LIGHT} 0%, transparent 60%), radial-gradient(1000px 500px at 100% 20%, ${CREAM} 0%, transparent 55%), ${INK_50}`,
-        padding: "96px 0 120px 0",
-        borderBottom: `1px solid ${INK_900}10`,
-        width: "100%"
-      }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 32px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64, alignItems: "center" }}>
-            
-            {/* Left side info */}
-            <div>
-              <div style={{ display: "flex", gap: 12, marginBottom: 24 }}>
-                <Tag type="ink">2024 · iOS / Android</Tag>
-                <Tag type="cream">Holistic Design</Tag>
-              </div>
-
-              <h1 style={{
-                fontFamily: "Fraunces, serif",
-                fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-                fontWeight: 500,
-                lineHeight: 1.05,
-                color: INK_900,
-                letterSpacing: "-0.03em"
-              }}>
-                A calmer way to find help, <br/>
-                <span style={{ fontStyle: "italic", color: SAGE_PRIMARY }}>talk it out,</span> and <br/>
-                take care of yourself.
-              </h1>
-
-              <p style={{
-                fontSize: "1.125rem",
-                lineHeight: 1.6,
-                color: INK_700,
-                marginTop: 32,
-                maxWidth: 540
-              }}>
-                <strong style={{ color: INK_900 }}>Serene</strong> is a holistic mental-health companion app that connects clients with licensed therapists while quietly monitoring daily wellness signals (sleep, mood, calories, steps) that shape how we feel.
-              </p>
-
-              <div style={{
-                marginTop: 48,
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: "24px 32px",
-                maxWidth: 480
-              }}>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 4 }}>Role</div>
-                  <div style={{ fontSize: 15, fontWeight: 600, color: INK_900 }}>Lead Product Designer</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 4 }}>Timeline</div>
-                  <div style={{ fontSize: 15, fontWeight: 600, color: INK_900 }}>8 Weeks</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 4 }}>Scope</div>
-                  <div style={{ fontSize: 15, fontWeight: 600, color: INK_900 }}>25 Core App Screens</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 4 }}>Tools</div>
-                  <div style={{ fontSize: 15, fontWeight: 600, color: INK_900 }}>Figma · Notion</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right side phones */}
-            <div style={{ display: "flex", gap: 24, justifyContent: "center" }}>
-              <motion.div 
-                initial={{ opacity: 0, y: 40, rotate: -3 }}
-                animate={{ opacity: 1, y: 0, rotate: -3 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                style={{
-                  background: WHITE,
-                  borderRadius: 36,
-                  padding: 8,
-                  boxShadow: "0 30px 60px -25px rgba(31,48,43,0.3), 0 8px 20px -10px rgba(31,48,43,0.1)",
-                  border: "1px solid rgba(31,48,43,0.06)",
-                  width: 220,
-                  transform: "translateY(24px)"
-                }}
-              >
-                <img 
-                  src={getAssetUrl("serene/Home-client.png")} 
-                  alt="Client Home Screen" 
-                  style={{ width: "100%", height: "auto", borderRadius: 28, display: "block" }} 
-                />
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 40, rotate: 3 }}
-                animate={{ opacity: 1, y: 0, rotate: 3 }}
-                transition={{ duration: 0.8 }}
-                style={{
-                  background: WHITE,
-                  borderRadius: 36,
-                  padding: 8,
-                  boxShadow: "0 30px 60px -25px rgba(31,48,43,0.3), 0 8px 20px -10px rgba(31,48,43,0.1)",
-                  border: "1px solid rgba(31,48,43,0.06)",
-                  width: 220
-                }}
-              >
-                <img 
-                  src={getAssetUrl("serene/Profile.png")} 
-                  alt="Therapist Profile Screen" 
-                  style={{ width: "100%", height: "auto", borderRadius: 28, display: "block" }} 
-                />
-              </motion.div>
-            </div>
-
-          </div>
+      <div id="top" style={{ maxWidth: "72rem", margin: "0 auto", padding: "64px 32px 48px" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 24 }}>
+          <Tag type="neutral">2024 · UI/UX Project</Tag>
+          <Tag type="sage">iOS · Android · Figma</Tag>
+          <Tag type="cream">Holistic Health App</Tag>
         </div>
-      </section>
 
-      {/* ── OVERVIEW & NUMBERS ─────────────────────────────── */}
-      <Section background={WHITE} id="overview">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64 }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>01 — Overview</div>
-            <h2 style={{
-              fontFamily: "Fraunces, serif",
-              fontSize: "2.25rem",
-              fontWeight: 500,
-              lineHeight: 1.15,
-              color: INK_900,
-              letterSpacing: "-0.02em"
-            }}>
-              Therapy, health tracking and community in one place.
-            </h2>
-          </div>
-          <div style={{ fontSize: 17, lineHeight: 1.65, color: INK_700 }}>
-            <p style={{ marginBottom: 24 }}>
-              Most mental-health apps focus heavily on a single action: meditation, mood journaling, or therapist search. Serene was designed as a single, calm home for all of these components — so a person in a difficult moment does not have to juggle multiple subscriptions and apps.
-            </p>
-            <p style={{ marginBottom: 32 }}>
-              The product spans a complete two-sided experience: a <strong style={{ color: INK_900 }}>client companion app</strong> for scheduling, messaging, and health self-monitoring, and a <strong style={{ color: INK_900 }}>therapist dashboard</strong> for medical scheduling and real-time client analytics.
-            </p>
+        <h1 style={{
+          fontFamily: "Fraunces, serif",
+          fontSize: "clamp(2.5rem, 5vw, 3.8rem)",
+          fontWeight: 500,
+          lineHeight: 1.05,
+          color: INK_900,
+          letterSpacing: "-0.03em",
+          margin: "0 0 16px"
+        }}>
+          Serene: A calmer way to find help, <span style={{ color: SAGE_PRIMARY }}>talk it out</span>, and take care of yourself.
+        </h1>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 24 }}>
-              <div style={{ padding: 24, borderRadius: 20, background: INK_50, border: `1px solid ${INK_900}08` }}>
-                <div style={{ fontFamily: "Fraunces, serif", fontSize: 40, color: SAGE_PRIMARY, fontWeight: 600 }}>25</div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: INK_500, marginTop: 4 }}>Screens Designed</div>
-              </div>
-              <div style={{ padding: 24, borderRadius: 20, background: INK_50, border: `1px solid ${INK_900}08` }}>
-                <div style={{ fontFamily: "Fraunces, serif", fontSize: 40, color: SAGE_PRIMARY, fontWeight: 600 }}>2</div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: INK_500, marginTop: 4 }}>User Personas Served</div>
-              </div>
-              <div style={{ padding: 24, borderRadius: 20, background: INK_50, border: `1px solid ${INK_900}08` }}>
-                <div style={{ fontFamily: "Fraunces, serif", fontSize: 40, color: SAGE_PRIMARY, fontWeight: 600 }}>9</div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: INK_500, marginTop: 4 }}>Core App Pillars</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* ── THE PROBLEM ────────────────────────────────────── */}
-      <Section background={CREAM} id="problem">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64 }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>02 — The Problem</div>
-            <h2 style={{
-              fontFamily: "Fraunces, serif",
-              fontSize: "2.25rem",
-              fontWeight: 500,
-              lineHeight: 1.15,
-              color: INK_900,
-              letterSpacing: "-0.02em",
-              marginBottom: 24
-            }}>
-              Asking for help is hard. The tools shouldn't be.
-            </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.6, color: INK_700 }}>
-              Through interviews and competition mapping, four massive friction points surfaced. Each was a drop-off point where a user would exhaustively give up:
-            </p>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
-            <div style={{ padding: 24, background: WHITE, borderRadius: 24, border: `1px solid ${INK_900}05` }}>
-              <div style={{ fontFamily: "Fraunces, serif", fontSize: 24, color: SAGE_PRIMARY, marginBottom: 12 }}>01</div>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: INK_900, marginBottom: 8 }}>Opaque Discovery</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.5, color: INK_500 }}>Users can't compare clinical experts easily by price, specialty, or schedules, making matches feel like guesswork.</p>
-            </div>
-            <div style={{ padding: 24, background: WHITE, borderRadius: 24, border: `1px solid ${INK_900}05` }}>
-              <div style={{ fontFamily: "Fraunces, serif", fontSize: 24, color: SAGE_PRIMARY, marginBottom: 12 }}>02</div>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: INK_900, marginBottom: 8 }}>Bureaucratic Booking</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.5, color: INK_500 }}>Calendars, intakes, and payments are fragmented across different portals, killing user momentum.</p>
-            </div>
-            <div style={{ padding: 24, background: WHITE, borderRadius: 24, border: `1px solid ${INK_900}05` }}>
-              <div style={{ fontFamily: "Fraunces, serif", fontSize: 24, color: SAGE_PRIMARY, marginBottom: 12 }}>03</div>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: INK_900, marginBottom: 8 }}>Fragmented Tracking</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.5, color: INK_500 }}>Mood, steps, and sleep live in standalone health apps therapists never see, losing valuable contextual details.</p>
-            </div>
-            <div style={{ padding: 24, background: WHITE, borderRadius: 24, border: `1px solid ${INK_900}05` }}>
-              <div style={{ fontFamily: "Fraunces, serif", fontSize: 24, color: SAGE_PRIMARY, marginBottom: 12 }}>04</div>
-              <h3 style={{ fontSize: 16, fontWeight: 700, color: INK_900, marginBottom: 8 }}>Shallow Self-Help</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.5, color: INK_500 }}>Self-directed resources are scattered across video sharing sites and personal blogs without professional guidance.</p>
-            </div>
-          </div>
-        </div>
+        <p style={{
+          fontSize: 16,
+          lineHeight: 1.7,
+          color: INK_700,
+          margin: "0 0 24px",
+          maxWidth: 660
+        }}>
+          A complete end-to-end companion platform connecting clients with licensed therapists while quietly monitoring everyday wellness signals (sleep, mood, steps, macros) that shape how we feel. Click through the interactive workspace below to explore all <strong style={{ color: INK_900 }}>25 high-fidelity screens</strong>.
+        </p>
 
         <div style={{
-          marginTop: 64,
-          padding: 48,
-          background: SAGE_PRIMARY,
-          borderRadius: 24,
-          color: WHITE,
-          position: "relative",
-          overflow: "hidden"
+          display: "flex",
+          gap: 32,
+          padding: "20px 0",
+          borderTop: `1px solid ${INK_100}`,
+          borderBottom: `1px solid ${INK_100}`,
+          maxWidth: 540
         }}>
-          <div style={{
-            fontFamily: "Fraunces, serif",
-            fontSize: 160,
-            lineHeight: 0.1,
-            color: WHITE,
-            opacity: 0.15,
-            position: "absolute",
-            top: 60,
-            left: 24
-          }}>“</div>
-          <p style={{
-            fontFamily: "Fraunces, serif",
-            fontSize: "1.75rem",
-            lineHeight: 1.4,
-            fontWeight: 400,
-            maxWidth: 880,
-            position: "relative",
-            zIndex: 1,
-            paddingLeft: 48
-          }}>
-            I downloaded three different apps before my first session — one to find a therapist, one to book, and another to journal. By the time I was ready to talk, I was already exhausted.
-          </p>
-          <div style={{ fontSize: 14, color: SAGE_LIGHT, marginTop: 24, paddingLeft: 48, position: "relative", zIndex: 1 }}>
-            — User Interview, 28, First-Time Therapy Seeker
-          </div>
-        </div>
-      </Section>
-
-      {/* ── GOALS ──────────────────────────────────────────── */}
-      <Section background={WHITE} id="goals">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64 }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>03 — Goals</div>
-            <h2 style={{
-              fontFamily: "Fraunces, serif",
-              fontSize: "2.25rem",
-              fontWeight: 500,
-              lineHeight: 1.15,
-              color: INK_900,
-              letterSpacing: "-0.02em"
-            }}>
-              Core design principles that guided every screen.
-            </h2>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-            <div style={{ display: "flex", gap: 24, alignItems: "flex-start", padding: 24, borderRadius: 20, background: INK_50 }}>
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: SAGE_LIGHT, display: "grid", placeItems: "center", color: SAGE_PRIMARY, flexShrink: 0 }}>
-                <Check size={20} />
-              </div>
-              <div>
-                <h3 style={{ fontSize: 17, fontWeight: 700, color: INK_900, marginBottom: 4 }}>Fast First Booking</h3>
-                <p style={{ fontSize: 15, color: INK_500, lineHeight: 1.5 }}>Reduce time-to-first-session to under 5 minutes without losing quality onboarding data.</p>
-              </div>
+          {[
+            ["Deliverables", "25 Screens Designed"],
+            ["Personalities", "2 User Personas"],
+            ["Timeline", "8 Weeks"],
+            ["Category", "Mobile App UI/UX"]
+          ].map(([k, v]) => (
+            <div key={k}>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: INK_300, marginBottom: 4 }}>{k}</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: INK_900 }}>{v}</div>
             </div>
-
-            <div style={{ display: "flex", gap: 24, alignItems: "flex-start", padding: 24, borderRadius: 20, background: INK_50 }}>
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: SAGE_LIGHT, display: "grid", placeItems: "center", color: SAGE_PRIMARY, flexShrink: 0 }}>
-                <Heart size={20} />
-              </div>
-              <div>
-                <h3 style={{ fontSize: 17, fontWeight: 700, color: INK_900, marginBottom: 4 }}>Supportive Data Viz</h3>
-                <p style={{ fontSize: 15, color: INK_500, lineHeight: 1.5 }}>Ensure wellness graphs look encouraging, utilizing natural hues and rounded geometries instead of bright alerts.</p>
-              </div>
-            </div>
-
-            <div style={{ display: "flex", gap: 24, alignItems: "flex-start", padding: 24, borderRadius: 20, background: INK_50 }}>
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: SAGE_LIGHT, display: "grid", placeItems: "center", color: SAGE_PRIMARY, flexShrink: 0 }}>
-                <Layers size={20} />
-              </div>
-              <div>
-                <h3 style={{ fontSize: 17, fontWeight: 700, color: INK_900, marginBottom: 4 }}>Shared Context</h3>
-                <p style={{ fontSize: 15, color: INK_500, lineHeight: 1.5 }}>Synchronize relevant client sleep and mood trends directly into the therapist view, eliminating repetitive status recaps.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* ── INTERACTIVE SHOWCASE ───────────────────────────── */}
-      <Section background={WHITE} id="screens">
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>04 — Interactive Showcase</div>
-          <h2 style={{
-            fontFamily: "Fraunces, serif",
-            fontSize: "3rem",
-            fontWeight: 500,
-            lineHeight: 1.1,
-            color: INK_900,
-            letterSpacing: "-0.03em"
-          }}>
-            Explore the Serene Platform
-          </h2>
-          <p style={{ color: INK_500, marginTop: 16, fontSize: 16, maxWidth: 600, margin: "16px auto 0 auto" }}>
-            Click on the design pillars below to review high-fidelity mockups, annotations, and UI UX product rationale.
-          </p>
-        </div>
-
-        {/* Categories Bar */}
-        <div style={{
-          display: "flex", gap: 8, overflowX: "auto", paddingBottom: 16,
-          justifyContent: "flex-start", borderBottom: `1px solid ${INK_900}08`,
-          marginBottom: 48, scrollbarWidth: "none"
-        }}>
-          {CATEGORIES.map(cat => (
-            <button
-              key={cat.id}
-              onClick={() => handleCatChange(cat.id)}
-              style={{
-                display: "flex", alignItems: "center", gap: 8,
-                padding: "10px 20px", borderRadius: 100,
-                border: `1px solid ${activeCat === cat.id ? SAGE_PRIMARY : "transparent"}`,
-                background: activeCat === cat.id ? `${SAGE_PRIMARY}12` : "none",
-                color: activeCat === cat.id ? SAGE_PRIMARY : INK_700,
-                fontSize: 14, fontWeight: 600, cursor: "pointer",
-                whiteSpace: "nowrap", transition: "all 0.2s ease"
-              }}
-            >
-              <span>{cat.icon}</span> {cat.name}
-            </button>
           ))}
         </div>
+      </div>
 
-        {/* Content Showcase Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64, alignItems: "center" }}>
+      {/* ── INTERACTIVE SHOWCASE WORKSPACE ─────────────────── */}
+      <Section id="gallery" background="radial-gradient(circle at 10% 10%, rgba(94,139,126,0.08) 0%, rgba(94,139,126,0.01) 50%, transparent 100%), radial-gradient(circle at 90% 90%, rgba(245,242,236,0.06) 0%, rgba(245,242,236,0.01) 50%, transparent 100%), #FAFAF7">
+        <div style={{ 
+          background: "rgba(255, 255, 255, 0.85)", 
+          backdropFilter: "blur(20px)",
+          border: `1px solid rgba(255, 255, 255, 0.6)`, 
+          borderRadius: 24, 
+          padding: 32, 
+          boxShadow: "0 20px 50px -12px rgba(17, 17, 17, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8)",
+          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 32
+        }}>
           
-          {/* Left Side: Device Mockup */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{
-              background: WHITE,
-              borderRadius: 48,
-              padding: 12,
-              boxShadow: "0 40px 80px -30px rgba(15,20,23,0.25), 0 10px 28px -10px rgba(15,20,23,0.12)",
-              border: `1px solid ${INK_900}10`,
-              width: "100%",
-              maxWidth: 360,
-              position: "relative"
-            }}>
-              {/* Phone Notch */}
-              <div style={{
-                position: "absolute", top: 20, left: "50%", transform: "translateX(-50%)",
-                width: 110, height: 28, borderRadius: 100, background: INK_900, zIndex: 10
-              }} />
-
-              <div 
-                className="phone-screen"
-                style={{ 
-                  overflowY: "auto", 
-                  aspectRatio: "375/812",
-                  borderRadius: 38, 
-                  background: INK_50, 
-                  position: "relative",
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none"
-                }}
-              >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentScreen.src}
-                    src={getAssetUrl(currentScreen.src)}
-                    alt={currentScreen.title}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
-                    style={{ width: "100%", height: "auto", display: "block" }}
-                  />
-                </AnimatePresence>
-              </div>
+          {/* Sidebar Tabs */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, borderRight: `1px solid ${INK_100}`, paddingRight: 20 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", color: INK_300, letterSpacing: "0.1em", paddingLeft: 12, marginBottom: 12 }}>
+              Feature Modules
             </div>
+            {CATEGORIES.map(cat => {
+              const isActive = cat.id === activeCat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => handleCatChange(cat)}
+                  style={{
+                    position: "relative",
+                    display: "flex", alignItems: "center", gap: 12, width: "100%",
+                    height: 44, padding: "0 12px", border: "none", borderRadius: 12,
+                    background: "transparent",
+                    color: isActive ? SAGE_PRIMARY : INK_700,
+                    fontWeight: isActive ? 700 : 500, fontSize: 13,
+                    textAlign: "left", cursor: "pointer", 
+                    transition: "color 0.25s ease, padding-left 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                    paddingLeft: isActive ? "16px" : "12px",
+                    outline: "none"
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.paddingLeft = "18px";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.paddingLeft = isActive ? "16px" : "12px";
+                  }}
+                >
+                  {/* Sliding Background Pill */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabPill"
+                      style={{
+                        position: "absolute",
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        background: SAGE_LIGHT,
+                        borderRadius: 12,
+                        zIndex: 0
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
 
-            {/* Interactive Scroll Tip */}
-            <div style={{
-              marginTop: 16,
-              fontSize: 12,
-              fontWeight: 600,
-              color: SAGE_PRIMARY,
-              background: `${SAGE_PRIMARY}0D`,
-              padding: "6px 14px",
-              borderRadius: 100,
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              border: `1px solid ${SAGE_PRIMARY}20`
-            }}>
-              <span className="pulse-dot" style={{
-                display: "inline-block",
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: SAGE_PRIMARY
-              }}></span>
-              <span>Interactive Mockup: Scroll screen to explore full design ↕</span>
-            </div>
-
-            {/* Screen Nav Selectors */}
-            {screens.length > 1 && (
-              <div style={{ display: "flex", gap: 8, marginTop: 24 }}>
-                {screens.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveScreenIndex(index)}
-                    style={{
-                      width: 10, height: 10, borderRadius: "50%",
-                      background: activeScreenIndex === index ? SAGE_PRIMARY : `${INK_900}15`,
-                      border: "none", cursor: "pointer", padding: 0
-                    }}
-                  />
-                ))}
-              </div>
-            )}
+                  <span style={{ fontSize: 16, position: "relative", zIndex: 1 }}>{cat.icon}</span>
+                  <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", position: "relative", zIndex: 1 }}>
+                    {cat.name}
+                  </span>
+                  
+                  {/* Sliding Active Dot */}
+                  {isActive && (
+                    <motion.span 
+                      layoutId="activeTabDot"
+                      style={{ 
+                        width: 6, height: 6, borderRadius: "50%", 
+                        background: SAGE_PRIMARY, position: "relative", zIndex: 1 
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Right Side: Descriptions & Details */}
-          <div>
-            <Tag>{category.name}</Tag>
-            <h3 style={{
-              fontFamily: "Fraunces, serif",
-              fontSize: "2rem",
-              fontWeight: 500,
-              color: INK_900,
-              marginTop: 16,
-              lineHeight: 1.2
-            }}>{currentScreen.title}</h3>
+          {/* Interactive Preview Workspace */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 40, alignItems: "center" }}>
             
-            <p style={{ fontSize: 16, color: INK_700, lineHeight: 1.6, marginTop: 16 }}>
-              {category.description}
-            </p>
+            {/* Phone Display Frame */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <div style={{ width: "100%", maxWidth: 220, position: "relative" }}>
+                
+                {/* Framer Motion AnimatePresence for smooth screen sliding */}
+                <div style={{
+                  borderRadius: 36, background: WHITE, padding: 6,
+                  boxShadow: "0 25px 50px -12px rgba(17,17,17,0.15)",
+                  border: "1px solid #e2e2e2", overflow: "hidden",
+                  position: "relative"
+                }}>
+                  {/* Phone Notch */}
+                  <div style={{
+                    position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)",
+                    width: 70, height: 16, borderRadius: 100, background: INK_900, zIndex: 10
+                  }} />
 
-            <div style={{
-              marginTop: 32,
-              padding: 24,
-              background: CREAM,
-              borderRadius: 20,
-              border: `1px solid ${INK_900}05`
-            }}>
-              <div style={{ display: "flex", gap: 8, alignItems: "center", color: SAGE_PRIMARY, fontWeight: 700, fontSize: 12, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                <Sparkle size={14} /> Design Note
+                  <div 
+                    className="phone-screen"
+                    style={{ 
+                      overflowY: "auto", 
+                      aspectRatio: "375/812",
+                      borderRadius: 30, 
+                      background: INK_50, 
+                      position: "relative",
+                      scrollbarWidth: "none",
+                      msOverflowStyle: "none"
+                    }}
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.img 
+                        key={fullSrc}
+                        src={fullSrc}
+                        alt={activeScreen.title}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                        style={{ width: "100%", height: "auto", display: "block" }}
+                      />
+                    </AnimatePresence>
+                  </div>
+                </div>
               </div>
-              <p style={{ fontSize: 14, color: INK_700, lineHeight: 1.5, marginTop: 8 }}>
-                {currentScreen.note}
-              </p>
+
+              {/* Interactive Scroll Tip */}
+              <div style={{
+                marginTop: 16,
+                fontSize: 10,
+                fontWeight: 600,
+                color: SAGE_PRIMARY,
+                background: `${SAGE_PRIMARY}0D`,
+                padding: "4px 12px",
+                borderRadius: 100,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                border: `1px solid ${SAGE_PRIMARY}20`
+              }}>
+                <span className="pulse-dot" style={{
+                  display: "inline-block",
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: SAGE_PRIMARY
+                }}></span>
+                <span>Interactive mockup: Scroll to explore ↕</span>
+              </div>
             </div>
 
-            {screens.length > 1 && (
-              <div style={{ display: "flex", gap: 16, marginTop: 40 }}>
-                <button
-                  disabled={activeScreenIndex === 0}
-                  onClick={() => setActiveScreenIndex(prev => prev - 1)}
-                  style={{
-                    display: "flex", alignItems: "center", gap: 8,
-                    padding: "10px 20px", borderRadius: 100, border: `1px solid ${INK_900}10`,
-                    background: WHITE, color: activeScreenIndex === 0 ? INK_300 : INK_700,
-                    fontSize: 14, fontWeight: 600, cursor: activeScreenIndex === 0 ? "not-allowed" : "pointer"
-                  }}
-                >
-                  <ArrowLeft size={16} /> Previous
-                </button>
-                <button
-                  disabled={activeScreenIndex === screens.length - 1}
-                  onClick={() => setActiveScreenIndex(prev => prev + 1)}
-                  style={{
-                    display: "flex", alignItems: "center", gap: 8,
-                    padding: "10px 20px", borderRadius: 100, border: `1px solid ${INK_900}10`,
-                    background: WHITE, color: activeScreenIndex === screens.length - 1 ? INK_300 : INK_700,
-                    fontSize: 14, fontWeight: 600, cursor: activeScreenIndex === screens.length - 1 ? "not-allowed" : "pointer"
-                  }}
-                >
-                  Next <ArrowRight size={16} />
-                </button>
+            {/* Description & Screen Selector */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "flex", gap: 8 }}>
+                <Tag>{activeCat.name}</Tag>
               </div>
-            )}
-          </div>
 
+              <h3 style={{ fontFamily: "Fraunces, serif", fontSize: 24, fontWeight: 500, margin: 0, color: INK_900 }}>
+                {activeScreen.title}
+              </h3>
+
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: INK_700, margin: 0 }}>
+                {activeCat.description}
+              </p>
+
+              <div style={{ padding: 16, borderRadius: 16, background: CREAM, border: `1px solid ${SAGE_PRIMARY}1a` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, fontWeight: 700, color: SAGE_PRIMARY, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  <Sparkle size={12} /> Key Feature
+                </div>
+                <p style={{ fontSize: 13, lineHeight: 1.5, color: INK_700, margin: "6px 0 0" }}>
+                  {activeScreen.note}
+                </p>
+              </div>
+
+              {/* Carousel Indicators for multi-screen modules */}
+              {activeCat.screens.length > 1 && (
+                <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 12 }}>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {activeCat.screens.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveScreenIndex(idx)}
+                        style={{
+                          width: 8, height: 8, borderRadius: "50%", border: "none",
+                          background: idx === activeScreenIndex ? SAGE_PRIMARY : INK_300,
+                          cursor: "pointer", padding: 0, transition: "background 0.2s"
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  <div style={{ display: "flex", gap: 4 }}>
+                    <button
+                      disabled={activeScreenIndex === 0}
+                      onClick={() => setActiveScreenIndex(p => p - 1)}
+                      style={{
+                        width: 26, height: 26, borderRadius: "50%", border: `1px solid ${INK_100}`,
+                        background: WHITE, display: "grid", placeItems: "center", cursor: activeScreenIndex === 0 ? "not-allowed" : "pointer",
+                        opacity: activeScreenIndex === 0 ? 0.4 : 1
+                      }}
+                    >
+                      <ArrowLeft size={12} />
+                    </button>
+                    <button
+                      disabled={activeScreenIndex === activeCat.screens.length - 1}
+                      onClick={() => setActiveScreenIndex(p => p + 1)}
+                      style={{
+                        width: 26, height: 26, borderRadius: "50%", border: `1px solid ${INK_100}`,
+                        background: WHITE, display: "grid", placeItems: "center", cursor: activeScreenIndex === activeCat.screens.length - 1 ? "not-allowed" : "pointer",
+                        opacity: activeScreenIndex === activeCat.screens.length - 1 ? 0.4 : 1
+                      }}
+                    >
+                      <ArrowRight size={12} />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+          </div>
         </div>
       </Section>
 
@@ -818,70 +607,8 @@ export default function SereneCaseStudy() {
         </div>
       </Section>
 
-      {/* ── OUTCOMES ───────────────────────────────────────── */}
-      <Section background={WHITE} id="outcomes">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64 }}>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>06 — Outcomes</div>
-            <h2 style={{
-              fontFamily: "Fraunces, serif",
-              fontSize: "2.25rem",
-              fontWeight: 500,
-              lineHeight: 1.15,
-              color: INK_900,
-              letterSpacing: "-0.02em"
-            }}>
-              What changed once the screens were on devices.
-            </h2>
-            <p style={{ color: INK_500, fontSize: 14, lineHeight: 1.6, marginTop: 24 }}>
-              Tested with 8 active participants in moderated research sessions — 6 prospective clients and 2 practicing therapists.
-            </p>
-          </div>
-
-          <div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 24, marginBottom: 48 }}>
-              <div style={{ padding: 32, borderRadius: 24, background: SAGE_PRIMARY, color: WHITE }}>
-                <div style={{ fontFamily: "Fraunces, serif", fontSize: 48, fontWeight: 500, lineHeight: 1 }}>3:42</div>
-                <div style={{ fontSize: 13, color: SAGE_LIGHT, marginTop: 8 }}>Median time to confirmed first booking (Target was &lt;5:00).</div>
-              </div>
-              <div style={{ padding: 32, borderRadius: 24, background: INK_50, border: `1px solid ${INK_900}05` }}>
-                <div style={{ fontFamily: "Fraunces, serif", fontSize: 48, color: INK_900, fontWeight: 500, lineHeight: 1 }}>100%</div>
-                <div style={{ fontSize: 13, color: INK_500, marginTop: 8 }}>Of cohort users completed scheduling without external help.</div>
-              </div>
-              <div style={{ padding: 32, borderRadius: 24, background: INK_50, border: `1px solid ${INK_900}05` }}>
-                <div style={{ fontFamily: "Fraunces, serif", fontSize: 48, color: INK_900, fontWeight: 500, lineHeight: 1 }}>4.6<span style={{ fontSize: 24 }}>/5</span></div>
-                <div style={{ fontSize: 13, color: INK_500, marginTop: 8 }}>Average brand "calming score" after completing flows.</div>
-              </div>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
-              <div>
-                <h4 style={{ fontSize: 15, fontWeight: 700, color: INK_900, display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
-                  <span style={{ color: SAGE_PRIMARY }}>✔</span> What Worked
-                </h4>
-                <ul style={{ fontSize: 13, color: INK_700, paddingLeft: 12, lineHeight: 1.6 }} className="space-y-2">
-                  <li>· The sage-led color palette was consistently praised as calming and highly trustworthy.</li>
-                  <li>· A standardized monitor layout (calendar strip → central ring → weekly charts) made self-tracking learnable in seconds.</li>
-                  <li>· Sticky footers on expert profiles dramatically boosted core action rates.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 style={{ fontSize: 15, fontWeight: 700, color: INK_900, display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
-                  <span style={{ color: SAGE_PRIMARY }}>➔</span> Next Iteration
-                </h4>
-                <ul style={{ fontSize: 13, color: INK_700, paddingLeft: 12, lineHeight: 1.6 }} className="space-y-2">
-                  <li>· Introduce a brief onboarding overlay explaining health monitors before tracking starts.</li>
-                  <li>· Add quick search tags directly above results (pricing, language, specialties).</li>
-                  <li>· Build a supportive "zero-data" dashboard state for new, non-tracking users.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
       {/* ── FOOTER CTA ─────────────────────────────────────── */}
-      <section style={{ padding: "0 32px 96px 32px" }}>
+      <section style={{ padding: "0 32px 96px 32px", marginTop: 64 }}>
         <div style={{
           maxWidth: "72rem", margin: "0 auto",
           background: INK_900, borderRadius: 32, padding: "64px 48px",
@@ -946,11 +673,11 @@ export default function SereneCaseStudy() {
           display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16,
           fontSize: 13, color: INK_500
         }}>
-          <div>© Serene · A UX/UI Project by Muhammad Ahmed</div>
+          <div>© Serene · A UI/UX Showcase by Muhammad Ahmed</div>
           <div style={{ display: "flex", gap: 24 }}>
-            <a href="#overview" style={{ color: INK_500, textDecoration: "none" }}>Overview</a>
-            <a href="#screens" style={{ color: INK_500, textDecoration: "none" }}>Screens</a>
-            <a href="#outcomes" style={{ color: INK_500, textDecoration: "none" }}>Outcomes</a>
+            <a href="#top" style={{ color: INK_500, textDecoration: "none" }}>Top</a>
+            <a href="#gallery" style={{ color: INK_500, textDecoration: "none" }}>Interactive Showcase</a>
+            <a href="#system" style={{ color: INK_500, textDecoration: "none" }}>Design System</a>
           </div>
         </div>
       </footer>
