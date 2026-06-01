@@ -646,12 +646,15 @@ export default function SereneCaseStudy() {
       <section style={{ padding: "0 32px 96px 32px", marginTop: 64 }}>
         <div style={{
           maxWidth: "72rem", margin: "0 auto",
-          background: INK_900, borderRadius: 32, padding: "64px 48px",
-          color: WHITE, position: "relative", overflow: "hidden"
+          background: "linear-gradient(135deg, #E1ECE7 0%, #F5F2EC 100%)", 
+          borderRadius: 32, padding: "64px 48px",
+          color: SAGE_DARK, position: "relative", overflow: "hidden",
+          border: `1px solid ${SAGE_MID}40`,
+          boxShadow: "0 20px 40px -12px rgba(49, 77, 69, 0.08)"
         }}>
           <div style={{
             position: "absolute", top: -80, right: -80, width: 320, height: 320,
-            borderRadius: "50%", background: `${SAGE_PRIMARY}30`, filter: "blur(60px)"
+            borderRadius: "50%", background: "rgba(255, 255, 255, 0.6)", filter: "blur(60px)"
           }} />
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "center", position: "relative", zIndex: 1 }}>
@@ -662,11 +665,12 @@ export default function SereneCaseStudy() {
                 fontSize: "2.5rem",
                 fontWeight: 700,
                 lineHeight: 1.15,
-                letterSpacing: "-0.02em"
+                letterSpacing: "-0.02em",
+                color: SAGE_DARK
               }}>
                 Got a product that needs the same kind of design care?
               </h2>
-              <p style={{ color: INK_300, fontSize: 15, lineHeight: 1.6, marginTop: 16, maxWidth: 560 }}>
+              <p style={{ color: INK_700, fontSize: 15, lineHeight: 1.6, marginTop: 16, maxWidth: 560 }}>
                 I design calm, considered interfaces for digital applications that impact real lives — across health, wellness, finance, and education. Let's build something exceptional.
               </p>
             </div>
@@ -677,7 +681,8 @@ export default function SereneCaseStudy() {
                 style={{
                   height: 48, borderRadius: 100, background: SAGE_PRIMARY, color: WHITE,
                   display: "grid", placeItems: "center", fontWeight: 600, fontSize: 14,
-                  textDecoration: "none", transition: "opacity 0.2s"
+                  textDecoration: "none", transition: "opacity 0.2s",
+                  boxShadow: `0 8px 20px -4px ${SAGE_PRIMARY}40`
                 }}
                 onMouseOver={e => e.currentTarget.style.opacity = "0.9"}
                 onMouseOut={e => e.currentTarget.style.opacity = "1"}
@@ -687,11 +692,11 @@ export default function SereneCaseStudy() {
               <button 
                 onClick={() => navigate("/")}
                 style={{
-                  height: 48, borderRadius: 100, border: `1px solid ${WHITE}30`, background: "none", color: WHITE,
+                  height: 48, borderRadius: 100, border: `1px solid ${SAGE_DARK}30`, background: "none", color: SAGE_DARK,
                   display: "grid", placeItems: "center", fontWeight: 600, fontSize: 14,
                   cursor: "pointer", transition: "background 0.2s"
                 }}
-                onMouseOver={e => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}
+                onMouseOver={e => e.currentTarget.style.background = "rgba(49, 77, 69, 0.06)"}
                 onMouseOut={e => e.currentTarget.style.background = "none"}
               >
                 Back to Portfolio
