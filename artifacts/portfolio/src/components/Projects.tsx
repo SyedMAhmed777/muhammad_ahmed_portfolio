@@ -22,6 +22,11 @@ const toolColors: Record<string, string> = {
 const getToolColor = (tool: string) =>
   toolColors[tool] ?? "text-muted-foreground bg-muted border-border";
 
+const getGroupHoverClasses = (chipColor?: string) => {
+  if (!chipColor) return "";
+  return chipColor.split(" ").map(cls => `group-hover:${cls}`).join(" ");
+};
+
 const projects = [
   {
     id: 1,
@@ -344,11 +349,11 @@ export default function Projects() {
                         </span>
                       )}
                     </div>
-                    <div
+                     <div
                       className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${
                         project.href || (project as any).externalHref
-                          ? `${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"} group-hover:scale-110 group-hover:brightness-120`
-                          : "text-muted-foreground/30 border-border/50"
+                          ? `text-white/80 border-white/20 bg-transparent ${getGroupHoverClasses(project.chipColor)} group-hover:scale-110`
+                          : "text-muted-foreground/30 border-border/50 bg-transparent"
                       }`}
                     >
                       <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
