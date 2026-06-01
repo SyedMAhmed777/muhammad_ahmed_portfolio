@@ -97,7 +97,7 @@ export default function Hero() {
             Get in Touch
           </a>
           <a
-            href="/muhammad-ahmed-resume.pdf"
+            href={`${import.meta.env.BASE_URL}muhammad-ahmed-resume.pdf`}
             download="MuhammadAhmed_Resume.pdf"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-foreground font-medium hover:border-cyan-500/50 hover:text-cyan-400 transition-colors"
             data-testid="button-download-resume"
