@@ -191,10 +191,10 @@ function Tag({ children, type = "mint" }: { children: React.ReactNode; type?: "m
   );
 }
 
-function Section({ children, noPad, background = PAPER, id }: { children: React.ReactNode; noPad?: boolean; background?: string; id?: string }) {
+function Section({ children, noPad, background = PAPER, id, maxWidth = "72rem" }: { children: React.ReactNode; noPad?: boolean; background?: string; id?: string; maxWidth?: string }) {
   return (
     <section id={id} style={{ background, width: "100%" }}>
-      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: noPad ? "0 32px" : "96px 32px" }}>
+      <div style={{ maxWidth, margin: "0 auto", padding: noPad ? "0 32px" : "96px 32px" }}>
         {children}
       </div>
     </section>
@@ -280,10 +280,34 @@ export default function NicotinaCaseStudy() {
   return (
     <div style={{ fontFamily: "Poppins, sans-serif", background: PAPER, color: INK900, minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`
-        @keyframes pulsePulse {
-          0% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(61,203,122,0.4); }
-          70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 6px rgba(61,203,122,0); }
-          100% { transform: scale(0.95); opacity: 0.5; box-shadow: 0 0 0 0 rgba(61,203,122,0); }
+        .phone-screen::-webkit-scrollbar {
+          display: none;
+        }
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.25); }
+        }
+        .pulse-dot {
+          animation: pulseDot 2s infinite ease-in-out;
+        }
+        .workspace-grid {
+          display: grid;
+          grid-template-columns: 280px 1fr;
+          gap: 32px;
+        }
+        .preview-grid {
+          display: grid;
+          grid-template-columns: 285px 1fr;
+          gap: 48px;
+          align-items: center;
+        }
+        @media (max-width: 991px) {
+          .workspace-grid {
+            grid-template-columns: 1fr;
+          }
+          .preview-grid {
+            grid-template-columns: 1fr;
+          }
         }
       `}</style>
 
@@ -355,7 +379,7 @@ export default function NicotinaCaseStudy() {
       </div>
 
       {/* ── INTERACTIVE WORKSPACE ───────────────────────────── */}
-      <Section id="gallery" background="radial-gradient(circle at 10% 10%, rgba(61,203,122,0.08) 0%, rgba(61,203,122,0.01) 50%, transparent 100%), radial-gradient(circle at 90% 90%, rgba(255,90,95,0.06) 0%, rgba(255,90,95,0.01) 50%, transparent 100%), #FAFAFA">
+      <Section id="gallery" background="radial-gradient(circle at 10% 10%, rgba(61,203,122,0.08) 0%, rgba(61,203,122,0.01) 50%, transparent 100%), radial-gradient(circle at 90% 90%, rgba(255,90,95,0.06) 0%, rgba(255,90,95,0.01) 50%, transparent 100%), #FAFAFA" maxWidth="86rem">
         <div style={{ 
           background: "rgba(255, 255, 255, 0.85)", 
           backdropFilter: "blur(20px)",
@@ -363,8 +387,10 @@ export default function NicotinaCaseStudy() {
           borderRadius: 24, 
           padding: 32, 
           boxShadow: "0 20px 50px -12px rgba(17, 17, 17, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8)",
-          display: "grid", gridTemplateColumns: "280px 1fr", gap: 32
-        }}>
+          gap: 32
+        }}
+        className="workspace-grid"
+        >
           
           {/* Sidebar Tabs */}
           <div style={{ display: "flex", flexDirection: "column", gap: 6, borderRight: `1px solid ${INK100}`, paddingRight: 20 }}>
@@ -433,44 +459,96 @@ export default function NicotinaCaseStudy() {
           </div>
 
           {/* Interactive Screen Preview Workspace */}
-          <div style={{ display: "grid", gridTemplateColumns: "240px 1fr", gap: 40, alignItems: "center" }}>
+          <div className="preview-grid" style={{ gap: 40, alignItems: "center" }}>
             
-            {/* Phone Display Frame - Reverted floating animation to keep mockup stable */}
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <div style={{ width: "100%", maxWidth: 220, position: "relative" }}>
+            {/* Phone Display Frame - Stable height with viewport scrollability */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <div style={{ width: "100%", maxWidth: 265, position: "relative" }}>
                 
                 {/* Framer Motion AnimatePresence for smooth screen sliding */}
                 <div style={{
                   borderRadius: 36, background: WHITE, padding: 6,
                   boxShadow: "0 25px 50px -12px rgba(17,17,17,0.15)",
-                  border: "1px solid #e2e2e2", overflow: "hidden"
+                  border: "1px solid #e2e2e2", overflow: "hidden",
+                  position: "relative"
                 }}>
-                  <AnimatePresence mode="wait">
-                    <motion.img 
-                      key={fullSrc}
-                      src={fullSrc} 
-                      alt={activeScreen.title} 
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
-                      style={{ borderRadius: 30, display: "block", width: "100%", height: "auto" }} 
-                    />
-                  </AnimatePresence>
-                </div>
+                  {/* Phone Notch */}
+                  <div style={{
+                    position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)",
+                    width: 70, height: 16, borderRadius: 100, background: INK900, zIndex: 10
+                  }} />
 
+                  <div 
+                    className="phone-screen"
+                    style={{ 
+                      overflowY: "auto", 
+                      aspectRatio: "375/812",
+                      borderRadius: 30, 
+                      background: INK50, 
+                      position: "relative",
+                      scrollbarWidth: "none",
+                      msOverflowStyle: "none"
+                    }}
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.img 
+                        key={fullSrc}
+                        src={fullSrc} 
+                        alt={activeScreen.title} 
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                        style={{ width: "100%", height: "auto", display: "block" }} 
+                      />
+                    </AnimatePresence>
+                  </div>
                 </div>
               </div>
 
+              {/* Interactive Scroll Tip */}
+              <div style={{
+                marginTop: 16,
+                fontSize: 10,
+                fontWeight: 600,
+                color: MINT_DARK,
+                background: `${MINT}0D`,
+                padding: "4px 12px",
+                borderRadius: 100,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                border: `1px solid ${MINT}20`
+              }}>
+                <span className="pulse-dot" style={{
+                  display: "inline-block",
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: MINT
+                }}></span>
+                <span>Interactive mockup: Scroll to explore ↕</span>
+              </div>
+            </div>
+
             {/* Selector Thumbnails & UI Highlight Description */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div>
-                <Tag type="mint">Active Screen</Tag>
+                <Tag type="mint">{activeCat.name}</Tag>
                 <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 24, color: INK900, marginTop: 12, marginBottom: 8 }}>
                   {activeScreen.title}
                 </h3>
                 <p style={{ fontSize: 14, color: INK500, lineHeight: 1.6, margin: 0 }}>
                   {activeCat.description}
+                </p>
+              </div>
+
+              <div style={{ padding: 16, borderRadius: 16, background: CREAM, border: `1px solid ${MINT}20` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, fontWeight: 700, color: MINT_DARK, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  <Sparkles size={12} style={{ width: 12, height: 12 }} /> Key Feature
+                </div>
+                <p style={{ fontSize: 13, lineHeight: 1.5, color: INK700, margin: "6px 0 0" }}>
+                  {activeScreen.note}
                 </p>
               </div>
 
@@ -487,10 +565,9 @@ export default function NicotinaCaseStudy() {
                     borderRadius: 100, padding: "2px 10px", letterSpacing: "0.05em",
                     boxShadow: `0 2px 8px ${MINT}15`
                   }}>
-                    <span style={{
-                      display: "inline-block", width: 6, height: 6, borderRadius: "50%",
-                      background: MINT,
-                      animation: "pulsePulse 2s infinite"
+                    <span className="pulse-dot" style={{
+                      display: "inline-block", width: 5, height: 5, borderRadius: "50%",
+                      background: MINT
                     }} />
                     Click to swap screen
                   </span>
@@ -532,25 +609,8 @@ export default function NicotinaCaseStudy() {
                   })}
                 </div>
               </div>
-
-              {/* Design Annotation Card */}
-              <div style={{ 
-                background: `${INK900}04`, border: `1px solid ${INK900}06`, 
-                borderRadius: 16, padding: "20px 24px", color: INK700
-              }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, fontWeight: 700, textTransform: "uppercase", color: MINT_DARK, letterSpacing: "0.08em", marginBottom: 6 }}>
-                  <Sparkles style={{ width: 12, height: 12 }} />
-                  UI/UX Design Highlight
-                </div>
-                <p style={{ fontSize: 13, lineHeight: 1.65, color: INK700, margin: 0 }}>
-                  {activeScreen.note}
-                </p>
-              </div>
-
             </div>
-
           </div>
-
         </div>
       </Section>
 
