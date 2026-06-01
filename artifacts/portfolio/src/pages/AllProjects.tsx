@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
-import { ArrowLeft, ArrowUpRight, Grid, LayoutGrid, Palette, Smartphone, LayoutDashboard } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Grid, Palette, Smartphone, LayoutDashboard, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/components/Projects";
 
-const categories = ["All", "Web Design", "Mobile App", "Branding"];
+const categories = ["All", "Case Study", "Web Design", "Mobile App", "Branding"];
 
 const getCategoryIcon = (category: string) => {
   switch (category) {
+    case "Case Study":
+      return BookOpen;
     case "Web Design":
       return LayoutDashboard;
     case "Mobile App":
@@ -40,7 +42,9 @@ export default function AllProjects() {
 
   const filteredProjects = selectedCategory === "All"
     ? projects
-    : projects.filter(p => p.category === selectedCategory);
+    : selectedCategory === "Case Study"
+      ? projects.filter(p => (p as any).badge === "Case Study")
+      : projects.filter(p => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-background">
@@ -243,6 +247,11 @@ export default function AllProjects() {
                       <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"}`}>
                         {project.category}
                       </span>
+                      {(project as any).badge && (
+                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"}`}>
+                          {(project as any).badge}
+                        </span>
+                      )}
                     </div>
                     <div
                       className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${

@@ -35,6 +35,7 @@ export const projects = [
     description: "A modern fintech dashboard website redesigned for clarity and conversion, featuring clean data visualisation, intuitive navigation, and a bold visual identity built for the web.",
     tools: ["Figma", "UI Design", "Prototyping", "Branding"],
     category: "Web Design",
+    badge: "Case Study",
     gradient: "from-[#6366F1]/20 via-[#a855f7]/10 to-[#6366F1]/5",
     accent: "from-[#6366F1] to-[#a855f7]",
     icon: LayoutDashboard,
