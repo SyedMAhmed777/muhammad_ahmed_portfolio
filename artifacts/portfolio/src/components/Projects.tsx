@@ -90,17 +90,21 @@ const projects = [
   {
     id: 5,
     name: "Serene",
-    subtitle: "Mental Health & Therapy App",
-    description: "A mental-health companion connecting users with licensed therapists while quietly monitoring daily wellness signals (sleep, mood, steps, calories) that shape how we feel. Complete end-to-end two-sided platform designed across 25 high-fidelity screens.",
-    tools: ["Figma", "UX Research", "Interaction Design", "Prototyping", "Notion"],
+    subtitle: "Mental Health & Self-Care Companion",
+    description: "A restorative mental-health app connecting clients with licensed therapists while quietly tracking everyday wellness signals (sleep, mood, steps, calories) shaping our well-being. Built as a dual client-therapist platform designed across 25 high-fidelity screens.",
+    tools: ["Figma", "UX Research", "Interaction Design", "Prototyping", "Information Architecture"],
     category: "Mobile App",
-    badge: "Project",
+    badge: "Design Project",
     gradient: "from-[#5E8B7E]/25 via-[#C3D9D1]/15 to-[#F5F2EC]/10",
     accent: "from-[#5E8B7E] to-[#C3D9D1]",
     icon: Smartphone,
     href: "/case-study/serene",
-    thumbnail: "/serene/Home-client.png",
-    chipColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+    screens: [
+      "/serene/Home-client.png",
+      "/serene/Profile.png",
+      "/serene/Therapist  Dashboard.png",
+    ],
+    chipColor: "text-[#5E8B7E] bg-[#5E8B7E]/10 border-[#5E8B7E]/20",
   },
 ];
 
