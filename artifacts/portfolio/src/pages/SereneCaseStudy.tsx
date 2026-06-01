@@ -578,7 +578,7 @@ export default function SereneCaseStudy() {
       <Section background={CREAM} id="system">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64 }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>05 — Design System</div>
+            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>Design System Specs</div>
             <h2 style={{
               fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif",
               fontSize: "2.25rem",
