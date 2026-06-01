@@ -10,6 +10,7 @@ import LumenCaseStudy from "@/pages/LumenCaseStudy";
 import JsoorBrandGuide from "@/pages/JsoorBrandGuide";
 import NicotinaCaseStudy from "@/pages/NicotinaCaseStudy";
 import SereneCaseStudy from "@/pages/SereneCaseStudy";
+import AllProjects from "@/pages/AllProjects";
 import { useHashLocation } from "@/hooks/use-hash-location";
 
 
@@ -19,6 +20,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/projects" component={AllProjects} />
       <Route path="/case-study/paygo-dash" component={PayGoDashCaseStudy} />
       <Route path="/case-study/lumen" component={LumenCaseStudy} />
       <Route path="/brand-guide/jsoor" component={JsoorBrandGuide} />

@@ -27,7 +27,7 @@ const getGroupHoverClasses = (chipColor?: string) => {
   return chipColor.split(" ").map(cls => `group-hover:${cls}`).join(" ");
 };
 
-const projects = [
+export const projects = [
   {
     id: 1,
     name: "PayGoDash",
@@ -198,7 +198,7 @@ export default function Projects() {
             paddingRight: "2rem",
           }}
         >
-            {projects.map((project, i) => (
+            {projects.slice(0, 3).map((project, i) => (
               <motion.div
                 key={project.id}
                 data-card
@@ -378,6 +378,22 @@ export default function Projects() {
             ))}
           </div>
         </div>
+
+        {/* View All Projects Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex justify-center mt-12"
+        >
+          <button
+            onClick={() => navigate("/projects")}
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-border bg-card/50 hover:bg-card hover:border-primary/50 text-foreground hover:text-primary transition-all duration-300 font-medium group shadow-lg"
+          >
+            <span>View All Projects</span>
+            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </button>
+        </motion.div>
     </section>
   );
 }
