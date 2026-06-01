@@ -220,6 +220,13 @@ export default function SereneCaseStudy() {
         .phone-screen::-webkit-scrollbar {
           display: none;
         }
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.25); }
+        }
+        .pulse-dot {
+          animation: pulseDot 2s infinite ease-in-out;
+        }
       `}</style>
 
       {/* ── TOP NAV BAR ────────────────────────────────────── */}
@@ -635,6 +642,30 @@ export default function SereneCaseStudy() {
                   />
                 </AnimatePresence>
               </div>
+            </div>
+
+            {/* Interactive Scroll Tip */}
+            <div style={{
+              marginTop: 16,
+              fontSize: 12,
+              fontWeight: 600,
+              color: SAGE_PRIMARY,
+              background: `${SAGE_PRIMARY}0D`,
+              padding: "6px 14px",
+              borderRadius: 100,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              border: `1px solid ${SAGE_PRIMARY}20`
+            }}>
+              <span className="pulse-dot" style={{
+                display: "inline-block",
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: SAGE_PRIMARY
+              }}></span>
+              <span>Interactive Mockup: Scroll screen to explore full design ↕</span>
             </div>
 
             {/* Screen Nav Selectors */}
