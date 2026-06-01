@@ -226,6 +226,25 @@ export default function SereneCaseStudy() {
         .pulse-dot {
           animation: pulseDot 2s infinite ease-in-out;
         }
+        .workspace-grid {
+          display: grid;
+          grid-template-columns: 280px 1fr;
+          gap: 32px;
+        }
+        .preview-grid {
+          display: grid;
+          grid-template-columns: 240px 1fr;
+          gap: 40px;
+          align-items: center;
+        }
+        @media (max-width: 991px) {
+          .workspace-grid {
+            grid-template-columns: 1fr;
+          }
+          .preview-grid {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
 
       {/* ── TOP NAV BAR ────────────────────────────────────── */}
@@ -325,8 +344,10 @@ export default function SereneCaseStudy() {
           borderRadius: 24, 
           padding: 32, 
           boxShadow: "0 20px 50px -12px rgba(17, 17, 17, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8)",
-          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 32
-        }}>
+          gap: 32
+        }}
+        className="workspace-grid"
+      >
           
           {/* Sidebar Tabs */}
           <div style={{ display: "flex", flexDirection: "column", gap: 6, borderRight: `1px solid ${INK_100}`, paddingRight: 20 }}>
@@ -395,7 +416,7 @@ export default function SereneCaseStudy() {
           </div>
 
           {/* Interactive Preview Workspace */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 40, alignItems: "center" }}>
+          <div className="preview-grid" style={{ gap: 40, alignItems: "center" }}>
             
             {/* Phone Display Frame */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -490,49 +511,63 @@ export default function SereneCaseStudy() {
                 </p>
               </div>
 
-              {/* Carousel Indicators for multi-screen modules */}
-              {activeCat.screens.length > 1 && (
-                <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 12 }}>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    {activeCat.screens.map((_, idx) => (
+              {/* Clickable screen selector thumbnails */}
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", color: INK_300, letterSpacing: "0.1em" }}>
+                    Screens In Module ({activeCat.screens.length})
+                  </span>
+                  <span style={{
+                    display: "inline-flex", alignItems: "center", gap: 6,
+                    background: SAGE_LIGHT, color: SAGE_PRIMARY,
+                    fontSize: 10, fontWeight: 700, textTransform: "uppercase",
+                    borderRadius: 100, padding: "2px 10px", letterSpacing: "0.05em",
+                    boxShadow: `0 2px 8px ${SAGE_PRIMARY}15`
+                  }}>
+                    <span className="pulse-dot" style={{
+                      display: "inline-block", width: 5, height: 5, borderRadius: "50%",
+                      background: SAGE_PRIMARY
+                    }} />
+                    Click to swap screen
+                  </span>
+                </div>
+                
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                  {activeCat.screens.map((screen, idx) => {
+                    const isSelected = idx === activeScreenIndex;
+                    const thumbSrc = `${basePath}/${screen.src.replace(/^\//, "")}`;
+                    return (
                       <button
-                        key={idx}
+                        key={screen.title}
                         onClick={() => setActiveScreenIndex(idx)}
                         style={{
-                          width: 8, height: 8, borderRadius: "50%", border: "none",
-                          background: idx === activeScreenIndex ? SAGE_PRIMARY : INK_300,
-                          cursor: "pointer", padding: 0, transition: "background 0.2s"
+                          width: 52, height: 96, borderRadius: 8, padding: 2,
+                          background: WHITE, cursor: "pointer", overflow: "hidden",
+                          border: isSelected ? `2.5px solid ${SAGE_PRIMARY}` : `1px solid ${INK_100}`,
+                          boxShadow: isSelected ? `0 4px 12px ${SAGE_PRIMARY}25` : "none",
+                          transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)"
                         }}
-                      />
-                    ))}
-                  </div>
-
-                  <div style={{ display: "flex", gap: 4 }}>
-                    <button
-                      disabled={activeScreenIndex === 0}
-                      onClick={() => setActiveScreenIndex(p => p - 1)}
-                      style={{
-                        width: 26, height: 26, borderRadius: "50%", border: `1px solid ${INK_100}`,
-                        background: WHITE, display: "grid", placeItems: "center", cursor: activeScreenIndex === 0 ? "not-allowed" : "pointer",
-                        opacity: activeScreenIndex === 0 ? 0.4 : 1
-                      }}
-                    >
-                      <ArrowLeft size={12} />
-                    </button>
-                    <button
-                      disabled={activeScreenIndex === activeCat.screens.length - 1}
-                      onClick={() => setActiveScreenIndex(p => p + 1)}
-                      style={{
-                        width: 26, height: 26, borderRadius: "50%", border: `1px solid ${INK_100}`,
-                        background: WHITE, display: "grid", placeItems: "center", cursor: activeScreenIndex === activeCat.screens.length - 1 ? "not-allowed" : "pointer",
-                        opacity: activeScreenIndex === activeCat.screens.length - 1 ? 0.4 : 1
-                      }}
-                    >
-                      <ArrowRight size={12} />
-                    </button>
-                  </div>
+                        onMouseEnter={e => {
+                          e.currentTarget.style.transform = "translateY(-4px) scale(1.05)";
+                          e.currentTarget.style.boxShadow = `0 8px 16px ${SAGE_PRIMARY}20`;
+                          if (!isSelected) e.currentTarget.style.borderColor = `${SAGE_PRIMARY}80`;
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.transform = "translateY(0) scale(1)";
+                          e.currentTarget.style.boxShadow = isSelected ? `0 4px 12px ${SAGE_PRIMARY}25` : "none";
+                          if (!isSelected) e.currentTarget.style.borderColor = INK_100;
+                        }}
+                      >
+                        <img 
+                          src={thumbSrc} 
+                          alt={screen.title} 
+                          style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 4 }} 
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
-              )}
+              </div>
             </div>
 
           </div>
