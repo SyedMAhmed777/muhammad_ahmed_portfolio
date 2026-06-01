@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, Fragment } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
+import { useBackNavigation } from "@/hooks/use-back-navigation";
 import { ArrowLeft, ArrowRight, Check, AlertCircle, Wifi, Clock, Layers, Plus, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -170,6 +171,7 @@ function InfoCard({ title, body, wide }: { title: string; body: string; wide?: b
 /* ── main page ───────────────────────────────────────────── */
 export default function LumenCaseStudy() {
   const [, navigate] = useHashLocation();
+  const { goBack } = useBackNavigation();
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
@@ -183,7 +185,7 @@ export default function LumenCaseStudy() {
       }}>
         <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 48px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => goBack()}
             style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: INK500, background: "none", border: "none", cursor: "pointer" }}
             onMouseEnter={e => (e.currentTarget.style.color = INK900)}
             onMouseLeave={e => (e.currentTarget.style.color = INK500)}
@@ -945,7 +947,7 @@ export default function LumenCaseStudy() {
               Get in touch
             </button>
             <button
-              onClick={() => navigate("/")}
+              onClick={() => goBack()}
               style={{ display: "inline-flex", alignItems: "center", gap: 8, height: 44, padding: "0 20px", background: WHITE, color: INK700, borderRadius: 12, fontWeight: 600, fontSize: 14, border: `1px solid ${INK900}12`, cursor: "pointer" }}
             >
               <ArrowLeft style={{ width: 14, height: 14 }} /> Back to Portfolio

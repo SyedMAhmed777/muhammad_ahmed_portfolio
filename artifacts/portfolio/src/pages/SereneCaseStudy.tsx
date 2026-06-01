@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
+import { useBackNavigation } from "@/hooks/use-back-navigation";
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -185,6 +186,7 @@ function Section({ children, noPad, background = WHITE, id, maxWidth = "72rem" }
 
 export default function SereneCaseStudy() {
   const [, navigate] = useHashLocation();
+  const { goBack } = useBackNavigation();
   const [activeCat, setActiveCat] = useState<CategoryItem>(CATEGORIES[0]);
   const [activeScreenIndex, setActiveScreenIndex] = useState(0);
   
@@ -259,7 +261,7 @@ export default function SereneCaseStudy() {
           height: 60, display: "flex", alignItems: "center", justifyContent: "space-between"
         }}>
           <button 
-            onClick={() => navigate("/")}
+            onClick={() => goBack()}
             style={{
               display: "flex", alignItems: "center", gap: 8,
               background: "none", border: "none", cursor: "pointer",
@@ -690,7 +692,7 @@ export default function SereneCaseStudy() {
                 Get in Touch
               </a>
               <button 
-                onClick={() => navigate("/")}
+                onClick={() => goBack()}
                 style={{
                   height: 48, borderRadius: 100, border: `1px solid ${SAGE_DARK}30`, background: "none", color: SAGE_DARK,
                   display: "grid", placeItems: "center", fontWeight: 600, fontSize: 14,

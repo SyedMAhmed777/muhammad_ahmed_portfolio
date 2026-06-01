@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
+import { useBackNavigation } from "@/hooks/use-back-navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -7,6 +8,7 @@ const pages = Array.from({ length: 26 }, (_, i) => `${basePath}/jsoor/${String(i
 
 export default function JsoorBrandGuide() {
   const [, navigate] = useHashLocation();
+  const { goBack } = useBackNavigation();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -15,7 +17,7 @@ export default function JsoorBrandGuide() {
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto px-6 max-w-6xl flex items-center justify-between h-16">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => goBack()}
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -69,7 +71,7 @@ export default function JsoorBrandGuide() {
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => goBack()}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />

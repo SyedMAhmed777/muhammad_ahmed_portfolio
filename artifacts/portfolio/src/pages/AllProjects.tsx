@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
+import { useBackNavigation } from "@/hooks/use-back-navigation";
 import { ArrowLeft, ArrowUpRight, Grid, Palette, Smartphone, LayoutDashboard, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/components/Projects";
@@ -28,6 +29,7 @@ const getGroupHoverClasses = (chipColor?: string) => {
 
 export default function AllProjects() {
   const [, navigate] = useHashLocation();
+  const { setBackDestination } = useBackNavigation();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
@@ -122,7 +124,10 @@ export default function AllProjects() {
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 whileHover={{ y: -6 }}
                 onClick={() => {
-                  if (project.href) navigate(project.href);
+                  if (project.href) {
+                    setBackDestination("/projects");
+                    navigate(project.href);
+                  }
                   else if ((project as any).externalHref) window.open((project as any).externalHref, "_blank", "noopener");
                 }}
                 className={`group relative rounded-2xl border border-card-border bg-card overflow-hidden cursor-pointer flex flex-col h-full`}

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
+import { useBackNavigation } from "@/hooks/use-back-navigation";
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -263,6 +264,7 @@ function ScrollRow({ children }: { children: React.ReactNode }) {
 /* ── main page ───────────────────────────────────────────── */
 export default function NicotinaCaseStudy() {
   const [, navigate] = useHashLocation();
+  const { goBack } = useBackNavigation();
   const [activeCat, setActiveCat] = useState<CategoryItem>(CATEGORIES[0]);
   const [activeScreenIndex, setActiveScreenIndex] = useState(0);
 
@@ -319,7 +321,7 @@ export default function NicotinaCaseStudy() {
       }}>
         <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 32px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => goBack()}
             style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: INK500, background: "none", border: "none", cursor: "pointer" }}
             onMouseEnter={e => (e.currentTarget.style.color = INK900)}
             onMouseLeave={e => (e.currentTarget.style.color = INK500)}
@@ -846,7 +848,7 @@ export default function NicotinaCaseStudy() {
               Get in touch
             </button>
             <button
-              onClick={() => navigate("/")}
+              onClick={() => goBack()}
               style={{ display: "inline-flex", alignItems: "center", gap: 8, height: 44, padding: "0 24px", background: WHITE, color: INK700, borderRadius: 100, fontWeight: 600, fontSize: 14, border: `1px solid ${INK100}`, cursor: "pointer" }}
             >
               <ArrowLeft style={{ width: 14, height: 14 }} /> Back to Portfolio
