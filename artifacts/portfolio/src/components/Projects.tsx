@@ -341,10 +341,6 @@ export default function Projects() {
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
-
-                  <p className="text-xs text-muted-foreground/70 tracking-wide">
-                    {project.tools.join(" · ")}
-                  </p>
                 </div>
               </motion.div>
             ))}

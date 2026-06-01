@@ -348,10 +348,6 @@ export default function AllProjects() {
                   <p className="text-muted-foreground text-sm mb-6 leading-relaxed line-clamp-3 flex-grow">
                     {project.description}
                   </p>
-
-                  <p className="text-xs text-muted-foreground/70 tracking-wide mt-auto">
-                    {project.tools.join(" · ")}
-                  </p>
                 </div>
               </motion.div>
             ))}
