@@ -207,7 +207,10 @@ export default function Projects() {
                 transition={{ duration: 0.7, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -6 }}
                 onClick={() => {
-                  if (project.href) navigate(project.href);
+                  if (project.href) {
+                    sessionStorage.setItem("scroll_to_projects", "true");
+                    navigate(project.href);
+                  }
                   else if ((project as any).externalHref) window.open((project as any).externalHref, "_blank", "noopener");
                 }}
                 className={`group relative rounded-2xl border border-card-border bg-card overflow-hidden shrink-0 snap-start w-[320px] sm:w-[360px] lg:w-[380px] ${project.href || (project as any).externalHref ? "cursor-pointer" : ""}`}
