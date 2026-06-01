@@ -215,6 +215,13 @@ export default function SereneCaseStudy() {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&display=swap" rel="stylesheet" />
 
+      {/* ── Hide scrollbars in device mockups ── */}
+      <style>{`
+        .phone-screen::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+
       {/* ── TOP NAV BAR ────────────────────────────────────── */}
       <header style={{
         position: "sticky", top: 0, zIndex: 40,
@@ -603,7 +610,18 @@ export default function SereneCaseStudy() {
                 width: 110, height: 28, borderRadius: 100, background: INK_900, zIndex: 10
               }} />
 
-              <div style={{ overflow: "hidden", borderRadius: 38, background: INK_50, position: "relative" }}>
+              <div 
+                className="phone-screen"
+                style={{ 
+                  overflowY: "auto", 
+                  height: 600,
+                  borderRadius: 38, 
+                  background: INK_50, 
+                  position: "relative",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none"
+                }}
+              >
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={currentScreen.src}
