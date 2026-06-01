@@ -99,7 +99,11 @@ const projects = [
     accent: "from-[#5E8B7E] to-[#C3D9D1]",
     icon: Smartphone,
     href: "/case-study/serene",
-    mockupThumbnail: "/serene/Home-client.png",
+    screens: [
+      "/serene/Home-client.png",
+      "/serene/Profile.png",
+      "/serene/Therapist  Dashboard.png",
+    ],
     chipColor: "text-[#5E8B7E] bg-[#5E8B7E]/10 border-[#5E8B7E]/20",
   },
 ];
