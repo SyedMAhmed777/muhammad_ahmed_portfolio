@@ -9,6 +9,7 @@ import PayGoDashCaseStudy from "@/pages/PayGoDashCaseStudy";
 import LumenCaseStudy from "@/pages/LumenCaseStudy";
 import JsoorBrandGuide from "@/pages/JsoorBrandGuide";
 import NicotinaCaseStudy from "@/pages/NicotinaCaseStudy";
+import SereneCaseStudy from "@/pages/SereneCaseStudy";
 import { useHashLocation } from "@/hooks/use-hash-location";
 
 
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/case-study/lumen" component={LumenCaseStudy} />
       <Route path="/brand-guide/jsoor" component={JsoorBrandGuide} />
       <Route path="/case-study/nicotina" component={NicotinaCaseStudy} />
+      <Route path="/case-study/serene" component={SereneCaseStudy} />
       <Route component={NotFound} />
     </Switch>
   );

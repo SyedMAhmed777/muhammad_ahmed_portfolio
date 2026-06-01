@@ -87,6 +87,21 @@ const projects = [
     thumbnail: "/nicotina/thumbnail.png",
     chipColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
   },
+  {
+    id: 5,
+    name: "Serene",
+    subtitle: "Mental Health & Therapy App",
+    description: "A holistic mental-health companion connecting users with licensed therapists while quietly monitoring daily wellness signals (sleep, mood, steps, calories) that shape how we feel. Complete end-to-end two-sided platform designed across 25 high-fidelity screens.",
+    tools: ["Figma", "UX Research", "Interaction Design", "Prototyping", "Notion"],
+    category: "Mobile App",
+    badge: "Project",
+    gradient: "from-[#5E8B7E]/25 via-[#C3D9D1]/15 to-[#F5F2EC]/10",
+    accent: "from-[#5E8B7E] to-[#C3D9D1]",
+    icon: Smartphone,
+    href: "/case-study/serene",
+    thumbnail: "/serene/Home-client.png",
+    chipColor: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+  },
 ];
 
 export default function Projects() {
