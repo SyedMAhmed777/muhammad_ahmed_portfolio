@@ -240,17 +240,31 @@ export default function Projects() {
                                 width: 110,
                               }}
                             >
-                              <img
-                                src={getAssetUrl(src)}
-                                alt=""
-                                style={{
-                                  borderRadius: 16,
-                                  display: "block",
-                                  width: "100%",
-                                  height: "auto",
-                                  boxShadow: "0 8px 24px -6px rgba(0,0,0,0.18)",
-                                }}
-                              />
+                              <div style={{
+                                borderRadius: 18,
+                                background: "#fff",
+                                padding: 2.5,
+                                border: "1.5px solid #d2d2d2",
+                                boxShadow: "0 12px 30px -8px rgba(0,0,0,0.2)",
+                                overflow: "hidden",
+                                position: "relative"
+                              }}>
+                                {/* Phone Notch in preview */}
+                                <div style={{
+                                  position: "absolute", top: 3, left: "50%", transform: "translateX(-50%)",
+                                  width: 32, height: 5, borderRadius: 100, background: "#0F1417", zIndex: 10
+                                }} />
+                                <img
+                                  src={getAssetUrl(src)}
+                                  alt=""
+                                  style={{
+                                    borderRadius: 15,
+                                    display: "block",
+                                    width: "100%",
+                                    height: "auto",
+                                  }}
+                                />
+                              </div>
                             </div>
                           );
                         })}
