@@ -164,7 +164,7 @@ function Tag({ children, type = "sage" }: { children: React.ReactNode; type?: "s
   return (
     <span style={{
       display: "inline-block",
-      fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 700,
+      fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif", fontSize: 11, fontWeight: 700,
       letterSpacing: "0.1em", textTransform: "uppercase" as const,
       color, background: bg, border, borderRadius: 100, padding: "4px 12px",
     }}>
@@ -203,7 +203,7 @@ export default function SereneCaseStudy() {
 
   return (
     <div style={{
-      fontFamily: "'Inter', sans-serif",
+      fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif",
       color: INK_900,
       background: WHITE,
       minHeight: "100vh",
@@ -292,9 +292,9 @@ export default function SereneCaseStudy() {
         </div>
 
         <h1 style={{
-          fontFamily: "Fraunces, serif",
+          fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif",
           fontSize: "clamp(2.5rem, 5vw, 3.8rem)",
-          fontWeight: 500,
+          fontWeight: 700,
           lineHeight: 1.05,
           color: INK_900,
           letterSpacing: "-0.03em",
@@ -494,7 +494,7 @@ export default function SereneCaseStudy() {
                 <Tag>{activeCat.name}</Tag>
               </div>
 
-              <h3 style={{ fontFamily: "Fraunces, serif", fontSize: 24, fontWeight: 500, margin: 0, color: INK_900 }}>
+              <h3 style={{ fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif", fontSize: 24, fontWeight: 700, margin: 0, color: INK_900 }}>
                 {activeScreen.title}
               </h3>
 
@@ -580,9 +580,9 @@ export default function SereneCaseStudy() {
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>05 — Design System</div>
             <h2 style={{
-              fontFamily: "Fraunces, serif",
+              fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif",
               fontSize: "2.25rem",
-              fontWeight: 500,
+              fontWeight: 700,
               lineHeight: 1.15,
               color: INK_900,
               letterSpacing: "-0.02em"
@@ -599,15 +599,15 @@ export default function SereneCaseStudy() {
               <h3 style={{ fontSize: 16, fontWeight: 700, color: INK_900, marginBottom: 16 }}>Typography</h3>
               
               <div style={{ marginBottom: 24 }}>
-                <div style={{ fontFamily: "Fraunces, serif", fontSize: 40, color: INK_900, lineHeight: 1 }}>Aa</div>
-                <div style={{ fontSize: 12, color: INK_500, marginTop: 4 }}>Display: Fraunces</div>
-                <div style={{ fontSize: 11, color: INK_300, marginTop: 2 }}>Elegant, organic serif used for editorial headers.</div>
+                <div style={{ fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif", fontSize: 36, fontWeight: 700, color: INK_900, lineHeight: 1, marginBottom: 6 }}>Aa</div>
+                <div style={{ fontSize: 12, color: INK_500, marginBottom: 3, fontWeight: 600 }}>Headings & Stats · Visby Round CF Bold</div>
+                <div style={{ fontSize: 11, color: INK_300, lineHeight: 1.5 }}>Hero titles, feature modules, and dashboard status highlights.</div>
               </div>
 
               <div>
-                <div style={{ fontFamily: "Inter, sans-serif", fontSize: 40, fontWeight: 700, color: INK_900, lineHeight: 1 }}>Aa</div>
-                <div style={{ fontSize: 12, color: INK_500, marginTop: 4 }}>Body & UI: Inter</div>
-                <div style={{ fontSize: 11, color: INK_300, marginTop: 2 }}>Screen-optimized, legible sans-serif for numbers & labels.</div>
+                <div style={{ fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif", fontSize: 32, fontWeight: 400, color: INK_900, lineHeight: 1, marginBottom: 6 }}>Aa</div>
+                <div style={{ fontSize: 12, color: INK_500, marginBottom: 3, fontWeight: 600 }}>UI Body & Labels · Visby Round CF Regular & Medium</div>
+                <div style={{ fontSize: 11, color: INK_300, lineHeight: 1.5 }}>Therapist profiles, clinical descriptions, and action sheet options.</div>
               </div>
             </div>
 
@@ -658,9 +658,9 @@ export default function SereneCaseStudy() {
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>Thanks for reviewing</div>
               <h2 style={{
-                fontFamily: "Fraunces, serif",
+                fontFamily: "'Visby Round CF', 'Visby Round', 'Poppins', sans-serif",
                 fontSize: "2.5rem",
-                fontWeight: 500,
+                fontWeight: 700,
                 lineHeight: 1.15,
                 letterSpacing: "-0.02em"
               }}>
