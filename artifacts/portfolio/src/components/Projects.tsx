@@ -344,19 +344,18 @@ export default function Projects() {
                         </span>
                       )}
                     </div>
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 15 }}
-                      className={`w-8 h-8 rounded-full border border-border flex items-center justify-center transition-colors ${
+                    <div
+                      className={`w-8 h-8 rounded-full border border-border flex items-center justify-center transition-all duration-300 ${
                         project.href || (project as any).externalHref
-                          ? "text-muted-foreground group-hover:text-primary group-hover:border-primary/50"
+                          ? "text-muted-foreground group-hover:text-white group-hover:border-white/40 group-hover:bg-white/5"
                           : "text-muted-foreground/30"
                       }`}
                     >
-                      <ArrowUpRight className="w-4 h-4" />
-                    </motion.div>
+                      <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
                   </div>
 
-                  <h3 className="font-display font-bold text-xl tracking-tight mb-1 group-hover:text-primary transition-colors">
+                  <h3 className="font-display font-bold text-xl tracking-tight mb-1 group-hover:text-white transition-colors duration-300">
                     {project.name}
                   </h3>
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
