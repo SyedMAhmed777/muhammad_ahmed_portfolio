@@ -345,10 +345,10 @@ export default function Projects() {
                       )}
                     </div>
                     <div
-                      className={`w-8 h-8 rounded-full border border-border flex items-center justify-center transition-all duration-300 ${
+                      className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${
                         project.href || (project as any).externalHref
-                          ? "text-muted-foreground group-hover:text-white group-hover:border-white/40 group-hover:bg-white/5"
-                          : "text-muted-foreground/30"
+                          ? `${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"} group-hover:scale-110 group-hover:brightness-120`
+                          : "text-muted-foreground/30 border-border/50"
                       }`}
                     >
                       <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
