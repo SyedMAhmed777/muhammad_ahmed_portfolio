@@ -614,7 +614,7 @@ export default function SereneCaseStudy() {
                 className="phone-screen"
                 style={{ 
                   overflowY: "auto", 
-                  height: 600,
+                  aspectRatio: "375/812",
                   borderRadius: 38, 
                   background: INK_50, 
                   position: "relative",
