@@ -1,11 +1,25 @@
 import { useState, useEffect } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
 import { useBackNavigation } from "@/hooks/use-back-navigation";
-import { ArrowLeft, ArrowUpRight, Grid, Palette, Smartphone, LayoutDashboard, BookOpen } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Grid,
+  Palette,
+  Smartphone,
+  LayoutDashboard,
+  BookOpen,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/components/Projects";
 
-const categories = ["All", "Case Study", "Web Design", "Mobile App", "Branding"];
+const categories = [
+  "All",
+  "Case Study",
+  "Web Design",
+  "Mobile App",
+  "Branding",
+];
 
 const getCategoryIcon = (category: string) => {
   switch (category) {
@@ -24,7 +38,10 @@ const getCategoryIcon = (category: string) => {
 
 const getGroupHoverClasses = (chipColor?: string) => {
   if (!chipColor) return "";
-  return chipColor.split(" ").map(cls => `group-hover:${cls}`).join(" ");
+  return chipColor
+    .split(" ")
+    .map((cls) => `group-hover:${cls}`)
+    .join(" ");
 };
 
 export default function AllProjects() {
@@ -39,14 +56,17 @@ export default function AllProjects() {
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
   const getAssetUrl = (url: string) => {
     if (!url) return "";
-    return url.startsWith("http") ? url : `${basePath}/${url.replace(/^\//, "")}`;
+    return url.startsWith("http")
+      ? url
+      : `${basePath}/${url.replace(/^\//, "")}`;
   };
 
-  const filteredProjects = selectedCategory === "All"
-    ? projects
-    : selectedCategory === "Case Study"
-      ? projects.filter(p => (p as any).badge === "Case Study")
-      : projects.filter(p => p.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === "All"
+      ? projects
+      : selectedCategory === "Case Study"
+        ? projects.filter((p) => (p as any).badge === "Case Study")
+        : projects.filter((p) => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-background">
@@ -65,7 +85,7 @@ export default function AllProjects() {
           </button>
 
           <span className="font-display font-bold text-lg tracking-tighter">
-            Muhammad Ahmed<span className="text-primary">.</span> Work
+            All Projects<span className="text-primary">.</span>
           </span>
 
           <span className="text-xs text-muted-foreground border border-border rounded-full px-3 py-1 bg-card">
@@ -82,7 +102,9 @@ export default function AllProjects() {
             Archive & Showcase
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-            A comprehensive look at my design and product engineering works across mobile interfaces, web experiences, and corporate brand guides.
+            A comprehensive look at my design and product engineering works
+            across mobile interfaces, web experiences, case studies and
+            corporate brand guides.
           </p>
         </div>
 
@@ -109,7 +131,7 @@ export default function AllProjects() {
         </div>
 
         {/* Dynamic high fidelity grid of projects */}
-        <motion.div 
+        <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
@@ -127,37 +149,61 @@ export default function AllProjects() {
                   if (project.href) {
                     setBackDestination("/projects");
                     navigate(project.href);
-                  }
-                  else if ((project as any).externalHref) window.open((project as any).externalHref, "_blank", "noopener");
+                  } else if ((project as any).externalHref)
+                    window.open(
+                      (project as any).externalHref,
+                      "_blank",
+                      "noopener",
+                    );
                 }}
                 className={`group relative rounded-2xl border border-card-border bg-card overflow-hidden cursor-pointer flex flex-col h-full`}
               >
                 {/* Card thumbnail / placeholder */}
-                <div className={`relative h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden shrink-0`}>
+                <div
+                  className={`relative h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden shrink-0`}
+                >
                   {(project as any).mockupThumbnail ? (
                     <>
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80`} />
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80`}
+                      />
                       <div className="relative flex items-center justify-center w-full h-full pt-4 pb-0">
-                        <div 
-                          style={{ width: 96, transformOrigin: "bottom center" }}
+                        <div
+                          style={{
+                            width: 96,
+                            transformOrigin: "bottom center",
+                          }}
                           className="relative transition-all duration-500 transform translate-y-4 -rotate-3 group-hover:translate-y-2 group-hover:rotate-0 group-hover:scale-105"
                         >
-                          <div style={{
-                            borderRadius: 16,
-                            background: "#fff",
-                            padding: 2.2,
-                            border: "1.5px solid #d2d2d2",
-                            boxShadow: "0 12px 30px -8px rgba(0,0,0,0.22)",
-                            overflow: "hidden",
-                            position: "relative"
-                          }}>
+                          <div
+                            style={{
+                              borderRadius: 16,
+                              background: "#fff",
+                              padding: 2.2,
+                              border: "1.5px solid #d2d2d2",
+                              boxShadow: "0 12px 30px -8px rgba(0,0,0,0.22)",
+                              overflow: "hidden",
+                              position: "relative",
+                            }}
+                          >
                             {/* Phone Notch */}
-                            <div style={{
-                              position: "absolute", top: 2, left: "50%", transform: "translateX(-50%)",
-                              width: 28, height: 4, borderRadius: 100, background: "#0F1417", zIndex: 10
-                            }} />
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: 2,
+                                left: "50%",
+                                transform: "translateX(-50%)",
+                                width: 28,
+                                height: 4,
+                                borderRadius: 100,
+                                background: "#0F1417",
+                                zIndex: 10,
+                              }}
+                            />
                             <img
-                              src={getAssetUrl((project as any).mockupThumbnail)}
+                              src={getAssetUrl(
+                                (project as any).mockupThumbnail,
+                              )}
                               alt={project.name}
                               style={{
                                 borderRadius: 13,
@@ -182,61 +228,84 @@ export default function AllProjects() {
                     </>
                   ) : (project as any).screens ? (
                     <>
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80`} />
-                      <div className="relative flex items-end justify-center w-full h-full pb-0" style={{ gap: 0 }}>
-                        {((project as any).screens as string[]).map((src, j) => {
-                          const offsets = [-34, 0, 34];
-                          const rotations = [-12, 0, 12];
-                          const scales = [0.82, 0.95, 0.82];
-                          const zIndex = [1, 3, 1];
-                          return (
-                            <div
-                              key={src}
-                              className="absolute bottom-0 transition-transform duration-500 group-hover:translate-y-[-6px]"
-                              style={{
-                                transform: `translateX(${offsets[j]}px) rotate(${rotations[j]}deg) scale(${scales[j]})`,
-                                transformOrigin: "bottom center",
-                                zIndex: zIndex[j],
-                                transitionDelay: `${j * 40}ms`,
-                                width: 100,
-                              }}
-                            >
-                              <div style={{
-                                borderRadius: 16,
-                                background: "#fff",
-                                padding: 2.2,
-                                border: "1.5px solid #d2d2d2",
-                                boxShadow: "0 12px 30px -8px rgba(0,0,0,0.2)",
-                                overflow: "hidden",
-                                position: "relative"
-                              }}>
-                                {/* Phone Notch */}
-                                <div style={{
-                                  position: "absolute", top: 2, left: "50%", transform: "translateX(-50%)",
-                                  width: 28, height: 4, borderRadius: 100, background: "#0F1417", zIndex: 10
-                                }} />
-                                <img
-                                  src={getAssetUrl(src)}
-                                  alt=""
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80`}
+                      />
+                      <div
+                        className="relative flex items-end justify-center w-full h-full pb-0"
+                        style={{ gap: 0 }}
+                      >
+                        {((project as any).screens as string[]).map(
+                          (src, j) => {
+                            const offsets = [-34, 0, 34];
+                            const rotations = [-12, 0, 12];
+                            const scales = [0.82, 0.95, 0.82];
+                            const zIndex = [1, 3, 1];
+                            return (
+                              <div
+                                key={src}
+                                className="absolute bottom-0 transition-transform duration-500 group-hover:translate-y-[-6px]"
+                                style={{
+                                  transform: `translateX(${offsets[j]}px) rotate(${rotations[j]}deg) scale(${scales[j]})`,
+                                  transformOrigin: "bottom center",
+                                  zIndex: zIndex[j],
+                                  transitionDelay: `${j * 40}ms`,
+                                  width: 100,
+                                }}
+                              >
+                                <div
                                   style={{
-                                    borderRadius: 13,
-                                    display: "block",
-                                    width: "100%",
-                                    height: "auto",
+                                    borderRadius: 16,
+                                    background: "#fff",
+                                    padding: 2.2,
+                                    border: "1.5px solid #d2d2d2",
+                                    boxShadow:
+                                      "0 12px 30px -8px rgba(0,0,0,0.2)",
+                                    overflow: "hidden",
+                                    position: "relative",
                                   }}
-                                />
+                                >
+                                  {/* Phone Notch */}
+                                  <div
+                                    style={{
+                                      position: "absolute",
+                                      top: 2,
+                                      left: "50%",
+                                      transform: "translateX(-50%)",
+                                      width: 28,
+                                      height: 4,
+                                      borderRadius: 100,
+                                      background: "#0F1417",
+                                      zIndex: 10,
+                                    }}
+                                  />
+                                  <img
+                                    src={getAssetUrl(src)}
+                                    alt=""
+                                    style={{
+                                      borderRadius: 13,
+                                      display: "block",
+                                      width: "100%",
+                                      height: "auto",
+                                    }}
+                                  />
+                                </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          },
+                        )}
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-card/60 via-transparent to-transparent" />
                     </>
                   ) : (
                     <>
-                      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-60`} />
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-60`}
+                      />
                       <div className="relative flex flex-col items-center gap-3">
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${project.accent} flex items-center justify-center shadow-lg`}>
+                        <div
+                          className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${project.accent} flex items-center justify-center shadow-lg`}
+                        >
                           <project.icon className="w-7 h-7 text-white" />
                         </div>
                       </div>
@@ -249,11 +318,15 @@ export default function AllProjects() {
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"}`}>
+                      <span
+                        className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"}`}
+                      >
                         {project.category}
                       </span>
                       {(project as any).badge && (
-                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"}`}>
+                        <span
+                          className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.chipColor ?? "text-primary bg-primary/10 border-primary/20"}`}
+                        >
                           {(project as any).badge}
                         </span>
                       )}

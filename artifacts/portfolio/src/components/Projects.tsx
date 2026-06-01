@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useHashLocation } from "@/hooks/use-hash-location";
 import { motion, useInView } from "framer-motion";
-import { ArrowUpRight, LayoutDashboard, ChevronLeft, ChevronRight, Smartphone, Palette, Gamepad2 } from "lucide-react";
+import { ArrowUpRight, LayoutDashboard, Smartphone, Palette, Gamepad2 } from "lucide-react";
 
 const toolColors: Record<string, string> = {
   "Figma":              "text-violet-400 bg-violet-400/10 border-violet-400/20",
@@ -126,13 +126,6 @@ export default function Projects() {
     return url.startsWith("http") ? url : `${basePath}/${url.replace(/^\//, "")}`;
   };
 
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const card = scrollRef.current.querySelector("[data-card]") as HTMLElement;
-    const cardWidth = card ? card.offsetWidth + 24 : 380;
-    scrollRef.current.scrollBy({ left: dir === "right" ? cardWidth : -cardWidth, behavior: "smooth" });
-  };
-
   return (
     <section id="projects" ref={ref} className="py-32 relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
@@ -151,28 +144,6 @@ export default function Projects() {
             <span className="text-primary font-mono text-sm font-medium tracking-widest uppercase">02</span>
             <div className="h-px flex-1 bg-border max-w-[60px]" />
             <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tighter">My Work</h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex items-center gap-2"
-          >
-            <button
-              onClick={() => scroll("left")}
-              className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
           </motion.div>
         </div>
 

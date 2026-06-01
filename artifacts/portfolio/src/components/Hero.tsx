@@ -3,16 +3,34 @@ import { ArrowDown, Mail, Linkedin, Download } from "lucide-react";
 import { SiBehance, SiDribbble } from "react-icons/si";
 
 const socialLinks = [
-  { icon: SiBehance, href: "https://www.behance.net/ui_ahmed/projects", label: "Behance", hoverColor: "hover:text-blue-400 hover:border-blue-400/50" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-ahmed7/", label: "LinkedIn", hoverColor: "hover:text-sky-400 hover:border-sky-400/50" },
-  { icon: SiDribbble, href: "https://dribbble.com/syedahmed777", label: "Dribbble", hoverColor: "hover:text-rose-400 hover:border-rose-400/50" },
+  {
+    icon: SiBehance,
+    href: "https://www.behance.net/ui_ahmed/projects",
+    label: "Behance",
+    hoverColor: "hover:text-blue-400 hover:border-blue-400/50",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/muhammad-ahmed7/",
+    label: "LinkedIn",
+    hoverColor: "hover:text-sky-400 hover:border-sky-400/50",
+  },
+  {
+    icon: SiDribbble,
+    href: "https://dribbble.com/syedahmed777",
+    label: "Dribbble",
+    hoverColor: "hover:text-rose-400 hover:border-rose-400/50",
+  },
 ];
 
 const words = ["Muhammad", "Ahmed"];
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+    >
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-background" />
         <motion.div
@@ -22,15 +40,26 @@ export default function Hero() {
         />
         <motion.div
           animate={{ scale: [1, 1.12, 1], opacity: [0.08, 0.14, 0.08] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
           className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-cyan-500/15 blur-[100px]"
         />
         <motion.div
           animate={{ scale: [1, 1.15, 1], opacity: [0.06, 0.12, 0.06] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4,
+          }}
           className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-amber-500/10 blur-[100px]"
         />
-        <div className="absolute inset-0 opacity-[0.04]"
+        <div
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
@@ -61,7 +90,11 @@ export default function Hero() {
                 className="inline-block mr-[0.2em]"
                 initial={{ y: 120, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.4 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.4 + i * 0.15,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
               >
                 {word}
               </motion.span>
@@ -78,7 +111,7 @@ export default function Hero() {
             Product & UI/UX Designer
           </p>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-12">
-            Designing experiences that feel effortless. The hardest work is invisible.
+            Turning complex ideas into simple, intuitive digital products that people love to use.
           </p>
         </motion.div>
 
