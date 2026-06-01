@@ -91,7 +91,7 @@ const projects = [
     id: 5,
     name: "Serene",
     subtitle: "Mental Health & Therapy App",
-    description: "A holistic mental-health companion connecting users with licensed therapists while quietly monitoring daily wellness signals (sleep, mood, steps, calories) that shape how we feel. Complete end-to-end two-sided platform designed across 25 high-fidelity screens.",
+    description: "A mental-health companion connecting users with licensed therapists while quietly monitoring daily wellness signals (sleep, mood, steps, calories) that shape how we feel. Complete end-to-end two-sided platform designed across 25 high-fidelity screens.",
     tools: ["Figma", "UX Research", "Interaction Design", "Prototyping", "Notion"],
     category: "Mobile App",
     badge: "Project",

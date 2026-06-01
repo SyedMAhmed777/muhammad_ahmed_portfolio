@@ -288,7 +288,7 @@ export default function SereneCaseStudy() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 24 }}>
           <Tag type="neutral">2024 · UI/UX Project</Tag>
           <Tag type="sage">iOS · Android · Figma</Tag>
-          <Tag type="cream">Holistic Health App</Tag>
+          <Tag type="cream">Health App</Tag>
         </div>
 
         <h1 style={{
