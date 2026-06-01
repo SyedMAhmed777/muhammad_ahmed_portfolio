@@ -173,10 +173,10 @@ function Tag({ children, type = "sage" }: { children: React.ReactNode; type?: "s
   );
 }
 
-function Section({ children, noPad, background = WHITE, id }: { children: React.ReactNode; noPad?: boolean; background?: string; id?: string }) {
+function Section({ children, noPad, background = WHITE, id, maxWidth = "72rem" }: { children: React.ReactNode; noPad?: boolean; background?: string; id?: string; maxWidth?: string }) {
   return (
     <section id={id} style={{ background, width: "100%" }}>
-      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: noPad ? "0 32px" : "96px 32px" }}>
+      <div style={{ maxWidth, margin: "0 auto", padding: noPad ? "0 32px" : "96px 32px" }}>
         {children}
       </div>
     </section>
@@ -233,8 +233,8 @@ export default function SereneCaseStudy() {
         }
         .preview-grid {
           display: grid;
-          grid-template-columns: 240px 1fr;
-          gap: 40px;
+          grid-template-columns: 285px 1fr;
+          gap: 48px;
           align-items: center;
         }
         @media (max-width: 991px) {
@@ -336,7 +336,7 @@ export default function SereneCaseStudy() {
       </div>
 
       {/* ── INTERACTIVE SHOWCASE WORKSPACE ─────────────────── */}
-      <Section id="gallery" background="radial-gradient(circle at 10% 10%, rgba(94,139,126,0.08) 0%, rgba(94,139,126,0.01) 50%, transparent 100%), radial-gradient(circle at 90% 90%, rgba(245,242,236,0.06) 0%, rgba(245,242,236,0.01) 50%, transparent 100%), #FAFAF7">
+      <Section id="gallery" background="radial-gradient(circle at 10% 10%, rgba(94,139,126,0.08) 0%, rgba(94,139,126,0.01) 50%, transparent 100%), radial-gradient(circle at 90% 90%, rgba(245,242,236,0.06) 0%, rgba(245,242,236,0.01) 50%, transparent 100%), #FAFAF7" maxWidth="86rem">
         <div style={{ 
           background: "rgba(255, 255, 255, 0.85)", 
           backdropFilter: "blur(20px)",
@@ -420,7 +420,7 @@ export default function SereneCaseStudy() {
             
             {/* Phone Display Frame */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <div style={{ width: "100%", maxWidth: 220, position: "relative" }}>
+              <div style={{ width: "100%", maxWidth: 265, position: "relative" }}>
                 
                 {/* Framer Motion AnimatePresence for smooth screen sliding */}
                 <div style={{
