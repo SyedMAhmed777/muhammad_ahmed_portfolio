@@ -111,7 +111,7 @@ export default function Hero() {
             Product & UI/UX Designer
           </p>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-12">
-            Turning complex ideas into simple, intuitive digital products that people love to use.
+            Turning complex ideas into simple, intuitive digital products.
           </p>
         </motion.div>
 
