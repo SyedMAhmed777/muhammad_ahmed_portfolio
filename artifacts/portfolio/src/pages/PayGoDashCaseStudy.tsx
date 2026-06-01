@@ -38,9 +38,9 @@ export default function PayGoDashCaseStudy() {
 
           <div className="flex items-center gap-3">
             <span className="font-display font-bold text-base tracking-tight">
-              Pay<span className="text-emerald-400">Go</span>Dash
+              Pay<span className="text-[#6366F1]">Go</span>Dash
             </span>
-            <span className="hidden sm:block text-xs text-muted-foreground border border-border rounded-full px-2.5 py-0.5">
+            <span className="hidden sm:block text-xs text-muted-foreground border border-[#6366F1]/20 bg-[#6366F1]/5 rounded-full px-2.5 py-0.5">
               Website Design · Case Study
             </span>
           </div>
@@ -49,7 +49,7 @@ export default function PayGoDashCaseStudy() {
             href="https://www.behance.net/gallery/207978201/PayGoDash-Website-Design-Case-Study"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm text-emerald-400 hover:text-emerald-300 transition-colors font-medium"
+            className="inline-flex items-center gap-1.5 text-sm text-[#6366F1] hover:text-[#818CF8] transition-colors font-medium"
           >
             Behance
             <ExternalLink className="w-3.5 h-3.5" />
@@ -82,7 +82,7 @@ export default function PayGoDashCaseStudy() {
             href="https://www.behance.net/gallery/207978201/PayGoDash-Website-Design-Case-Study"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-[#6366F1] hover:text-[#818CF8] transition-colors"
           >
             View on Behance
             <ExternalLink className="w-3.5 h-3.5" />
