@@ -22,6 +22,18 @@ const socialLinks = [
   { icon: SiDribbble, href: "https://dribbble.com/syedahmed777", label: "Dribbble" },
 ];
 
+// ─── EmailJS config ────────────────────────────────────────────────────────────
+// Replace the three placeholder values below with your real EmailJS credentials.
+// Setup guide: https://www.emailjs.com/docs/tutorial/overview/
+//   1. Create a free account at https://emailjs.com
+//   2. Add Email Service  → connect your Gmail → copy the Service ID
+//   3. Create Email Template → copy the Template ID
+//   4. Account → API Keys → copy your Public Key
+// ──────────────────────────────────────────────────────────────────────────────
+const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";   // e.g. "service_xxxxxxx"
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";  // e.g. "template_xxxxxxx"
+const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";   // e.g. "xxxxxxxxxxxxxxxxxxxx"
+
 export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -34,18 +46,25 @@ export default function Contact() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error("Request failed");
+      const emailjs = await import("@emailjs/browser");
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:    data.name,
+          from_email:   data.email,
+          message:      data.message,
+          reply_to:     data.email,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
       toast({
-        title: "Message sent!",
+        title: "Message sent! ✉️",
         description: "Thanks for reaching out. I'll get back to you shortly.",
       });
       form.reset();
-    } catch {
+    } catch (err) {
+      console.error("EmailJS error:", err);
       toast({
         title: "Couldn't send message",
         description: "Please email me directly at muhammad.ahmed.9760@gmail.com",
@@ -171,7 +190,7 @@ export default function Contact() {
                 data-testid="button-submit"
               >
                 <Send className="w-4 h-4" />
-                Send Message
+                {form.formState.isSubmitting ? "Sending…" : "Send Message"}
               </Button>
             </form>
           </motion.div>
