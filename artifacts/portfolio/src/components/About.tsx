@@ -50,7 +50,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 via-cyan-500/10 to-transparent" />
                 <div className="relative flex flex-col items-center gap-4">
                   <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-violet-500/40">
-                    <img src={`${basePath}/avatar.png`} alt="Muhammad Ahmed" className="w-full h-full object-cover object-top" />
+                    <img src={`${basePath}/avatar.jpg`} alt="Muhammad Ahmed" className="w-full h-full object-cover object-top" />
                   </div>
                   <div className="text-center px-6">
                     <p className="font-display font-semibold text-lg text-foreground">Muhammad Ahmed</p>
