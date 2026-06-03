@@ -43,43 +43,12 @@ export default function About() {
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative w-full max-w-sm mx-auto lg:mx-0">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-gradient-to-br from-violet-500/20 via-cyan-500/5 to-transparent flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 via-cyan-500/10 to-transparent" />
-                <div className="relative flex flex-col items-center gap-4">
-                  <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-white/10">
-                    <img src={`${basePath}/avatar.jpg`} alt="Muhammad Ahmed" className="w-full h-full object-cover object-top" />
-                  </div>
-                  <div className="text-center px-6">
-                    <p className="font-display font-semibold text-lg text-foreground">Muhammad Ahmed</p>
-                    <p className="text-muted-foreground text-sm mt-1">Product & UI/UX Designer</p>
-                  </div>
-                  <div className="flex gap-2 flex-wrap justify-center px-6">
-                    {tools.map(({ name, color, bg, border }) => (
-                      <span key={name} className={`text-xs px-3 py-1 rounded-full ${bg} ${color} ${border} border font-medium`}>
-                        {name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-xl bg-cyan-500/10 border border-cyan-500/20 -z-10" />
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 rounded-xl bg-amber-500/10 border border-amber-500/20 -z-10" />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
           >
             <p className="text-foreground/80 text-lg leading-relaxed mb-8">
-              Results-driven UI/UX Designer with 3+ years of experience delivering user-centered design solutions across web and mobile products. Proficient in end-to-end UX design processes from user research and wireframing through prototyping and high-fidelity design using Figma, Adobe XD, and Sketch.
+              Hi, I'm Muhammad Ahmed. I'm a Product Designer with over three years of experience delivering user-centered design solutions across web and mobile products. I am proficient in the entire end to end UX design process, from user research and wireframing through to prototyping and high-fidelity design using Figma, Adobe XD, and Sketch.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-12">
-              Proven ability to build scalable design systems, conduct usability testing, and collaborate cross-functionally with product managers and engineers in Agile/Scrum environments to ship accessible, conversion-optimised digital experiences.
+              Throughout my work, I build scalable design systems, conduct usability testing, and collaborate cross-functionally with product managers and engineers in Agile and Scrum environments to ship accessible, conversion-optimized digital experiences.
             </p>
 
             <div className="grid grid-cols-3 gap-6">
@@ -96,6 +65,35 @@ export default function About() {
                   <div className="text-muted-foreground text-xs leading-tight">{label}</div>
                 </motion.div>
               ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative"
+          >
+            <div className="relative w-full max-w-sm mx-auto lg:mr-0 lg:ml-auto">
+              {/* Stacked design layer offsets with subtle peek animation */}
+              <motion.div
+                animate={{ rotate: [3, 5, 3], x: [0, 4, 0], y: [0, -3, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 border border-violet-500/30 rounded-2xl scale-98 -z-10"
+              />
+              <motion.div
+                animate={{ rotate: [-3, -5, -3], x: [0, -4, 0], y: [0, 3, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute inset-0 border border-cyan-500/20 rounded-2xl scale-98 -z-20"
+              />
+              
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-card shadow-2xl transition-all duration-500 ease-out transform hover:rotate-0 hover:scale-[1.02] group">
+                <img
+                  src={`${basePath}/avatar.jpg`}
+                  alt="Muhammad Ahmed"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-103"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
