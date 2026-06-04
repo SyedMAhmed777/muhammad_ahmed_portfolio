@@ -208,7 +208,7 @@ function Rule() {
 
 function EditGrid({ left, right }: { left: React.ReactNode; right: React.ReactNode }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "80px", alignItems: "start" }}>
+    <div className="nico-edit-grid">
       <div style={{ minWidth: 0 }}>{left}</div>
       <div style={{ minWidth: 0 }}>{right}</div>
     </div>
@@ -303,12 +303,86 @@ export default function NicotinaCaseStudy() {
           gap: 48px;
           align-items: center;
         }
+        .nico-edit-grid {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 80px;
+          align-items: start;
+        }
+        .nico-hero-meta {
+          display: flex;
+          gap: 32px;
+          padding: 20px 0;
+          max-width: 540px;
+        }
+        .nico-outcome-stats {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 16px;
+          margin-bottom: 24px;
+        }
+        .nico-outcome-cols {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+        .nico-ds-colors {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 24px;
+          margin-bottom: 32px;
+        }
+        .nico-ds-type-comp {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+        .nico-footer-inner {
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 80px 32px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 32px;
+        }
         @media (max-width: 991px) {
           .workspace-grid {
             grid-template-columns: 1fr;
           }
           .preview-grid {
             grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 768px) {
+          .nico-edit-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .nico-hero-meta {
+            flex-wrap: wrap;
+            gap: 16px;
+          }
+          .nico-outcome-stats {
+            grid-template-columns: 1fr;
+          }
+          .nico-outcome-cols {
+            grid-template-columns: 1fr;
+          }
+          .nico-ds-colors {
+            grid-template-columns: 1fr;
+          }
+          .nico-ds-type-comp {
+            grid-template-columns: 1fr;
+          }
+          .nico-footer-inner {
+            padding: 48px 20px;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .workspace-grid {
+            padding: 20px !important;
           }
         }
       `}</style>
@@ -365,7 +439,7 @@ export default function NicotinaCaseStudy() {
           An end-to-end gamified companion app that replaces dry tracker spreadsheets with playful veggie mascots, streak currencies, cost calculators, and replacement habit loops. Click through the interactive dashboard below to explore all <strong style={{ color: INK900 }}>27 high-fidelity interface screens</strong>.
         </p>
 
-        <div style={{ display: "flex", gap: 32, padding: "20px 0", borderTop: `1px solid ${INK100}`, borderBottom: `1px solid ${INK100}`, maxWidth: 540 }}>
+        <div className="nico-hero-meta" style={{ borderTop: `1px solid ${INK100}`, borderBottom: `1px solid ${INK100}` }}>
           {[
             ["Deliverables", "27 Screens designed"],
             ["Personalities", "3 Mascots"],
@@ -633,7 +707,7 @@ export default function NicotinaCaseStudy() {
           right={
             <div>
               {/* color swatches */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 24, marginBottom: 32 }}>
+              <div className="nico-ds-colors">
                 {[
                   { title: "Primary · Mint", swatches: [["#E8F9EF","50"],["#c0ecd4","200"],["#3DCB7A","500"],["#2EBC6E","600"]] },
                   { title: "Error · Coral", swatches: [["#FFF0F0","50"],["#ffd0d2","200"],["#FF5A5F","500"],["#D63840","700"]] },
@@ -654,7 +728,7 @@ export default function NicotinaCaseStudy() {
               </div>
 
               {/* type + components */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div className="nico-ds-type-comp">
                 
                 {/* Left Card: Typography Scales */}
                 <div style={{ background: INK50, border: `1px solid ${INK100}`, borderRadius: 16, padding: 24, fontFamily: "Poppins, sans-serif" }}>
@@ -772,7 +846,7 @@ export default function NicotinaCaseStudy() {
           right={
             <div>
               {/* big stats */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 24 }}>
+              <div className="nico-outcome-stats">
                 {[
                   { value: "100%", label: "Onboarding completion rate, indicating the quiz layout and avatar choice felt highly engaging and low-pressure.", bg: MINT, valueColor: WHITE, labelColor: MINT_LIGHT, border: "none" },
                   { value: "12s", label: "Average check-in time. The primary two-button dashboard layout made daily tracking extremely rapid and frictionless.", bg: `${INK900}06`, valueColor: INK900, labelColor: INK500, border: `1px solid ${INK900}08` },
@@ -793,7 +867,7 @@ export default function NicotinaCaseStudy() {
               </div>
 
               {/* what worked / what's next */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div className="nico-outcome-cols">
                 <div style={{ background: WHITE, border: `1px solid ${INK100}`, borderRadius: 20, padding: 32 }}>
                   <div style={{ fontWeight: 700, fontSize: 14, color: MINT_DARK, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 18 }}>What worked</div>
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
@@ -835,7 +909,7 @@ export default function NicotinaCaseStudy() {
 
       {/* ── FOOTER CTA ───────────────────────────────────────── */}
       <div style={{ borderTop: `1px solid ${INK100}`, background: CREAM }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "80px 32px 80px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 32 }}>
+        <div className="nico-footer-inner">
           <div>
             <div style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 28, color: INK900, marginBottom: 8 }}>Ready to quit the traditional spreadsheet trackers?</div>
             <p style={{ color: INK500, fontSize: 15, lineHeight: 1.6, maxWidth: 520 }}>I design delightful companion apps for behaviour change, wearables, and hardware companion platforms. Always happy to talk through a brief.</p>

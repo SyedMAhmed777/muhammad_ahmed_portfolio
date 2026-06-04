@@ -216,7 +216,6 @@ export default function SereneCaseStudy() {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&display=swap" rel="stylesheet" />
 
-      {/* ── Hide scrollbars in device mockups ── */}
       <style>{`
         .phone-screen::-webkit-scrollbar {
           display: none;
@@ -239,12 +238,54 @@ export default function SereneCaseStudy() {
           gap: 48px;
           align-items: center;
         }
+        .serene-hero-meta {
+          display: flex;
+          gap: 32px;
+          padding: 20px 0;
+          max-width: 540px;
+        }
+        .serene-footer-cta-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 48px;
+          align-items: center;
+        }
+        .serene-ds-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 64px;
+        }
+        .serene-ds-inner-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 32px;
+        }
         @media (max-width: 991px) {
           .workspace-grid {
             grid-template-columns: 1fr;
           }
           .preview-grid {
             grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 768px) {
+          .serene-hero-meta {
+            flex-wrap: wrap;
+            gap: 16px;
+          }
+          .serene-footer-cta-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .serene-ds-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .serene-ds-inner-grid {
+            grid-template-columns: 1fr;
+          }
+          .workspace-grid {
+            padding: 20px !important;
           }
         }
       `}</style>
@@ -315,14 +356,7 @@ export default function SereneCaseStudy() {
           A complete end-to-end companion platform connecting clients with licensed therapists while quietly monitoring everyday wellness signals (sleep, mood, steps, macros) that shape how we feel. Click through the interactive workspace below to explore all <strong style={{ color: INK_900 }}>25 high-fidelity screens</strong>.
         </p>
 
-        <div style={{
-          display: "flex",
-          gap: 32,
-          padding: "20px 0",
-          borderTop: `1px solid ${INK_100}`,
-          borderBottom: `1px solid ${INK_100}`,
-          maxWidth: 540
-        }}>
+        <div className="serene-hero-meta" style={{ borderTop: `1px solid ${INK_100}`, borderBottom: `1px solid ${INK_100}` }}>
           {[
             ["Deliverables", "25 Screens Designed"],
             ["Personalities", "2 User Personas"],
@@ -578,7 +612,7 @@ export default function SereneCaseStudy() {
 
       {/* ── DESIGN SYSTEM ─────────────────────────────────── */}
       <Section background={SAGE_LIGHT} id="system">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 64 }}>
+        <div className="serene-ds-grid">
           <div>
             <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>Design System Specs</div>
             <h2 style={{
@@ -596,7 +630,7 @@ export default function SereneCaseStudy() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 32 }}>
+          <div className="serene-ds-inner-grid">
             <div style={{ background: WHITE, padding: 32, borderRadius: 24 }}>
               <h3 style={{ fontSize: 16, fontWeight: 700, color: INK_900, marginBottom: 16 }}>Typography</h3>
               
@@ -659,7 +693,7 @@ export default function SereneCaseStudy() {
             borderRadius: "50%", background: "rgba(255, 255, 255, 0.6)", filter: "blur(60px)"
           }} />
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "center", position: "relative", zIndex: 1 }}>
+          <div className="serene-footer-cta-grid" style={{ position: "relative", zIndex: 1 }}>
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: SAGE_PRIMARY, marginBottom: 12 }}>Thanks for reviewing</div>
               <h2 style={{

@@ -80,7 +80,7 @@ function Rule() {
 /* editorial two-column layout: narrow left label + wide right content */
 function Section({ children, noPad }: { children: React.ReactNode; noPad?: boolean }) {
   return (
-    <section style={{ maxWidth: "72rem", margin: "0 auto", padding: noPad ? "0 48px" : "72px 48px" }}>
+    <section className="lumen-section" style={{ maxWidth: "72rem", margin: "0 auto", padding: noPad ? undefined : undefined }} data-no-pad={noPad ? "true" : undefined}>
       {children}
     </section>
   );
@@ -102,7 +102,7 @@ function EditGrid({ left, right }: { left: React.ReactNode; right: React.ReactNo
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-80px" }}
-      style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: "64px", alignItems: "start" }}
+      className="lumen-edit-grid"
     >
       <motion.div variants={gridChildVariants} style={{ minWidth: 0 }}>{left}</motion.div>
       <motion.div variants={gridChildVariants} style={{ minWidth: 0 }}>{right}</motion.div>
@@ -176,6 +176,201 @@ export default function LumenCaseStudy() {
 
   return (
     <div style={{ fontFamily: "Inter, ui-sans-serif, system-ui", background: PAPER, color: INK900, minHeight: "100vh" }}>
+      <style>{`
+        .lumen-section {
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 72px 48px;
+        }
+        .lumen-section[data-no-pad] {
+          padding: 0 48px;
+        }
+        .lumen-edit-grid {
+          display: grid;
+          grid-template-columns: 260px 1fr;
+          gap: 64px;
+          align-items: start;
+        }
+        .lumen-hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 360px;
+          gap: 80px;
+          align-items: center;
+        }
+        .lumen-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+        }
+        .lumen-hero-meta {
+          display: flex;
+          gap: 40px;
+          margin-top: 48px;
+        }
+        .lumen-hero-cta {
+          display: flex;
+          gap: 12px;
+          margin-top: 40px;
+        }
+        .lumen-nav-inner {
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 0 48px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .lumen-hero-wrap {
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 80px 48px 56px;
+        }
+        .lumen-outcome-stats {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+        .lumen-outcome-cols {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        .lumen-problem-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        .lumen-ds-colors {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 28px;
+          margin-bottom: 28px;
+        }
+        .lumen-ds-type-comp {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+        .lumen-screen-header {
+          display: grid;
+          grid-template-columns: 260px 1fr;
+          gap: 64px;
+          margin-bottom: 32px;
+        }
+        .lumen-footer-inner {
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 56px 48px 64px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 32px;
+        }
+        .lumen-footer-bottom {
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 20px 48px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 12px;
+        }
+        .lumen-screens-wrap {
+          max-width: 72rem;
+          margin: 0 auto;
+          padding: 80px 48px;
+        }
+        .lumen-nav-title-span {
+          display: inline;
+        }
+        .lumen-hero-phone-chips {
+          display: block;
+        }
+        @media (max-width: 768px) {
+          .lumen-section {
+            padding: 48px 20px;
+          }
+          .lumen-section[data-no-pad] {
+            padding: 0 20px;
+          }
+          .lumen-edit-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .lumen-hero-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .lumen-stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .lumen-hero-meta {
+            flex-wrap: wrap;
+            gap: 20px;
+          }
+          .lumen-hero-cta {
+            flex-wrap: wrap;
+          }
+          .lumen-nav-inner {
+            padding: 0 20px;
+          }
+          .lumen-hero-wrap {
+            padding: 48px 20px 40px;
+          }
+          .lumen-outcome-stats {
+            grid-template-columns: 1fr;
+          }
+          .lumen-outcome-cols {
+            grid-template-columns: 1fr;
+          }
+          .lumen-problem-grid {
+            grid-template-columns: 1fr;
+          }
+          .lumen-ds-colors {
+            grid-template-columns: 1fr;
+          }
+          .lumen-ds-type-comp {
+            grid-template-columns: 1fr;
+          }
+          .lumen-screen-header {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+          .lumen-footer-inner {
+            padding: 40px 20px;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .lumen-footer-bottom {
+            padding: 16px 20px;
+            flex-direction: column;
+            gap: 12px;
+            text-align: center;
+          }
+          .lumen-screens-wrap {
+            padding: 48px 20px;
+          }
+          .lumen-nav-title-span {
+            display: none;
+          }
+          .lumen-hero-phone-chips {
+            display: none;
+          }
+          .lumen-phone-aside {
+            flex-wrap: wrap;
+          }
+          .lumen-phone-aside > div:first-child {
+            flex: 1 1 100% !important;
+            max-width: 260px;
+            margin: 0 auto;
+          }
+          .lumen-profile-cards {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
 
       {/* ── NAV ─────────────────────────────────────────────── */}
       <header style={{
@@ -183,7 +378,7 @@ export default function LumenCaseStudy() {
         backdropFilter: "blur(16px)", background: `${PAPER}e8`,
         borderBottom: `1px solid ${INK900}0d`,
       }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 48px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div className="lumen-nav-inner">
           <button
             onClick={() => goBack()}
             style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: INK500, background: "none", border: "none", cursor: "pointer" }}
@@ -196,7 +391,7 @@ export default function LumenCaseStudy() {
 
           <div style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 600, fontSize: 15, color: INK900, letterSpacing: "0.01em" }}>
             Lumen<span style={{ color: E500 }}>.</span>
-            <span style={{ fontWeight: 400, fontSize: 13, color: INK500, marginLeft: 8 }}>Smart Home · Design Project</span>
+            <span className="lumen-nav-title-span" style={{ fontWeight: 400, fontSize: 13, color: INK500, marginLeft: 8 }}>Smart Home · Design Project</span>
           </div>
 
           <a href="#screens" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: E500, textDecoration: "none" }}>
@@ -206,8 +401,8 @@ export default function LumenCaseStudy() {
       </header>
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "80px 48px 56px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 80, alignItems: "center" }}>
+      <div className="lumen-hero-wrap">
+        <div className="lumen-hero-grid">
           <div>
             <Tag>Design Project · 2025</Tag>
 
@@ -231,7 +426,7 @@ export default function LumenCaseStudy() {
               A mobile IoT platform that strips back the noise of smart-home management, replacing cluttered dashboards with a single, intentional interface across <strong style={{ color: INK900 }}>18 screens</strong>.
             </p>
 
-            <div style={{ display: "flex", gap: 40, marginTop: 48 }}>
+            <div className="lumen-hero-meta">
               {[["Role", "Product Design"], ["Duration", "6 Weeks"], ["Platform", "iOS · Android"], ["Tools", "Figma · Notion"]].map(([k, v]) => (
                 <div key={k}>
                   <div style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: INK300, marginBottom: 5 }}>{k}</div>
@@ -240,7 +435,7 @@ export default function LumenCaseStudy() {
               ))}
             </div>
 
-            <div style={{ display: "flex", gap: 12, marginTop: 40 }}>
+            <div className="lumen-hero-cta">
               <a href="#screens" style={{ display: "inline-flex", alignItems: "center", gap: 8, height: 44, padding: "0 20px", background: `linear-gradient(180deg,#FF7E48,${E500})`, color: WHITE, borderRadius: 12, fontWeight: 600, fontSize: 14, textDecoration: "none", boxShadow: "0 12px 28px -8px rgba(242,107,44,0.50)" }}>
                 Explore the screens <ArrowRight style={{ width: 14, height: 14 }} />
               </a>
@@ -255,7 +450,7 @@ export default function LumenCaseStudy() {
             <div style={{ position: "relative", width: "85%" }}>
               <Phone src="/lumen/Home- listing devices.png" alt="Lumen Home" />
               {/* floating spec chips */}
-              <div style={{ position: "absolute", top: -14, left: -20, display: "flex", alignItems: "center", gap: 10, backdropFilter: "blur(12px)", background: "rgba(255,255,255,0.88)", border: `1px solid ${INK900}0d`, borderRadius: 14, padding: "10px 14px", boxShadow: "0 8px 24px -10px rgba(15,16,20,0.20)" }}>
+              <div className="lumen-hero-phone-chips" style={{ position: "absolute", top: -14, left: -20, display: "flex", alignItems: "center", gap: 10, backdropFilter: "blur(12px)", background: "rgba(255,255,255,0.88)", border: `1px solid ${INK900}0d`, borderRadius: 14, padding: "10px 14px", boxShadow: "0 8px 24px -10px rgba(15,16,20,0.20)" }}>
                 <span style={{ width: 28, height: 28, borderRadius: 8, background: `${OK500}20`, display: "grid", placeItems: "center" }}>
                   <span style={{ width: 8, height: 8, borderRadius: "50%", background: OK500, display: "block" }} />
                 </span>
@@ -264,7 +459,7 @@ export default function LumenCaseStudy() {
                   <div style={{ fontSize: 13, fontWeight: 600 }}>ON · 12W</div>
                 </div>
               </div>
-              <div style={{ position: "absolute", right: -20, top: "35%", display: "flex", alignItems: "center", gap: 10, backdropFilter: "blur(12px)", background: "rgba(255,255,255,0.88)", border: `1px solid ${INK900}0d`, borderRadius: 14, padding: "10px 14px", boxShadow: "0 8px 24px -10px rgba(15,16,20,0.20)" }}>
+              <div className="lumen-hero-phone-chips" style={{ position: "absolute", right: -20, top: "35%", display: "flex", alignItems: "center", gap: 10, backdropFilter: "blur(12px)", background: "rgba(255,255,255,0.88)", border: `1px solid ${INK900}0d`, borderRadius: 14, padding: "10px 14px", boxShadow: "0 8px 24px -10px rgba(15,16,20,0.20)" }}>
                 <span style={{ width: 28, height: 28, borderRadius: 8, background: E100, display: "grid", placeItems: "center", color: E700 }}>
                   <svg viewBox="0 0 24 24" style={{ width: 14, height: 14 }} fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3" /><circle cx="12" cy="12" r="3" /></svg>
                 </span>
@@ -280,7 +475,7 @@ export default function LumenCaseStudy() {
 
       {/* ── STATS STRIP ──────────────────────────────────────── */}
       <div style={{ borderTop: `1px solid ${INK900}0f`, borderBottom: `1px solid ${INK900}0f` }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 48px", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}>
+        <div className="lumen-stats-grid" style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 48px" }}>
           {[
             { n: "18", label: "Screens designed" },
             { n: "5", label: "Device types" },
@@ -345,7 +540,7 @@ export default function LumenCaseStudy() {
                 <footer style={{ fontSize: 13, color: INK500, marginTop: 12 }}>User interview, 34, first-time smart-plug owner</footer>
               </blockquote>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <div className="lumen-problem-grid">
                 {[
                   { n: "01", title: "Pairing is a black box", body: "Connecting\u2026 with a spinner. No timer, no progress, no idea what to do if it stalls." },
                   { n: "02", title: "Empty states feel like errors", body: "A blank home screen on day-1 looks broken. Users assume the app doesn\u2019t work." },
@@ -529,7 +724,7 @@ export default function LumenCaseStudy() {
             right={
               <div>
                 {/* color swatches */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 28, marginBottom: 28 }}>
+                <div className="lumen-ds-colors">
                   {[
                     { title: "Primary · Ember", swatches: [["#FFF1EA","50"],["#FFC2A4","200"],["#F26B2C","500"],["#DC551A","600"],["#7E2B07","800"]] },
                     { title: "Neutral · Ink",   swatches: [["#F7F7F8","50"],["#D9D9DD","200"],["#5B5E66","500"],["#262830","700"],["#0F1014","900"]] },
@@ -550,7 +745,7 @@ export default function LumenCaseStudy() {
                 </div>
 
                 {/* type + components */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                <div className="lumen-ds-type-comp">
                   <div style={{ background: WHITE, border: `1px solid ${INK900}08`, borderRadius: 16, padding: 24 }}>
                     <div style={{ fontWeight: 600, fontSize: 14, color: INK900, marginBottom: 20 }}>Typography</div>
                     <div style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontSize: 42, fontWeight: 700, lineHeight: 1, marginBottom: 6 }}>Aa</div>
@@ -594,7 +789,7 @@ export default function LumenCaseStudy() {
       </div>
 
       {/* ── KEY SCREENS ──────────────────────────────────────── */}
-      <div id="screens" style={{ maxWidth: "72rem", margin: "0 auto", padding: "80px 48px" }}>
+      <div id="screens" className="lumen-screens-wrap">
         <div style={{ marginBottom: 56 }}>
           <Tag>07 · Key Screens</Tag>
           <h2 style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: "clamp(2rem,4vw,3rem)", letterSpacing: "-0.025em", lineHeight: 1.1, color: INK900, margin: "18px 0 0", maxWidth: 560 }}>
@@ -661,7 +856,7 @@ export default function LumenCaseStudy() {
         {/* 7.3 Pairing flow - full-width with scroll */}
         <div style={{ marginBottom: 72, paddingBottom: 72, borderBottom: `1px solid ${INK900}0f` }}>
           {/* header row */}
-          <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: "64px", marginBottom: 32 }}>
+          <div className="lumen-screen-header">
             <div>
               <Tag>7.3 · Pairing Flow</Tag>
               <h3 style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: "clamp(1.3rem,2.5vw,1.7rem)", letterSpacing: "-0.02em", lineHeight: 1.25, color: INK900, margin: "16px 0 0" }}>
@@ -810,7 +1005,7 @@ export default function LumenCaseStudy() {
               </div>
             }
             right={
-              <div style={{ display: "flex", gap: 28, alignItems: "flex-start" }}>
+              <div className="lumen-phone-aside" style={{ display: "flex", gap: 28, alignItems: "flex-start" }}>
                 <div style={{ flex: "0 0 230px" }}>
                   <Phone src="/lumen/Scene.png" alt="Automation / Scene" />
                 </div>
@@ -837,11 +1032,11 @@ export default function LumenCaseStudy() {
               </div>
             }
             right={
-              <div style={{ display: "flex", gap: 28, alignItems: "flex-start" }}>
+              <div className="lumen-phone-aside" style={{ display: "flex", gap: 28, alignItems: "flex-start" }}>
                 <div style={{ flex: "0 0 230px" }}>
                   <Phone src="/lumen/Profile.png" alt="Profile screen" />
                 </div>
-                <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, paddingTop: 8 }}>
+                <div className="lumen-profile-cards" style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, paddingTop: 8 }}>
                   {[
                     { title: "User card · orange CTA", body: "Edit is the only orange element. Focus where it counts." },
                     { title: "Third-party services first", body: "Google Assistant + Alexa as visible cards, not buried menus." },
@@ -874,7 +1069,7 @@ export default function LumenCaseStudy() {
           right={
             <div>
               {/* big stats */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 20 }}>
+              <div className="lumen-outcome-stats">
                 {[
                   { value: "47s", label: "Median time-to-pair, under the 60s ceiling.", bg: E500, valueColor: WHITE, labelColor: E100, border: "none" },
                   { value: "7/7", label: "Users who recovered from a forced pairing failure unaided.", bg: `${INK900}06`, valueColor: INK900, labelColor: INK500, border: `1px solid ${INK900}08` },
@@ -895,7 +1090,7 @@ export default function LumenCaseStudy() {
               </div>
 
               {/* what worked / what's next */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <div className="lumen-outcome-cols">
                 <div style={{ background: WHITE, border: `1px solid ${INK900}08`, borderRadius: 16, padding: 24 }}>
                   <div style={{ fontWeight: 600, fontSize: 14, color: INK900, marginBottom: 14 }}>What worked</div>
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
@@ -934,7 +1129,7 @@ export default function LumenCaseStudy() {
 
       {/* ── FOOTER CTA ───────────────────────────────────────── */}
       <div style={{ borderTop: `1px solid ${INK900}0f` }}>
-        <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "56px 48px 64px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 32 }}>
+        <div className="lumen-footer-inner">
           <div>
             <div style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: 24, color: INK900, marginBottom: 6 }}>Building hardware that needs a soft touch?</div>
             <p style={{ color: INK500, fontSize: 15, lineHeight: 1.6, maxWidth: 480 }}>I design companion apps for connected products: IoT, wearables, fintech hardware. Always happy to talk through a brief.</p>
@@ -956,7 +1151,7 @@ export default function LumenCaseStudy() {
         </div>
 
         <div style={{ borderTop: `1px solid ${INK900}08` }}>
-          <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "20px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 12, color: INK300 }}>
+          <div className="lumen-footer-bottom" style={{ color: INK300 }}>
             <span>Lumen · A Design Project by Muhammad Ahmed</span>
             <div style={{ display: "flex", gap: 20 }}>
               {["overview","screens","outcome"].map(s => (
