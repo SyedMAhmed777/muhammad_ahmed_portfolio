@@ -53,7 +53,7 @@ const CATEGORIES: CategoryItem[] = [
     description: "A welcoming, secure first 30 seconds. Social options, minimal fields, and clear status feedback to lower the bar of entry.",
     screens: [
       { src: "serene/Login.png", title: "Login Screen", note: "Email + password with social SSO options. Clean and focused layout with zero clutter." },
-      { src: "serene/Sign up.png", title: "Create Account", note: "Four essential fields — name, email, password, and age to surface appropriate clinical options later." },
+      { src: "serene/Sign up.png", title: "Create Account", note: "Four essential fields: name, email, password, and age to surface appropriate clinical options later." },
     ]
   },
   {
@@ -69,7 +69,7 @@ const CATEGORIES: CategoryItem[] = [
     id: "discovery",
     name: "Discovery & Search",
     icon: "🔍",
-    description: "Discover and compare therapists end-to-end. Highlight specialty pills, credentials, pricing, and authentic client proof.",
+    description: "Discover and compare therapists from start to finish. Highlight specialty pills, credentials, pricing, and authentic client proof.",
     screens: [
       { src: "serene/Search.png", title: "Search Therapists", note: "Search filters and result cards prioritizing the three trust signals: who, what, how much." },
       { src: "serene/Profile.png", title: "Therapist Profile", note: "Biography, introduction clips, patient reviews, and a sticky scheduling footer for quick actions." },
@@ -82,7 +82,7 @@ const CATEGORIES: CategoryItem[] = [
     icon: "📅",
     description: "Confirm a session in just two taps. Horizontal date swipers, clean hour grids, and saved payment integration.",
     screens: [
-      { src: "serene/Booking.png", title: "Appointment Scheduler", note: "Warm layout, swipeable days, and clear time-slot selection to make scheduling stress-free." },
+      { src: "serene/Booking.png", title: "Appointment Scheduler", note: "Warm layout, swipeable days, and clear time slot selection to make scheduling effortless." },
       { src: "serene/Payment.png", title: "Payment Confirmation", note: "Saved cards shown first, custom entry last. The confirm CTA stays disabled until selected." },
     ]
   },
@@ -92,8 +92,8 @@ const CATEGORIES: CategoryItem[] = [
     icon: "💬",
     description: "The room where healing happens. Asynchronous 1:1 chat, moderated support groups, high-quality video, and history logs.",
     screens: [
-      { src: "serene/Consultation.png", title: "Upcoming Consultations", note: "Review booked sessions with a simple, direct one-tap join and cancel option." },
-      { src: "serene/Consultation Video Call.png", title: "Video Consultation", note: "Full-screen video, self picture-in-picture, and simple call controls built for focus." },
+      { src: "serene/Consultation.png", title: "Upcoming Consultations", note: "Review booked sessions with a simple, direct single tap join and cancel option." },
+      { src: "serene/Consultation Video Call.png", title: "Video Consultation", note: "Fullscreen video, self floating preview, and simple call controls built for focus." },
       { src: "serene/Chat.png", title: "1:1 Messaging", note: "Encrypted text, voice notes, and media sharing. Generation of safety parameters inline." },
       { src: "serene/Group Chat.png", title: "Group Support Rooms", note: "Topic-based community circles (Anxiety, Depression) for guided peer support." },
       { src: "serene/History.png", title: "Session History", note: "Logs of past consultations with recorded clips and simple delete/archive options." },
@@ -105,9 +105,9 @@ const CATEGORIES: CategoryItem[] = [
     icon: "📊",
     description: "Numbers that feel like a friend asking how you are. Curated templates for mood, sleep, steps, and nutrition tracker.",
     screens: [
-      { src: "serene/Mood Monitor.png", title: "Mood Tracker", note: "Five simple emoji states, weekly trends, and gentle notes — absolutely no judgment or strict scores." },
+      { src: "serene/Mood Monitor.png", title: "Mood Tracker", note: "Five simple emoji states, weekly trends, and gentle notes. Absolutely no judgment or strict scores." },
       { src: "serene/Sleep Monitor.png", title: "Sleep Analyzer", note: "Visual breakdown of Bedtime, Waketime, and Sleep Stages (REM, Light, Deep)." },
-      { src: "serene/Steps.png", title: "Activity Counter", note: "Daily steps, total active duration, and calories tracked cleanly in real-time." },
+      { src: "serene/Steps.png", title: "Activity Counter", note: "Daily steps, total active duration, and calories tracked cleanly in realtime." },
       { src: "serene/Calories.png", title: "Nutrition Ring", note: "Visual macro rings (Carbs, Protein, Fats) inside a unified calories intake display." },
     ]
   },
@@ -118,8 +118,8 @@ const CATEGORIES: CategoryItem[] = [
     description: "A free, generous path for those who aren't ready to commit to therapy yet. Curated guides, articles, and audio files.",
     screens: [
       { src: "serene/Library.png", title: "Library Hub", note: "Categorized guides for Anxiety, Stress, Loneliness, ADHD, and relationships in plain language." },
-      { src: "serene/Library-1.png", title: "Anxiety Topic Detail", note: "Editorial cover, search filters, group chat entry points, and bite-sized video reels." },
-      { src: "serene/Blog.png", title: "Calm Reads", note: "Beautifully set typography articles for clients who prefer mindful, long-form reading." },
+      { src: "serene/Library-1.png", title: "Anxiety Topic Detail", note: "Editorial cover, search filters, group chat entry points, and short video reels." },
+      { src: "serene/Blog.png", title: "Calm Reads", note: "Beautifully set typography articles for clients who prefer mindful, extended reading." },
     ]
   },
   {
@@ -137,7 +137,7 @@ const CATEGORIES: CategoryItem[] = [
     icon: "⭐",
     description: "Monetization that builds long-term trust. Clean comparisons, transparent yearly packages, and zero FOMO dark patterns.",
     screens: [
-      { src: "serene/Premium.png", title: "Premium Matrix", note: "Free vs. Pro side-by-side table, highlighting transparent billing cycles with a single-tap cancellation guarantee." },
+      { src: "serene/Premium.png", title: "Premium Matrix", note: "Free vs. Pro comparison table, highlighting transparent billing cycles with a one tap cancellation guarantee." },
     ]
   }
 ];
@@ -353,7 +353,7 @@ export default function SereneCaseStudy() {
           margin: "0 0 24px",
           maxWidth: 660
         }}>
-          A complete end-to-end companion platform connecting clients with licensed therapists while quietly monitoring everyday wellness signals (sleep, mood, steps, macros) that shape how we feel. Click through the interactive workspace below to explore all <strong style={{ color: INK_900 }}>25 high-fidelity screens</strong>.
+          A complete companion platform connecting clients with licensed therapists while quietly monitoring everyday wellness signals (sleep, mood, steps, macros) that shape how we feel. Click through the interactive workspace below to explore all <strong style={{ color: INK_900 }}>25 polished screens</strong>.
         </p>
 
         <div className="serene-hero-meta" style={{ borderTop: `1px solid ${INK_100}`, borderBottom: `1px solid ${INK_100}` }}>
@@ -707,7 +707,7 @@ export default function SereneCaseStudy() {
                 Got a product that needs the same kind of design care?
               </h2>
               <p style={{ color: INK_700, fontSize: 15, lineHeight: 1.6, marginTop: 16, maxWidth: 560 }}>
-                I design calm, considered interfaces for digital applications that impact real lives — across health, wellness, finance, and education. Let's build something exceptional.
+                I design calm, considered interfaces for digital applications that impact real lives, across health, wellness, finance, and education. Let's build something exceptional.
               </p>
             </div>
             

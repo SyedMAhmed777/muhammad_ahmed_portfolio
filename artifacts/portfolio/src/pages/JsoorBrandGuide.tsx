@@ -48,7 +48,7 @@ export default function JsoorBrandGuide() {
           <div key={src} className="w-full border-t border-white/[0.04] first:border-t-0">
             <img
               src={src}
-              alt={`Jsoor Brand Guide – Page ${i + 1}`}
+              alt={`Jsoor Brand Guide, Page ${i + 1}`}
               loading={i < 3 ? "eager" : "lazy"}
               className="w-full h-auto block"
             />

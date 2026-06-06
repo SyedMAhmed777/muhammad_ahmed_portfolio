@@ -479,7 +479,7 @@ export default function LumenCaseStudy() {
           {[
             { n: "18", label: "Screens designed" },
             { n: "5", label: "Device types" },
-            { n: "60s", label: "Target time-to-pair" },
+            { n: "60s", label: "Target pairing time" },
             { n: "7 / 7", label: "Users recovered unaided" },
           ].map(({ n, label }, i) => (
             <div key={i} style={{ padding: "32px 0", paddingLeft: i > 0 ? 32 : 0, borderRight: i < 3 ? `1px solid ${INK900}0f` : "none" }}>
@@ -507,7 +507,7 @@ export default function LumenCaseStudy() {
                 Smart-home apps live or die on a single moment: the first time a user holds an unboxed plug, opens the app, and tries to bring the two together. Lumen is designed to make that moment feel less like flashing a router and more like AirPods pairing: guided, forgiving, and quick.
               </p>
               <p style={{ fontSize: 17, lineHeight: 1.78, color: INK700 }}>
-                Beyond pairing, the product organises devices by <strong style={{ color: INK900 }}>home</strong> and <strong style={{ color: INK900 }}>room</strong>, exposes contextual bottom-sheet controls for each device type, and ties the lot together with scenes and voice-assistant hooks.
+                Beyond pairing, the product organises devices by <strong style={{ color: INK900 }}>home</strong> and <strong style={{ color: INK900 }}>room</strong>, exposes contextual bottom sheet controls for each device type, and ties the lot together with scenes and voice assistant hooks.
               </p>
             </div>
           }
@@ -526,7 +526,7 @@ export default function LumenCaseStudy() {
                 IoT apps fail at the moments that matter most.
               </h2>
               <p style={{ fontSize: 14, lineHeight: 1.7, color: INK500 }}>
-                After auditing 6 leading smart-home apps and watching 5 first-time setups in person, four failure modes accounted for nearly every drop-off.
+                After auditing 6 leading smart home apps and watching 5 first time setups in person, four failure modes accounted for nearly every drop off.
               </p>
             </>
           }
@@ -537,14 +537,14 @@ export default function LumenCaseStudy() {
                 <p style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontSize: "clamp(1.1rem,2.5vw,1.35rem)", fontWeight: 500, lineHeight: 1.5, color: INK900, margin: 0 }}>
                   "I bought the plug, downloaded the app, and spent twenty minutes trying to figure out why it kept timing out. Turned out my router was 5GHz. The app never said a word."
                 </p>
-                <footer style={{ fontSize: 13, color: INK500, marginTop: 12 }}>User interview, 34, first-time smart-plug owner</footer>
+                <footer style={{ fontSize: 13, color: INK500, marginTop: 12 }}>User interview, 34, first time smart plug owner</footer>
               </blockquote>
 
               <div className="lumen-problem-grid">
                 {[
                   { n: "01", title: "Pairing is a black box", body: "Connecting\u2026 with a spinner. No timer, no progress, no idea what to do if it stalls." },
-                  { n: "02", title: "Empty states feel like errors", body: "A blank home screen on day-1 looks broken. Users assume the app doesn\u2019t work." },
-                  { n: "03", title: "Errors are dead ends", body: "Failed. Try again. gives no diagnostic \u2014 most users blame themselves and give up." },
+                  { n: "02", title: "Empty states feel like errors", body: "A blank home screen on day one looks broken. Users assume the app doesn\u2019t work." },
+                  { n: "03", title: "Errors are dead ends", body: "Failed. Try again. gives no diagnostic, so most users blame themselves and give up." },
                   { n: "04", title: "Lists break at scale", body: "Past a dozen devices, flat lists become unusable. Users want rooms, scenes, and a panic button." },
                 ].map(({ n, title, body }) => (
                   <div key={n} style={{ background: `${INK900}05`, border: `1px solid ${INK900}08`, borderRadius: 14, padding: "20px 20px" }}>
@@ -575,8 +575,8 @@ export default function LumenCaseStudy() {
           right={
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {[
-                { icon: <Check style={{ width: 16, height: 16 }} />, title: "Make first-pair feel like a magic trick", body: "A countdown timer, a clear blinking check, and a 3-bullet recovery modal: pairing as a guided 60-second journey, not a black box." },
-                { icon: <svg viewBox="0 0 24 24" style={{ width: 16, height: 16 }} fill="none" stroke="currentColor" strokeWidth="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>, title: "Treat empty as opportunity, not failure", body: "An illustrated empty home plus a dashed arrow pointing at the FAB, so even day-zero users know exactly what to do next." },
+                { icon: <Check style={{ width: 16, height: 16 }} />, title: "Make first pair feel like a magic trick", body: "A countdown timer, a clear blinking check, and a 3 bullet recovery modal: pairing as a guided 60 second journey, not a black box." },
+                { icon: <svg viewBox="0 0 24 24" style={{ width: 16, height: 16 }} fill="none" stroke="currentColor" strokeWidth="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>, title: "Treat empty as opportunity, not failure", body: "An illustrated empty home plus a dashed arrow pointing at the FAB, so even brand new users know exactly what to do next." },
                 { icon: <AlertCircle style={{ width: 16, height: 16 }} />, title: "Errors should be conversations", body: "Every failure modal lists the three most likely causes, turning a dead end into a checklist." },
                 { icon: <Layers style={{ width: 16, height: 16 }} />, title: "Daily control belongs in the thumb zone", body: "Bottom sheets, not new pages, for power, dimmer, regulator. The home screen never has to leave focus." },
               ].map(({ icon, title, body }) => (
@@ -602,7 +602,7 @@ export default function LumenCaseStudy() {
             <>
               <Tag>04 · Who we designed for</Tag>
               <h2 style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: "clamp(1.6rem,3vw,2.2rem)", letterSpacing: "-0.025em", lineHeight: 1.2, color: INK900, margin: "18px 0 0" }}>
-                The first-timer and the power user.
+                The first timer and the power user.
               </h2>
             </>
           }
@@ -610,18 +610,18 @@ export default function LumenCaseStudy() {
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {[
                 {
-                  letter: "P", name: "Priya, 29", subtitle: "First-time smart-plug buyer · One bedroom, one device",
+                  letter: "P", name: "Priya, 29", subtitle: "First time smart plug buyer · One bedroom, one device",
                   gradient: `linear-gradient(135deg,${E200},${E500})`,
                   bio: "Bought a smart plug to schedule her aquarium light. Will return the device if setup takes longer than ten minutes.",
-                  needs: ["A first-device walkthrough", "Honest feedback during pairing", "Plain-language errors"],
+                  needs: ["A first device walkthrough", "Honest feedback during pairing", "Plain language errors"],
                   frustrations: ["Account creation before setup", "Mystery WiFi requirements", "No way to back out cleanly"],
                 },
                 {
                   letter: "M", name: "Murat, 41", subtitle: "Power user · 3 homes, 32 devices, 12 scenes",
                   gradient: `linear-gradient(135deg,${INK700},${INK900})`,
                   bio: "Manages his apartment, his parents' place, and a holiday home from one phone. Wants speed: fewer taps, more bulk actions.",
-                  needs: ["Multi-home switcher", "Bulk-select & Off all", "Voice-assistant pairing"],
-                  frustrations: ["Single flat device list", "Re-pairing after WiFi change", "Slow scene authoring"],
+                  needs: ["Multi home switcher", "Bulk select & Off all", "Voice assistant pairing"],
+                  frustrations: ["Single flat device list", "Re pairing after WiFi change", "Slow scene authoring"],
                 },
               ].map(({ letter, name, subtitle, gradient, bio, needs, frustrations }) => (
                 <div key={name} style={{ background: WHITE, border: `1px solid ${INK900}08`, borderRadius: 18, padding: "28px 28px" }}>
@@ -811,8 +811,8 @@ export default function LumenCaseStudy() {
             layout: "three",
           },
           {
-            id: "7.2", tag: "7.2 · First-time Setup", headline: "An empty home, with a way out.",
-            desc: "Day-zero is the highest-stakes moment in any IoT app. The empty state earns its keep with an illustration, a one-line ask, and a dashed arrow pointing to the FAB.",
+            id: "7.2", tag: "7.2 · First Time Setup", headline: "An empty home, with a way out.",
+            desc: "Day zero is the highest stakes moment in any IoT app. The empty state earns its keep with an illustration, a single line ask, and a dashed arrow pointing to the FAB.",
             bullets: ["Illustration says: we know it's empty, here's what to do", "Dashed arrow from illustration to the + FAB", "Create Home: house name, location, room defaults on one screen"],
             phones: [
               { src: "/lumen/Home.png", alt: "Empty home", label: "Empty Home" },
@@ -943,7 +943,7 @@ export default function LumenCaseStudy() {
                 <h3 style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: "clamp(1.3rem,2.5vw,1.7rem)", letterSpacing: "-0.02em", lineHeight: 1.25, color: INK900, margin: "16px 0 14px" }}>Bottom sheets, not new pages.</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.75, color: INK500, marginBottom: 20 }}>Tapping a device card opens a contextual sheet scaled to the device's controls, never an entire new screen for a single slider.</p>
                 <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
-                  {["Oversized power button, the only thing that matters for binary devices", "Tactile slider with real-time percentage readout", "Edit pencil for renaming, discoverable but never in the way"].map(b => (
+                  {["Oversized power button, the only thing that matters for binary devices", "Tactile slider with realtime percentage readout", "Edit pencil for renaming, discoverable but never in the way"].map(b => (
                     <li key={b} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: INK500, lineHeight: 1.55 }}>
                       <span style={{ width: 5, height: 5, borderRadius: "50%", background: E500, flexShrink: 0, marginTop: 5 }} />{b}
                     </li>
@@ -974,7 +974,7 @@ export default function LumenCaseStudy() {
               <div style={{ position: "sticky", top: 76 }}>
                 <Tag>7.6 · Bulk Management</Tag>
                 <h3 style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: "clamp(1.3rem,2.5vw,1.7rem)", letterSpacing: "-0.02em", lineHeight: 1.25, color: INK900, margin: "16px 0 14px" }}>For when one isn't enough.</h3>
-                <p style={{ fontSize: 14, lineHeight: 1.75, color: INK500 }}>Power users live and die on bulk actions, hidden from first-timers but two taps away.</p>
+                <p style={{ fontSize: 14, lineHeight: 1.75, color: INK500 }}>Power users live and die on bulk actions, hidden from beginners but two taps away.</p>
               </div>
             }
             right={
@@ -984,9 +984,9 @@ export default function LumenCaseStudy() {
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 12, paddingTop: 8 }}>
                   {[
-                    { title: "Card-based multi-select", body: "Selection markers in the corner, readable from a thumb's distance." },
+                    { title: "Card based multi select", body: "Selection markers in the corner, readable from a thumb's distance." },
                     { title: "Sticky destructive footer", body: "Delete Device: red, pinned, only enabled while a card is selected." },
-                    { title: "Same grid, different mode", body: "No separate edit-mode page. One mental model, two jobs." },
+                    { title: "Same grid, different mode", body: "No separate edit mode page. One mental model, two jobs." },
                   ].map(({ title, body }) => <InfoCard key={title} title={title} body={body} />)}
                 </div>
               </div>
@@ -1001,7 +1001,7 @@ export default function LumenCaseStudy() {
               <div style={{ position: "sticky", top: 76 }}>
                 <Tag>7.7 · Automation & Scenes</Tag>
                 <h3 style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: "clamp(1.3rem,2.5vw,1.7rem)", letterSpacing: "-0.02em", lineHeight: 1.25, color: INK900, margin: "16px 0 14px" }}>A second tab, for the "set it and forget it" life.</h3>
-                <p style={{ fontSize: 14, lineHeight: 1.75, color: INK500 }}>Automations (event-triggered) and Tap-to-Run (manual scenes) live in their own tab, discoverable but separate from daily control.</p>
+                <p style={{ fontSize: 14, lineHeight: 1.75, color: INK500 }}>Automations (event triggered) and Tap to Run (manual scenes) live in their own tab, discoverable but separate from daily control.</p>
               </div>
             }
             right={
@@ -1011,8 +1011,8 @@ export default function LumenCaseStudy() {
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 12, paddingTop: 8 }}>
                   {[
-                    { title: "Two pills, one tab", body: "Automation = if X then Y. Tap-to-Run = a scene you trigger manually." },
-                    { title: "Helpful empty state", body: "A one-line value prop rather than a hollow 'No automations yet'." },
+                    { title: "Two pills, one tab", body: "Automation = if X then Y. Tap to Run = a scene you trigger manually." },
+                    { title: "Helpful empty state", body: "A single line value prop rather than a hollow 'No automations yet'." },
                     { title: "Same FAB pattern", body: "Orange + in the same corner, muscle memory transfers between tabs." },
                   ].map(({ title, body }) => <InfoCard key={title} title={title} body={body} />)}
                 </div>
@@ -1028,7 +1028,7 @@ export default function LumenCaseStudy() {
               <div style={{ position: "sticky", top: 76 }}>
                 <Tag>7.8 · Profile</Tag>
                 <h3 style={{ fontFamily: "Space Grotesk, ui-sans-serif", fontWeight: 700, fontSize: "clamp(1.3rem,2.5vw,1.7rem)", letterSpacing: "-0.02em", lineHeight: 1.25, color: INK900, margin: "16px 0 14px" }}>Account, integrations, support. In one quiet screen.</h3>
-                <p style={{ fontSize: 14, lineHeight: 1.75, color: INK500 }}>Voice-assistant integrations sit above the fold, as they're a major reason people choose one IoT brand over another.</p>
+                <p style={{ fontSize: 14, lineHeight: 1.75, color: INK500 }}>Voice assistant integrations sit above the fold, as they're a major reason people choose one IoT brand over another.</p>
               </div>
             }
             right={
@@ -1039,9 +1039,9 @@ export default function LumenCaseStudy() {
                 <div className="lumen-profile-cards" style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, paddingTop: 8 }}>
                   {[
                     { title: "User card · orange CTA", body: "Edit is the only orange element. Focus where it counts." },
-                    { title: "Third-party services first", body: "Google Assistant + Alexa as visible cards, not buried menus." },
+                    { title: "Third party services first", body: "Google Assistant + Alexa as visible cards, not buried menus." },
                     { title: "Three settings rows", body: "Home Management, Message Centre, FAQ & Feedback. No clutter." },
-                    { title: "Settings icon, top-right", body: "Present but not the headline. The gear never competes." },
+                    { title: "Settings icon, top right", body: "Present but not the headline. The gear never competes." },
                   ].map(({ title, body }) => <InfoCard key={title} title={title} body={body} />)}
                 </div>
               </div>
@@ -1062,7 +1062,7 @@ export default function LumenCaseStudy() {
                 What changed once real plugs hit the room.
               </h2>
               <p style={{ fontSize: 14, lineHeight: 1.7, color: INK500 }}>
-                Tested with 7 participants across two cohorts: 4 first-time IoT buyers and 3 power users. Results held across Android and iOS prototypes.
+                Tested with 7 participants across two cohorts: 4 first time IoT buyers and 3 power users. Results held across Android and iOS prototypes.
               </p>
             </>
           }
@@ -1071,7 +1071,7 @@ export default function LumenCaseStudy() {
               {/* big stats */}
               <div className="lumen-outcome-stats">
                 {[
-                  { value: "47s", label: "Median time-to-pair, under the 60s ceiling.", bg: E500, valueColor: WHITE, labelColor: E100, border: "none" },
+                  { value: "47s", label: "Median pairing time, under the 60s ceiling.", bg: E500, valueColor: WHITE, labelColor: E100, border: "none" },
                   { value: "7/7", label: "Users who recovered from a forced pairing failure unaided.", bg: `${INK900}06`, valueColor: INK900, labelColor: INK500, border: `1px solid ${INK900}08` },
                   { value: "0",   label: "Users who tapped the wrong CTA on the empty home screen.", bg: `${INK900}06`, valueColor: OK700, labelColor: INK500, border: `1px solid ${INK900}08` },
                 ].map(({ value, label, bg, valueColor, labelColor, border }, i) => (
@@ -1096,8 +1096,8 @@ export default function LumenCaseStudy() {
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
                     {[
                       "The 60s timer was cited as the moment trust kicked in.",
-                      "2.4 GHz pre-flight prevented all expected router failures.",
-                      "Bottom-sheet control preferred 7/7 over full-screen pages.",
+                      "2.4 GHz pre flight check prevented all expected router failures.",
+                      "Bottom sheet control preferred 7/7 over full screen pages.",
                       "Power users found Switch Off All unprompted in 3/3 cases.",
                     ].map(s => (
                       <li key={s} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: INK500, lineHeight: 1.55 }}>
@@ -1110,10 +1110,10 @@ export default function LumenCaseStudy() {
                   <div style={{ fontWeight: 600, fontSize: 14, color: INK900, marginBottom: 14 }}>What I'd change next</div>
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
                     {[
-                      "Add a multi-home switcher to the top-left dropdown.",
+                      "Add a multi home switcher to the top left dropdown.",
                       "Build a real scene authoring flow. The empty state implies polish that doesn't yet exist.",
-                      "Surface a per-device signal-strength badge for early WiFi diagnosis.",
-                      "Separate schedule-based automations from the overloaded + FAB.",
+                      "Surface a per device signal strength badge for early WiFi diagnosis.",
+                      "Separate schedule based automations from the overloaded + FAB.",
                     ].map(s => (
                       <li key={s} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: INK500, lineHeight: 1.55 }}>
                         <ArrowRight style={{ width: 13, height: 13, color: E500, flexShrink: 0, marginTop: 2 }} />{s}

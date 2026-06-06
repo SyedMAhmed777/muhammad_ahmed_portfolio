@@ -45,10 +45,10 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <p className="text-foreground/80 text-lg leading-relaxed mb-8">
-              Hi, I'm Muhammad Ahmed. I'm a Product Designer with over three years of experience delivering user-centered design solutions across web and mobile products. I am proficient in the entire end to end UX design process, from user research and wireframing through to prototyping and high-fidelity design using Figma, Adobe XD, and Sketch.
+              Hi, I'm Muhammad Ahmed. I'm a Product Designer with over three years of experience delivering user centered design solutions across web and mobile products. I am proficient in the entire end to end UX design process, from user research and wireframing through to prototyping and polished design using Figma, Adobe XD, and Sketch.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-12">
-              Throughout my work, I build scalable design systems, conduct usability testing, and collaborate cross-functionally with product managers and engineers in Agile and Scrum environments to ship accessible, conversion-optimized digital experiences.
+              Throughout my work, I build scalable design systems, conduct usability testing, and collaborate across functions with product managers and engineers in Agile and Scrum environments to ship accessible, conversion focused digital experiences.
             </p>
 
             <div className="grid grid-cols-3 gap-6">

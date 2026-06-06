@@ -67,7 +67,7 @@ export default function PayGoDashCaseStudy() {
           >
             <img
               src={src}
-              alt={`PayGoDash Case Study – Slide ${i + 1}`}
+              alt={`PayGoDash Case Study, Slide ${i + 1}`}
               loading={i === 0 ? "eager" : "lazy"}
               className="w-full h-auto block"
             />

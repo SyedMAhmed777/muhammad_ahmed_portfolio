@@ -61,7 +61,7 @@ const services = [
   {
     icon: ShieldCheck,
     title: "UX Audit & Accessibility",
-    description: "Heuristic evaluation and WCAG compliance review that identifies friction points, accessibility gaps, and quick-win improvements across your product.",
+    description: "Heuristic evaluation and WCAG compliance review that identifies friction points, accessibility gaps, and quick win improvements across your product.",
     iconColor: "text-sky-400",
     iconBg: "bg-sky-500/10",
     iconBorder: "border-sky-500/20",

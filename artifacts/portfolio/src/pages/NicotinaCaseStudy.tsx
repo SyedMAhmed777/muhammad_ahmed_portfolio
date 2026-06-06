@@ -55,9 +55,9 @@ const CATEGORIES: CategoryItem[] = [
     id: "welcome",
     name: "Welcome Experience",
     icon: "👋",
-    description: "Mascots and a hand-lettered logo set the tone: playful, low-stakes, and a little weird in the best way.",
+    description: "Mascots and a hand drawn logo set the tone: playful, casual, and a little weird in the best way.",
     screens: [
-      { src: "nicotina/Splash.png", title: "Splash Screen", note: "Hand-drawn logo + the two heroes say \"this is a game\" before any words do. Establishes character." },
+      { src: "nicotina/Splash.png", title: "Splash Screen", note: "Hand drawn logo + the two heroes say \"this is a game\" before any words do. Establishes character." },
       { src: "nicotina/get started.png", title: "Get Started", note: "Honest framing: \"this app only works if you do 2 things.\" Sets expectations early, with no false promises." },
       { src: "nicotina/How to play.png", title: "How to Play", note: "A single page that explains the entire gamified mechanic: red when you slip, and blue when you replace." },
     ]
@@ -68,11 +68,11 @@ const CATEGORIES: CategoryItem[] = [
     icon: "📋",
     description: "A short behavioral quiz tunes the entire experience: what you smoke, how often, goals, and companion avatar.",
     screens: [
-      { src: "nicotina/onboarding-1.png", title: "What you smoke", note: "Pill-style choice + cost + nicotine content database lookup for real-time calculations." },
+      { src: "nicotina/onboarding-1.png", title: "What you smoke", note: "Pill style choice + cost + nicotine content database lookup for realtime calculations." },
       { src: "nicotina/onboarding-2.png", title: "How often", note: "Two stacked sliders + an honest \"Not Sure\" option to remove guilt for not knowing exact details." },
       { src: "nicotina/onboarding-3.png", title: "Your target", note: "Stop · Decrease · Maintain. Three completely different gamified routes inside one codebase." },
       { src: "nicotina/onboarding-4.png", title: "Choose veggie", note: "Three distinct companion mascot personalities to pick from, and the user gets to name them." },
-      { src: "nicotina/Reminder.png", title: "Reminder timing", note: "Wheel-style time picker. \"Never\" is a valid, prominent option, avoiding dark patterns or forced notifications." },
+      { src: "nicotina/Reminder.png", title: "Reminder timing", note: "Wheel style time picker. \"Never\" is a valid, prominent option, avoiding dark patterns or forced notifications." },
     ]
   },
   {
@@ -82,9 +82,9 @@ const CATEGORIES: CategoryItem[] = [
     description: "A continuation path lowers the bar to entry: record habit data first, and form an account later.",
     screens: [
       { src: "nicotina/Sign in.png", title: "Sign In", note: "Username/email + password, with \"Continue as guest\" right under the primary CTA." },
-      { src: "nicotina/Sign up.png", title: "Sign Up - Empty", note: "Four fields max. Social SSO at the bottom for quick, frictionless signup." },
-      { src: "nicotina/Sign up-2.png", title: "Sign Up - Filled", note: "CTA stays calmly disabled until validation passes. Inline helper text instead of red shouting labels." },
-      { src: "nicotina/Sign up-1.png", title: "Sign Up - Error State", note: "A worried cucumber mascot softens the \"Ooops!\", keeping the failure state friendly." },
+      { src: "nicotina/Sign up.png", title: "Sign Up (Empty)", note: "Four fields max. Social SSO at the bottom for quick, frictionless signup." },
+      { src: "nicotina/Sign up-2.png", title: "Sign Up (Filled)", note: "CTA stays calmly disabled until validation passes. Inline helper text instead of red shouting labels." },
+      { src: "nicotina/Sign up-1.png", title: "Sign Up (Error State)", note: "A worried cucumber mascot softens the \"Ooops!\", keeping the failure state friendly." },
     ]
   },
   {
@@ -111,7 +111,7 @@ const CATEGORIES: CategoryItem[] = [
     icon: "🏆",
     description: "A bright, responsive Levels and milestones view showcasing XP, streaks, and unlocked trophy assets.",
     screens: [
-      { src: "nicotina/Levels.png", title: "Levels & Milestones", note: "Hexagons unlock left-to-right. Trophies sit on a quiet shelf below, present but not nagging." },
+      { src: "nicotina/Levels.png", title: "Levels & Milestones", note: "Hexagons unlock sequentially. Trophies sit on a quiet shelf below, present but not nagging." },
     ]
   },
   {
@@ -142,7 +142,7 @@ const CATEGORIES: CategoryItem[] = [
     screens: [
       { src: "nicotina/shop.png", title: "Shop Categories", note: "Background, Wall, Pot, Table, Decoration: your veggie has a whole apartment." },
       { src: "nicotina/shop-1.png", title: "Shop Accessories", note: "Glasses and hats. Tiny, repeating dopaminergic rewards that reinforce showing up." },
-      { src: "nicotina/Items.png", title: "Items · Buy", note: "Star-priced and gem-priced items side-by-side. \"Subscriber only\" is clear, honest, and not sneaky." },
+      { src: "nicotina/Items.png", title: "Items · Buy", note: "Star priced and gem priced items placed next to each other. \"Subscriber only\" is clear, honest, and not sneaky." },
       { src: "nicotina/Owned.png", title: "Owned · Equip", note: "A separate tab so the act of \"wearing\" items remains distinct and clean from buying." },
     ]
   },
@@ -436,7 +436,7 @@ export default function NicotinaCaseStudy() {
         </h1>
 
         <p style={{ fontSize: 16, lineHeight: 1.7, margin: "0 0 24px", color: INK700, maxWidth: 660 }}>
-          An end-to-end gamified companion app that replaces dry tracker spreadsheets with playful veggie mascots, streak currencies, cost calculators, and replacement habit loops. Click through the interactive dashboard below to explore all <strong style={{ color: INK900 }}>27 high-fidelity interface screens</strong>.
+          A complete gamified companion app that replaces dry tracker spreadsheets with playful veggie mascots, streak currencies, cost calculators, and replacement habit loops. Click through the interactive dashboard below to explore all <strong style={{ color: INK900 }}>27 polished interface screens</strong>.
         </p>
 
         <div className="nico-hero-meta" style={{ borderTop: `1px solid ${INK100}`, borderBottom: `1px solid ${INK100}` }}>
@@ -848,9 +848,9 @@ export default function NicotinaCaseStudy() {
               {/* big stats */}
               <div className="nico-outcome-stats">
                 {[
-                  { value: "100%", label: "Onboarding completion rate, indicating the quiz layout and avatar choice felt highly engaging and low-pressure.", bg: MINT, valueColor: WHITE, labelColor: MINT_LIGHT, border: "none" },
-                  { value: "12s", label: "Average check-in time. The primary two-button dashboard layout made daily tracking extremely rapid and frictionless.", bg: `${INK900}06`, valueColor: INK900, labelColor: INK500, border: `1px solid ${INK900}08` },
-                  { value: "8/9", label: "Users correctly mapped the visual color meaning (Mint for replaced, Coral for smoked check-ins) without any instructions.", bg: `${INK900}06`, valueColor: SUN_DARK, labelColor: INK500, border: `1px solid ${INK900}08` },
+                  { value: "100%", label: "Onboarding completion rate, indicating the quiz layout and avatar choice felt highly engaging and relaxed.", bg: MINT, valueColor: WHITE, labelColor: MINT_LIGHT, border: "none" },
+                  { value: "12s", label: "Average check in time. The primary two button dashboard layout made daily tracking extremely rapid and frictionless.", bg: `${INK900}06`, valueColor: INK900, labelColor: INK500, border: `1px solid ${INK900}08` },
+                  { value: "8/9", label: "Users correctly mapped the visual color meaning (Mint for replaced, Coral for smoked check ins) without any instructions.", bg: `${INK900}06`, valueColor: SUN_DARK, labelColor: INK500, border: `1px solid ${INK900}08` },
                 ].map(({ value, label, bg, valueColor, labelColor, border }, i) => (
                   <motion.div
                     key={value}
@@ -872,10 +872,10 @@ export default function NicotinaCaseStudy() {
                   <div style={{ fontWeight: 700, fontSize: 14, color: MINT_DARK, letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: 18 }}>What worked</div>
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
                     {[
-                      "The Wealth Calculator's real-world cost comparisons immediately resonated, with users calling it a powerful mental shift.",
-                      "Color-coded check-ins reduced cognitive load, allowing users to log their state in seconds without feelings of guilt.",
+                      "The Wealth Calculator's real world cost comparisons immediately resonated, with users calling it a powerful mental shift.",
+                      "Color coded check ins reduced cognitive load, allowing users to log their state in seconds without feelings of guilt.",
                       "Selecting and naming a companion veggie mascot established a clear sense of ownership and daily routine motivation.",
-                      "The scrollable daily diary strip was praised for being extremely low-pressure compared to typical calendar checklists.",
+                      "The scrollable daily diary strip was praised for being extremely casual compared to typical calendar checklists.",
                     ].map(s => (
                       <li key={s} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: INK700, lineHeight: 1.6 }}>
                         <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" style={{ color: MINT_DARK, flexShrink: 0, marginTop: 3 }}><path d="M20 6L9 17l-5-5"/></svg>
@@ -890,9 +890,9 @@ export default function NicotinaCaseStudy() {
                   <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
                     {[
                       "Build a better empty state for the daily dashboard since the initial screen felt sparse before logging history.",
-                      "Soften the slip-up reaction: when a user logs a smoke, the mascot should react with care and support, not a hard streak reset.",
-                      "Surface the Alternatives suggestion pre-emptively on the dashboard during recurring high-craving hours.",
-                      "Explore integrating tactile haptic feedback on the primary check-in buttons to make the logging action feel more physical.",
+                      "Soften the slip up reaction: when a user logs a smoke, the mascot should react with care and support, not a hard streak reset.",
+                      "Surface the Alternatives suggestion pre emptively on the dashboard during recurring high craving hours.",
+                      "Explore integrating tactile haptic feedback on the primary check in buttons to make the logging action feel more physical.",
                     ].map(s => (
                       <li key={s} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 13, color: INK700, lineHeight: 1.6 }}>
                         <ArrowRight style={{ width: 14, height: 14, color: SUN, flexShrink: 0, marginTop: 3 }} />

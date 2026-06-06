@@ -97,7 +97,7 @@ export const projects = [
     id: 5,
     name: "Serene",
     subtitle: "Mental Health & Self-Care Companion",
-    description: "A restorative mental-health app connecting clients with licensed therapists while quietly tracking everyday wellness signals (sleep, mood, steps, calories) shaping our well-being. Built as a dual client-therapist platform designed across 25 high-fidelity screens.",
+    description: "A restorative mental health app connecting clients with licensed therapists while quietly tracking everyday wellness signals (sleep, mood, steps, calories) shaping our wellbeing. Built as a dual persona platform designed across 25 polished screens.",
     tools: ["Figma", "UX Research", "Interaction Design", "Prototyping", "Information Architecture"],
     category: "Mobile App",
     badge: "Design Project",
