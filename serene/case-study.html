@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Serene — Mental Health & Therapy App · UX Case Study</title>
+<meta name="description" content="UX/UI case study for Serene, a holistic mental health and therapy companion app. Onboarding, therapist discovery, booking, video consults, chat, and wellness tracking." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          sage: {
+            50:  '#F2F6F4',
+            100: '#E1ECE7',
+            200: '#C3D9D1',
+            300: '#A2C3B7',
+            400: '#82B0A4',
+            500: '#7DA89C',
+            600: '#5E8B7E',
+            700: '#456C61',
+            800: '#314D45',
+            900: '#1F302B'
+          },
+          ink: {
+            900: '#0F1417',
+            700: '#2A323A',
+            500: '#5B6670',
+            300: '#9AA3AC'
+          },
+          paper: '#FAFAF7',
+          cream: '#F5F2EC'
+        },
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          serif: ['Fraunces', 'ui-serif', 'Georgia']
+        },
+        boxShadow: {
+          'soft':   '0 10px 40px -12px rgba(31, 48, 43, 0.18)',
+          'softer': '0 6px 30px -10px rgba(31, 48, 43, 0.12)',
+          'phone':  '0 30px 60px -25px rgba(31, 48, 43, 0.35), 0 8px 20px -10px rgba(31, 48, 43, 0.18)'
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #FAFAF7; color: #0F1417; }
+  .display { font-family: 'Fraunces', serif; font-optical-sizing: auto; letter-spacing: -0.02em; }
+  .grain { background-image: radial-gradient(rgba(31,48,43,0.05) 1px, transparent 1px); background-size: 22px 22px; }
+  .phone {
+    border-radius: 38px;
+    background: #fff;
+    padding: 8px;
+    box-shadow: 0 30px 60px -25px rgba(31, 48, 43, 0.35), 0 8px 20px -10px rgba(31, 48, 43, 0.18);
+    border: 1px solid rgba(31,48,43,0.06);
+  }
+  .phone img { border-radius: 30px; display: block; width: 100%; height: auto; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; font-weight: 500;
+    background: #E1ECE7; color: #314D45;
+    border: 1px solid rgba(49, 77, 69, 0.08);
+  }
+  .rule { height: 1px; background: linear-gradient(to right, transparent, rgba(15,20,23,0.15), transparent); }
+  .num {
+    font-family: 'Fraunces', serif;
+    font-feature-settings: "ss01";
+  }
+  .gradient-sage {
+    background: radial-gradient(1200px 600px at 10% 0%, #E1ECE7 0%, transparent 60%),
+                radial-gradient(1000px 500px at 100% 20%, #F5F2EC 0%, transparent 55%),
+                #FAFAF7;
+  }
+  .quote-mark { font-family: 'Fraunces', serif; font-size: 120px; line-height: 0.6; color: #5E8B7E; opacity: 0.25; }
+  .swatch { aspect-ratio: 1/1; border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(15,20,23,0.06); }
+  .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; padding: 2px 6px; border-radius: 6px; background: #F2F6F4; border: 1px solid #C3D9D1; color: #314D45; }
+  .nav-link { transition: color .2s ease; }
+  .nav-link:hover { color: #5E8B7E; }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  .section-eyebrow { letter-spacing: 0.18em; text-transform: uppercase; font-size: 11px; font-weight: 600; color: #5E8B7E; }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ───────── NAV ───────── -->
+<header class="sticky top-0 z-40 backdrop-blur bg-paper/80 border-b border-ink-900/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-sage-500 grid place-items-center text-white">
+        <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M12 21s-7.5-4.6-7.5-11A4.5 4.5 0 0 1 12 6a4.5 4.5 0 0 1 7.5 4c0 6.4-7.5 11-7.5 11Z"/></svg>
+      </span>
+      <span class="font-semibold tracking-tight">Serene<span class="text-sage-600">.</span></span>
+      <span class="hidden sm:inline text-ink-300 text-sm">/ Case Study</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm text-ink-700">
+      <a href="#overview"   class="nav-link">Overview</a>
+      <a href="#problem"    class="nav-link">Problem</a>
+      <a href="#research"   class="nav-link">Research</a>
+      <a href="#system"     class="nav-link">System</a>
+      <a href="#screens"    class="nav-link">Screens</a>
+      <a href="#outcome"    class="nav-link">Outcome</a>
+    </nav>
+    <a href="#screens" class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-4 h-9 rounded-full bg-ink-900 text-white hover:bg-ink-700 transition">
+      View screens
+      <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ───────── HERO ───────── -->
+<section id="top" class="gradient-sage relative overflow-hidden">
+  <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-24 lg:pt-24 lg:pb-32 relative">
+    <div class="grid lg:grid-cols-12 gap-12 items-end">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="chip">2024 · Mobile · iOS / Android</span>
+          <span class="chip" style="background:#F5F2EC;color:#314D45;">UX/UI Case Study</span>
+        </div>
+        <h1 class="display text-5xl sm:text-6xl lg:text-7xl font-medium leading-[1.02] text-ink-900">
+          A calmer way to find help,<br />
+          <span class="italic text-sage-700">talk it out,</span> and<br />
+          take care of yourself.
+        </h1>
+        <p class="mt-8 text-lg text-ink-700 max-w-xl leading-relaxed">
+          <span class="font-semibold text-ink-900">Serene</span> is a mental-health companion that connects clients with licensed therapists,
+          while quietly tracking the everyday signals — sleep, mood, movement, nutrition — that shape how we feel.
+          A complete two-sided product, designed end-to-end across <span class="font-medium">25 screens</span>.
+        </p>
+
+        <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl">
+          <div>
+            <div class="section-eyebrow mb-1">Role</div>
+            <div class="text-ink-900 font-medium">Lead Product Designer</div>
+          </div>
+          <div>
+            <div class="section-eyebrow mb-1">Timeline</div>
+            <div class="text-ink-900 font-medium">8 weeks</div>
+          </div>
+          <div>
+            <div class="section-eyebrow mb-1">Platform</div>
+            <div class="text-ink-900 font-medium">iOS · Android</div>
+          </div>
+          <div>
+            <div class="section-eyebrow mb-1">Tools</div>
+            <div class="text-ink-900 font-medium">Figma · Notion</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="grid grid-cols-2 gap-5">
+          <div class="phone -rotate-3 translate-y-6"><img src="Home-client.png" alt="Client home dashboard" /></div>
+          <div class="phone rotate-3"><img src="Profile.png" alt="Therapist profile" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-20 flex items-center gap-4 text-ink-500 text-xs uppercase tracking-[0.2em]">
+      <span class="h-px w-10 bg-ink-300"></span>
+      <span>Scroll for the story</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── AT A GLANCE ───────── -->
+<section id="overview" class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+  <div class="grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-4">
+      <div class="section-eyebrow mb-4">01 — Overview</div>
+      <h2 class="display text-4xl lg:text-5xl font-medium leading-tight">
+        Therapy, tracking and<br/>community in one place.
+      </h2>
+    </div>
+    <div class="lg:col-span-8 space-y-6 text-ink-700 text-lg leading-relaxed">
+      <p>
+        Most mental-health apps do one thing well: meditation, mood journaling, or therapist matching.
+        Serene was designed as a single, calm home for all of it — so a person in a difficult moment
+        doesn't have to juggle five apps to get the help they actually need.
+      </p>
+      <p>
+        The product spans two connected experiences: a <span class="font-semibold text-ink-900">client app</span> for booking,
+        chatting, and self-monitoring, and a <span class="font-semibold text-ink-900">therapist dashboard</span> for managing
+        appointments and consultations.
+      </p>
+
+      <div class="grid sm:grid-cols-3 gap-4 pt-4">
+        <div class="p-5 rounded-2xl bg-white shadow-softer border border-ink-900/5">
+          <div class="num text-4xl text-sage-700">25</div>
+          <div class="text-sm text-ink-500 mt-1">Screens designed</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white shadow-softer border border-ink-900/5">
+          <div class="num text-4xl text-sage-700">2</div>
+          <div class="text-sm text-ink-500 mt-1">User personas served</div>
+        </div>
+        <div class="p-5 rounded-2xl bg-white shadow-softer border border-ink-900/5">
+          <div class="num text-4xl text-sage-700">9</div>
+          <div class="text-sm text-ink-500 mt-1">Core feature areas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule max-w-7xl mx-auto"></div>
+
+<!-- ───────── PROBLEM ───────── -->
+<section id="problem" class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+  <div class="grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-5">
+      <div class="section-eyebrow mb-4">02 — The Problem</div>
+      <h2 class="display text-4xl lg:text-5xl font-medium leading-tight mb-6">
+        Asking for help is hard.<br/>The tools shouldn't be.
+      </h2>
+      <p class="text-ink-700 text-lg leading-relaxed">
+        Through interviews with prospective users and a competitive teardown of leading platforms,
+        four friction points kept surfacing — each one a moment where a person almost gave up.
+      </p>
+    </div>
+
+    <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+      <div class="p-6 rounded-3xl bg-cream border border-ink-900/5">
+        <div class="num text-3xl text-sage-700 mb-2">01</div>
+        <h3 class="font-semibold mb-2">Discovery is opaque</h3>
+        <p class="text-ink-500 text-sm leading-relaxed">Users can't easily compare therapists by specialty, price, or reviews — picking one feels like guesswork.</p>
+      </div>
+      <div class="p-6 rounded-3xl bg-cream border border-ink-900/5">
+        <div class="num text-3xl text-sage-700 mb-2">02</div>
+        <h3 class="font-semibold mb-2">Booking is bureaucratic</h3>
+        <p class="text-ink-500 text-sm leading-relaxed">Calendars, intake forms, and payment portals live in different places, killing momentum mid-funnel.</p>
+      </div>
+      <div class="p-6 rounded-3xl bg-cream border border-ink-900/5">
+        <div class="num text-3xl text-sage-700 mb-2">03</div>
+        <h3 class="font-semibold mb-2">Tracking lives elsewhere</h3>
+        <p class="text-ink-500 text-sm leading-relaxed">Sleep, mood and activity data sits in separate apps the therapist never sees, so context gets lost.</p>
+      </div>
+      <div class="p-6 rounded-3xl bg-cream border border-ink-900/5">
+        <div class="num text-3xl text-sage-700 mb-2">04</div>
+        <h3 class="font-semibold mb-2">Self-help is shallow</h3>
+        <p class="text-ink-500 text-sm leading-relaxed">Free resources are scattered across YouTube and blogs. There's no curated library tied to a real plan.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16 p-8 lg:p-12 rounded-3xl bg-sage-700 text-sage-50 relative overflow-hidden">
+    <div class="quote-mark absolute -top-4 left-6 text-sage-50">“</div>
+    <p class="display text-2xl lg:text-3xl leading-snug max-w-4xl pl-12">
+      “I downloaded three different apps before my first session — one to find a therapist,
+      one to book, one to track how I was feeling. By the time I was ready to talk, I was already exhausted.”
+    </p>
+    <p class="text-sage-200 text-sm mt-4 pl-12">— User interview, 28, first-time therapy seeker</p>
+  </div>
+</section>
+
+<div class="rule max-w-7xl mx-auto"></div>
+
+<!-- ───────── GOALS ───────── -->
+<section class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+  <div class="grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-4">
+      <div class="section-eyebrow mb-4">03 — Goals</div>
+      <h2 class="display text-4xl lg:text-5xl font-medium leading-tight">
+        Design principles<br/>that guided every screen.
+      </h2>
+    </div>
+    <div class="lg:col-span-8 space-y-4">
+      <div class="p-6 rounded-2xl bg-white border border-ink-900/5 flex gap-5 items-start">
+        <div class="w-10 h-10 rounded-full bg-sage-100 grid place-items-center text-sage-700 shrink-0 mt-1">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1">Reduce time-to-first-session to under 5 minutes</h3>
+          <p class="text-ink-500 leading-relaxed">From opening the app to a confirmed booking — without losing the user to a form.</p>
+        </div>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-ink-900/5 flex gap-5 items-start">
+        <div class="w-10 h-10 rounded-full bg-sage-100 grid place-items-center text-sage-700 shrink-0 mt-1">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-7 11-7 11Z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1">Make wellness data feel supportive, not surveilling</h3>
+          <p class="text-ink-500 leading-relaxed">Use soft color, gentle illustrations and human numbers — never red alerts or shame loops.</p>
+        </div>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-ink-900/5 flex gap-5 items-start">
+        <div class="w-10 h-10 rounded-full bg-sage-100 grid place-items-center text-sage-700 shrink-0 mt-1">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c2-3 5-5 9-5s7 2 9 5c-2 3-5 5-9 5s-7-2-9-5Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1">Create one shared context between client and therapist</h3>
+          <p class="text-ink-500 leading-relaxed">The therapist sees what's relevant — sleep, mood trends — without the client typing a recap each session.</p>
+        </div>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-ink-900/5 flex gap-5 items-start">
+        <div class="w-10 h-10 rounded-full bg-sage-100 grid place-items-center text-sage-700 shrink-0 mt-1">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1">Build a free, curated path for those who aren't ready for therapy yet</h3>
+          <p class="text-ink-500 leading-relaxed">A library, blog and group chats give value before any payment is asked.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule max-w-7xl mx-auto"></div>
+
+<!-- ───────── PERSONAS ───────── -->
+<section id="research" class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+  <div class="mb-12">
+    <div class="section-eyebrow mb-4">04 — Who we're designing for</div>
+    <h2 class="display text-4xl lg:text-5xl font-medium leading-tight max-w-3xl">
+      Two sides of the same conversation.
+    </h2>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+    <!-- Persona 1 -->
+    <article class="p-8 lg:p-10 rounded-3xl bg-white border border-ink-900/5 shadow-softer">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-sage-300 to-sage-600 grid place-items-center text-white text-xl font-semibold">A</div>
+        <div>
+          <h3 class="font-semibold text-lg">Amelia, 28</h3>
+          <p class="text-ink-500 text-sm">Marketing manager · First-time therapy seeker</p>
+        </div>
+      </div>
+      <p class="text-ink-700 leading-relaxed mb-5">
+        Has been feeling low for months but doesn't know where to start. Wants a private, low-friction
+        way to find someone, peek at reviews, and book a single session before committing.
+      </p>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div>
+          <div class="section-eyebrow mb-1">Needs</div>
+          <ul class="space-y-1 text-ink-700">
+            <li>· Trust signals up front</li>
+            <li>· Pay-per-session flexibility</li>
+            <li>· No long onboarding</li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-eyebrow mb-1">Frustrations</div>
+          <ul class="space-y-1 text-ink-700">
+            <li>· Long intake forms</li>
+            <li>· Subscription lock-ins</li>
+            <li>· Cold, clinical UI</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- Persona 2 -->
+    <article class="p-8 lg:p-10 rounded-3xl bg-white border border-ink-900/5 shadow-softer">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-300 to-purple-600 grid place-items-center text-white text-xl font-semibold">J</div>
+        <div>
+          <h3 class="font-semibold text-lg">Dr. John, 41</h3>
+          <p class="text-ink-500 text-sm">Licensed therapist · 320+ active clients</p>
+        </div>
+      </div>
+      <p class="text-ink-700 leading-relaxed mb-5">
+        Runs a small practice and wants a clean way to manage upcoming sessions, jump into video calls
+        in one tap, and see relevant client context without opening five tabs.
+      </p>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div>
+          <div class="section-eyebrow mb-1">Needs</div>
+          <ul class="space-y-1 text-ink-700">
+            <li>· Day-at-a-glance schedule</li>
+            <li>· Quick-join video calls</li>
+            <li>· Client wellness context</li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-eyebrow mb-1">Frustrations</div>
+          <ul class="space-y-1 text-ink-700">
+            <li>· Tool fragmentation</li>
+            <li>· No-show appointments</li>
+            <li>· Manual note-taking</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="rule max-w-7xl mx-auto"></div>
+
+<!-- ───────── USER FLOW ───────── -->
+<section class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+  <div class="grid lg:grid-cols-12 gap-12 mb-12">
+    <div class="lg:col-span-5">
+      <div class="section-eyebrow mb-4">05 — Information Architecture</div>
+      <h2 class="display text-4xl lg:text-5xl font-medium leading-tight">
+        From "I need help" to<br/>"I'm in a session" — fast.
+      </h2>
+    </div>
+    <div class="lg:col-span-7 text-ink-700 text-lg leading-relaxed">
+      <p>
+        The primary client flow was reduced to five touchpoints. Every other surface — library, blog, monitors —
+        branches off the home dashboard so the booking path stays clean and obvious.
+      </p>
+    </div>
+  </div>
+
+  <!-- Flow diagram -->
+  <div class="p-8 lg:p-12 rounded-3xl bg-white border border-ink-900/5 shadow-softer overflow-x-auto">
+    <div class="flex items-center gap-3 lg:gap-5 min-w-[820px]">
+      <!-- Step -->
+      <div class="flex-1 text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-sage-100 grid place-items-center text-sage-700 mb-3">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="text-xs section-eyebrow mb-1">Step 01</div>
+        <div class="font-semibold">Sign up / Login</div>
+        <p class="text-xs text-ink-500 mt-1">3 fields, social options</p>
+      </div>
+      <svg viewBox="0 0 24 24" class="w-6 h-6 text-sage-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+
+      <div class="flex-1 text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-sage-100 grid place-items-center text-sage-700 mb-3">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </div>
+        <div class="text-xs section-eyebrow mb-1">Step 02</div>
+        <div class="font-semibold">Discover therapist</div>
+        <p class="text-xs text-ink-500 mt-1">Filter by need & price</p>
+      </div>
+      <svg viewBox="0 0 24 24" class="w-6 h-6 text-sage-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+
+      <div class="flex-1 text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-sage-100 grid place-items-center text-sage-700 mb-3">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        </div>
+        <div class="text-xs section-eyebrow mb-1">Step 03</div>
+        <div class="font-semibold">Book a slot</div>
+        <p class="text-xs text-ink-500 mt-1">Date + time in 2 taps</p>
+      </div>
+      <svg viewBox="0 0 24 24" class="w-6 h-6 text-sage-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+
+      <div class="flex-1 text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-sage-100 grid place-items-center text-sage-700 mb-3">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M3 10h18"/></svg>
+        </div>
+        <div class="text-xs section-eyebrow mb-1">Step 04</div>
+        <div class="font-semibold">Pay securely</div>
+        <p class="text-xs text-ink-500 mt-1">Saved methods, 1 confirm</p>
+      </div>
+      <svg viewBox="0 0 24 24" class="w-6 h-6 text-sage-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+
+      <div class="flex-1 text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-sage-700 grid place-items-center text-white mb-3">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>
+        </div>
+        <div class="text-xs section-eyebrow mb-1">Step 05</div>
+        <div class="font-semibold">Join session</div>
+        <p class="text-xs text-ink-500 mt-1">Video, chat, or both</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule max-w-7xl mx-auto"></div>
+
+<!-- ───────── DESIGN SYSTEM ───────── -->
+<section id="system" class="bg-cream/60">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-12 gap-12 mb-14">
+      <div class="lg:col-span-5">
+        <div class="section-eyebrow mb-4">06 — Design System</div>
+        <h2 class="display text-4xl lg:text-5xl font-medium leading-tight">
+          A palette borrowed<br/>from the outdoors.
+        </h2>
+      </div>
+      <div class="lg:col-span-7 text-ink-700 text-lg leading-relaxed">
+        <p>
+          Sage green is the spine of the system — a color associated with restoration and growth.
+          Bright accents (purple, orange, magenta) are reserved for data visualization and progress moments,
+          so they feel like rewards rather than warnings.
+        </p>
+      </div>
+    </div>
+
+    <!-- Color -->
+    <div class="grid md:grid-cols-2 gap-10 mb-16">
+      <div>
+        <h3 class="font-semibold mb-5 text-lg">Primary · Sage</h3>
+        <div class="grid grid-cols-5 gap-3">
+          <div><div class="swatch" style="background:#F2F6F4"></div><div class="text-xs mt-2 text-ink-500">50</div><div class="text-xs font-mono">#F2F6F4</div></div>
+          <div><div class="swatch" style="background:#C3D9D1"></div><div class="text-xs mt-2 text-ink-500">200</div><div class="text-xs font-mono">#C3D9D1</div></div>
+          <div><div class="swatch" style="background:#7DA89C"></div><div class="text-xs mt-2 text-ink-500">500</div><div class="text-xs font-mono">#7DA89C</div></div>
+          <div><div class="swatch" style="background:#5E8B7E"></div><div class="text-xs mt-2 text-ink-500">600</div><div class="text-xs font-mono">#5E8B7E</div></div>
+          <div><div class="swatch" style="background:#314D45"></div><div class="text-xs mt-2 text-ink-500">800</div><div class="text-xs font-mono">#314D45</div></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-5 text-lg">Accents · Data viz</h3>
+        <div class="grid grid-cols-5 gap-3">
+          <div><div class="swatch" style="background:#B458F1"></div><div class="text-xs mt-2 text-ink-500">Purple</div><div class="text-xs font-mono">#B458F1</div></div>
+          <div><div class="swatch" style="background:#F5A623"></div><div class="text-xs mt-2 text-ink-500">Amber</div><div class="text-xs font-mono">#F5A623</div></div>
+          <div><div class="swatch" style="background:#FF6B7A"></div><div class="text-xs mt-2 text-ink-500">Coral</div><div class="text-xs font-mono">#FF6B7A</div></div>
+          <div><div class="swatch" style="background:#3DBEEB"></div><div class="text-xs mt-2 text-ink-500">Sky</div><div class="text-xs font-mono">#3DBEEB</div></div>
+          <div><div class="swatch" style="background:#0F1417"></div><div class="text-xs mt-2 text-ink-500">Ink</div><div class="text-xs font-mono">#0F1417</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography & components -->
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="p-8 rounded-3xl bg-white border border-ink-900/5 shadow-softer">
+        <h3 class="font-semibold mb-6 text-lg">Typography</h3>
+        <div class="display text-5xl mb-2 leading-none">Aa</div>
+        <div class="text-sm text-ink-500 mb-1">Display · <span class="font-mono">Fraunces</span></div>
+        <div class="text-xs text-ink-300 mb-8">Used for hero headlines and section titles. Soft, warm, slightly editorial.</div>
+        <div class="text-5xl font-semibold mb-2 leading-none">Aa</div>
+        <div class="text-sm text-ink-500 mb-1">UI · <span class="font-mono">Inter</span></div>
+        <div class="text-xs text-ink-300">Used for body, labels, and numbers. Neutral, dependable, screen-optimized.</div>
+
+        <div class="mt-8 grid grid-cols-3 gap-3 text-sm">
+          <div><div class="text-2xl font-semibold">32/36</div><div class="text-ink-500 text-xs mt-1">H1</div></div>
+          <div><div class="text-xl font-semibold">20/28</div><div class="text-ink-500 text-xs mt-1">H2</div></div>
+          <div><div class="text-base font-semibold">15/22</div><div class="text-ink-500 text-xs mt-1">Body</div></div>
+        </div>
+      </div>
+
+      <div class="p-8 rounded-3xl bg-white border border-ink-900/5 shadow-softer">
+        <h3 class="font-semibold mb-6 text-lg">Core components</h3>
+        <div class="space-y-4">
+          <button class="w-full h-12 rounded-full bg-sage-500 text-white font-medium hover:bg-sage-600 transition">Primary CTA</button>
+          <button class="w-full h-12 rounded-full bg-sage-100 text-sage-700 font-medium border border-sage-200">Secondary</button>
+          <div class="flex gap-2">
+            <span class="chip">Psychiatrist</span>
+            <span class="chip" style="background:#FDE9D8;color:#9A4F18;">Profession</span>
+            <span class="chip" style="background:#E0E9FB;color:#264C9C;">Therapist</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-sage-50 border border-sage-100 flex items-center justify-between">
+            <div>
+              <div class="text-sm text-ink-500">Sleep Time</div>
+              <div class="num text-2xl text-sage-700">7.2<span class="text-sm font-sans text-ink-500 ml-1">hrs</span></div>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-sage-200 grid place-items-center text-sage-700">
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+            </div>
+          </div>
+          <div class="p-3 rounded-xl bg-paper border border-ink-900/5 flex items-center gap-3">
+            <span class="kbd">⌘</span>
+            <span class="text-sm text-ink-500">Soft elevation, 16–24px radii, generous whitespace.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── KEY SCREENS ───────── -->
+<section id="screens" class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+  <div class="mb-14">
+    <div class="section-eyebrow mb-4">07 — Key Screens</div>
+    <h2 class="display text-4xl lg:text-5xl font-medium leading-tight max-w-3xl">
+      Every surface, organized<br/>by what the user is trying to do.
+    </h2>
+  </div>
+
+  <!-- 7.1 Onboarding -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.1 — Onboarding</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">A welcoming first 30 seconds.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">Branded but minimal. Social options, three required fields, and a single forgivable mistake state.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-8 lg:gap-12">
+      <div>
+        <div class="phone"><img src="Login.png" alt="Login screen" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Login</div><p class="text-sm text-ink-500 mt-1">Email + password with social SSO. "Remember me" and password recovery sit inline so users don't dig.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Sign%20up.png" alt="Sign up screen" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Create account</div><p class="text-sm text-ink-500 mt-1">Four fields max — name, email, password, age. Age is used to surface relevant therapists later.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.2 Client Home -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.2 — Client Home</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">A daily glance, not a homework assignment.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">Today's date, sleep, mood, activity and nutrition all on one scroll — capped with a suggested therapist for momentum.</p>
+    </div>
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div class="lg:col-span-5">
+        <div class="phone"><img src="Home-client.png" alt="Client home dashboard" /></div>
+      </div>
+      <div class="lg:col-span-7 space-y-5">
+        <div class="p-5 rounded-2xl bg-white border border-ink-900/5">
+          <div class="font-semibold mb-1">Top-of-screen wellness summary</div>
+          <p class="text-sm text-ink-500">Sleep and mood are paired because they're the two most predictive signals of how the day will feel.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-ink-900/5">
+          <div class="font-semibold mb-1">A single ring for nutrition</div>
+          <p class="text-sm text-ink-500">Macros are split inside one ring instead of four — less cognitive load, more "am I on track?"</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-ink-900/5">
+          <div class="font-semibold mb-1">Suggested Therapist card</div>
+          <p class="text-sm text-ink-500">Closes the loop: tracking is great, but if you'd like to talk to someone, here's a path that takes one tap.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.3 Discovery -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.3 — Discovery</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">Comparing therapists like you'd compare anything else.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">Specialty pill, social proof (clients · ratings), price-per-hour and a single "View Profile" — all visible without tapping.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+      <div>
+        <div class="phone"><img src="Search.png" alt="Search therapists" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Search</div><p class="text-sm text-ink-500 mt-1">Result cards prioritize the three trust signals: who, what, how much.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Profile.png" alt="Therapist profile" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Therapist profile</div><p class="text-sm text-ink-500 mt-1">About, library of intro videos, real reviews, and a sticky "Book Appointment" footer that always stays in reach.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Profile-1.png" alt="Client profile with stats" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Client profile (therapist view)</div><p class="text-sm text-ink-500 mt-1">When the therapist opens a client, sleep, mood and calorie trends are the first things they see.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.4 Booking -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.4 — Booking & Payment</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">From "Book" to "Confirmed" in two taps.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">A horizontal date picker, time-slot grid, and saved payment methods — no typing required.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-8 lg:gap-12">
+      <div>
+        <div class="phone"><img src="Booking.png" alt="Book appointment" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Book Appointment</div><p class="text-sm text-ink-500 mt-1">Friendly illustration, swipeable dates, and time slots in a relaxed grid — booking shouldn't feel like an airline form.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Payment.png" alt="Payment method" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Payment</div><p class="text-sm text-ink-500 mt-1">Saved methods first, "Add new" last. The Confirm CTA stays calmly disabled until a method is selected.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.5 Sessions -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.5 — Sessions & Conversations</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">The room where it happens.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">Calls, 1:1 chats, group support rooms, and a session history — every modality lives behind one familiar layout.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      <div>
+        <div class="phone"><img src="Consultation.png" alt="Upcoming consultations" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">Consultations</div><p class="text-xs text-ink-500 mt-1">Upcoming sessions with a one-tap rejoin & cancel.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Consultation%20Video%20Call.png" alt="Video call" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">Video call</div><p class="text-xs text-ink-500 mt-1">Full-bleed video, picture-in-picture, classic three-button control.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Chat.png" alt="1:1 chat" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">1:1 chat</div><p class="text-xs text-ink-500 mt-1">Date dividers, asymmetric bubbles, voice + photo input baked in.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Group%20Chat.png" alt="Group chat" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">Group support</div><p class="text-xs text-ink-500 mt-1">Topic-based rooms (Anxiety, Depression…) for moments between sessions.</p></div>
+      </div>
+    </div>
+
+    <div class="mt-10 grid sm:grid-cols-2 gap-8 lg:gap-12">
+      <div>
+        <div class="phone"><img src="History.png" alt="Session history" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Session history</div><p class="text-sm text-ink-500 mt-1">Past sessions stay accessible with a recorded clip and quick-delete — useful for therapists revisiting context.</p></div>
+      </div>
+      <div class="flex flex-col justify-center p-8 rounded-3xl bg-sage-700 text-white">
+        <div class="quote-mark text-sage-200">“</div>
+        <p class="display text-2xl leading-snug">
+          The hardest part of therapy is showing up.<br/>So we made <span class="italic">showing up</span> the easiest part.
+        </p>
+        <p class="text-sage-200 text-sm mt-6">Design principle for the session surfaces</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.6 Self-care -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.6 — Self-care monitors</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">Numbers that feel like a friend asking how you slept.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">Each monitor follows the same template: a calendar strip, a hero ring, and a 7-day stat — so the cognitive cost stays at zero.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      <div>
+        <div class="phone"><img src="Mood%20Monitor.png" alt="Mood Monitor" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">Mood Monitor</div><p class="text-xs text-ink-500 mt-1">Five emoji states, weekly stacked bars — never a "score".</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Sleep%20Monitor.png" alt="Sleep Monitor" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">Sleep Monitor</div><p class="text-xs text-ink-500 mt-1">Bed time + wake time with REM / Deep / Light split.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Steps.png" alt="Steps Counter" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">Steps Counter</div><p class="text-xs text-ink-500 mt-1">Distance, time and calories on one card.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Calories.png" alt="Nutrition Monitor" /></div>
+        <div class="mt-3 px-2"><div class="font-semibold text-sm">Nutrition</div><p class="text-xs text-ink-500 mt-1">Macros split inside the energy ring.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.7 Library / Blog -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.7 — Resources</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">A free path for those not ready to book — yet.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">The library is a quiet, generous on-ramp. No paywalls, no upsells — just curated videos, a blog, and group chats by topic.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+      <div>
+        <div class="phone"><img src="Library.png" alt="Library categories" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Library — topics</div><p class="text-sm text-ink-500 mt-1">Anxiety, Depression, Stress, Loneliness, ADHD, OCD, Divorce — labelled in plain language.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Library-1.png" alt="Library Anxiety detail" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Library — detail</div><p class="text-sm text-ink-500 mt-1">Editorial cover, "Group Chat" entry point, and a searchable feed of bite-sized videos.</p></div>
+      </div>
+      <div>
+        <div class="phone"><img src="Blog.png" alt="Blog" /></div>
+        <div class="mt-4 px-2"><div class="font-semibold">Blog</div><p class="text-sm text-ink-500 mt-1">Long-form articles for the people who'd rather read than watch.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.8 Therapist side -->
+  <div class="mb-24">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.8 — Therapist Dashboard</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">A working day, in one screen.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">Two big stat tiles set the tone for the day. Below, every upcoming appointment is a single tap from a video call or a respectful cancel.</p>
+    </div>
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div class="lg:col-span-5">
+        <div class="phone"><img src="Therapist%20%20Dashboard.png" alt="Therapist Dashboard" /></div>
+      </div>
+      <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+        <div class="p-6 rounded-2xl bg-white border border-ink-900/5">
+          <div class="num text-3xl text-sage-700 mb-1">321</div>
+          <div class="text-sm text-ink-500">Total appointments handled to date — quietly motivating without being a leaderboard.</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-ink-900/5">
+          <div class="num text-3xl text-sage-700 mb-1">5</div>
+          <div class="text-sm text-ink-500">Upcoming today — bounded so the day feels finite, not endless.</div>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-ink-900/5 sm:col-span-2">
+          <div class="font-semibold mb-2">Two-button row on every appointment</div>
+          <p class="text-sm text-ink-500">Yellow camera = "join now". Red ✕ = "we need to reschedule." No ambiguous icons, no nested menus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.9 Premium -->
+  <div>
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-8">
+      <div>
+        <div class="section-eyebrow mb-2">7.9 — Premium</div>
+        <h3 class="display text-3xl lg:text-4xl font-medium">Monetization that doesn't beg.</h3>
+      </div>
+      <p class="text-ink-500 max-w-md">A single, comparison-led upsell screen. Three plans, a transparent feature matrix, and a cancellation note in plain English at the bottom.</p>
+    </div>
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div class="lg:col-span-5">
+        <div class="phone"><img src="Premium.png" alt="Premium subscription" /></div>
+      </div>
+      <div class="lg:col-span-7 space-y-4">
+        <div class="p-6 rounded-2xl bg-white border border-ink-900/5">
+          <div class="font-semibold mb-1">Free vs. Pro feature matrix</div>
+          <p class="text-sm text-ink-500">Checks and dashes — no FOMO copy, no "limited time" countdowns.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-ink-900/5">
+          <div class="font-semibold mb-1">Yearly is pre-selected</div>
+          <p class="text-sm text-ink-500">Best value for the user, healthiest unit economics for the business — both wins are honest.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-ink-900/5">
+          <div class="font-semibold mb-1">"Subscription will auto-renew. Cancel anytime."</div>
+          <p class="text-sm text-ink-500">The footnote that builds long-term trust — surfaced at the moment of decision.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule max-w-7xl mx-auto"></div>
+
+<!-- ───────── OUTCOMES ───────── -->
+<section id="outcome" class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+  <div class="grid lg:grid-cols-12 gap-12 mb-12">
+    <div class="lg:col-span-5">
+      <div class="section-eyebrow mb-4">08 — Outcomes</div>
+      <h2 class="display text-4xl lg:text-5xl font-medium leading-tight">
+        What changed once<br/>the screens were on devices.
+      </h2>
+    </div>
+    <div class="lg:col-span-7 text-ink-700 text-lg leading-relaxed">
+      <p>
+        Tested with 8 participants in moderated sessions — 6 prospective clients, 2 therapists.
+        Tasks included finding a therapist, booking a session, and logging a mood entry. The patterns below held across the cohort.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid sm:grid-cols-3 gap-5">
+    <div class="p-8 rounded-3xl bg-sage-700 text-white">
+      <div class="num text-6xl mb-2">3:42</div>
+      <div class="text-sage-100">Median time to a confirmed first booking — beating the 5-minute target.</div>
+    </div>
+    <div class="p-8 rounded-3xl bg-white border border-ink-900/5 shadow-softer">
+      <div class="num text-6xl text-sage-700 mb-2">100%</div>
+      <div class="text-ink-500">Of test users completed the booking flow without help on the first attempt.</div>
+    </div>
+    <div class="p-8 rounded-3xl bg-white border border-ink-900/5 shadow-softer">
+      <div class="num text-6xl text-sage-700 mb-2">4.6<span class="text-2xl">/5</span></div>
+      <div class="text-ink-500">Average "feels calming" rating from a 1–5 brand-perception question after the session.</div>
+    </div>
+  </div>
+
+  <div class="mt-12 grid lg:grid-cols-2 gap-6">
+    <details class="p-6 rounded-2xl bg-white border border-ink-900/5 group">
+      <summary class="flex items-center justify-between font-semibold">
+        What worked
+        <svg viewBox="0 0 24 24" class="w-5 h-5 text-sage-600 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      </summary>
+      <ul class="mt-4 space-y-2 text-ink-500 text-sm leading-relaxed">
+        <li>· Sage-led palette consistently rated as "calming" and "trustworthy" in unprompted feedback.</li>
+        <li>· The unified monitor template (calendar → ring → weekly bars) made every health surface feel learnable in seconds.</li>
+        <li>· The sticky "Book Appointment" footer on profiles drove the highest task-completion rate.</li>
+      </ul>
+    </details>
+    <details class="p-6 rounded-2xl bg-white border border-ink-900/5 group">
+      <summary class="flex items-center justify-between font-semibold">
+        What I'd change next
+        <svg viewBox="0 0 24 24" class="w-5 h-5 text-sage-600 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      </summary>
+      <ul class="mt-4 space-y-2 text-ink-500 text-sm leading-relaxed">
+        <li>· Add a guided "first-time" onboarding that explains the monitors before they fill with data.</li>
+        <li>· Introduce filters on the search screen — specialty, language, price range — surfaced as chips above results.</li>
+        <li>· Build an empty state for the home dashboard that gracefully handles users with no tracked data yet.</li>
+        <li>· Explore an in-session note-capture flow for therapists, paired with a private summary they can share back.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- ───────── CTA ───────── -->
+<section class="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
+  <div class="p-10 lg:p-16 rounded-3xl bg-ink-900 text-white relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-sage-600/40 blur-3xl"></div>
+    <div class="relative grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-8">
+        <div class="section-eyebrow mb-4 text-sage-300">Thanks for reading</div>
+        <h2 class="display text-4xl lg:text-5xl font-medium leading-tight">
+          Got a product that needs<br/>the same kind of care?
+        </h2>
+        <p class="text-ink-300 mt-5 max-w-2xl">
+          I design calm, considered interfaces for products that touch real lives — health, finance, education.
+          Always happy to talk through a project, share more of the process, or geek out over color systems.
+        </p>
+      </div>
+      <div class="lg:col-span-4 flex flex-col gap-3">
+        <a href="mailto:hello@example.com" class="h-12 rounded-full bg-sage-500 hover:bg-sage-400 text-white font-medium grid place-items-center transition">Get in touch</a>
+        <a href="#top" class="h-12 rounded-full border border-white/20 text-white font-medium grid place-items-center hover:bg-white/5 transition">Back to top</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FOOTER ───────── -->
+<footer class="border-t border-ink-900/10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-8 flex flex-wrap items-center justify-between gap-4 text-sm text-ink-500">
+    <div>© Serene · A UX/UI case study</div>
+    <div class="flex items-center gap-5">
+      <a href="#overview" class="nav-link">Overview</a>
+      <a href="#screens"  class="nav-link">Screens</a>
+      <a href="#outcome"  class="nav-link">Outcome</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
