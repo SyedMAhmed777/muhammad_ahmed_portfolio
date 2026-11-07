@@ -4,6 +4,20 @@ import { MapPin, Calendar } from "lucide-react";
 
 const experiences = [
   {
+    company: "SOFTZen Systems",
+    role: "UI/UX Designer",
+    period: "November 2024 to Present",
+    location: "Islamabad (Remote)",
+    color: "text-emerald-400",
+    dot: "bg-emerald-500",
+    ring: "ring-emerald-500/30",
+    border: "hover:border-emerald-500/30",
+    bullets: [
+      "Designed web and mobile experiences, from user flows and wireframes to prototypes and high fidelity UI, while maintaining usability and visual consistency.",
+      "Created reusable Figma components and design patterns while collaborating with developers and the project manager to ensure smooth design to development handoff.",
+    ],
+  },
+  {
     company: "O3 Interfaces",
     role: "UI/UX Designer",
     period: "May to September 2024",
@@ -20,7 +34,7 @@ const experiences = [
   },
   {
     company: "InterfaceX",
-    role: "Product Designer",
+    role: "UI/UX Designer",
     period: "October 2023 to April 2024",
     location: "Islamabad (Onsite)",
     color: "text-cyan-400",
