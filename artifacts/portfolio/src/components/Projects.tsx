@@ -16,6 +16,8 @@ const toolColors: Record<string, string> = {
   "Web Design":         "text-teal-400 bg-teal-400/10 border-teal-400/20",
   "UI Design":          "text-purple-400 bg-purple-400/10 border-purple-400/20",
   "Branding":           "text-fuchsia-400 bg-fuchsia-400/10 border-fuchsia-400/20",
+  "Notion":             "text-stone-300 bg-stone-300/10 border-stone-300/20",
+  "Information Architecture": "text-yellow-400 bg-yellow-400/10 border-yellow-400/20",
   "Stationery":         "text-lime-400 bg-lime-400/10 border-lime-400/20",
 };
 

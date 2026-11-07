@@ -9,7 +9,7 @@ const stats = [
 
 const tools = [
   { name: "Figma", color: "text-violet-400", bg: "bg-violet-500/10", border: "border-violet-500/20" },
-  { name: "Adobe XD", color: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
+  
   { name: "Sketch", color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
 ];
 
@@ -45,7 +45,7 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <p className="text-foreground/80 text-lg leading-relaxed mb-8">
-              Hi, I'm Muhammad Ahmed. I'm a Product Designer with over three years of experience delivering user centered design solutions across web and mobile products. I am proficient in the entire end to end UX design process, from user research and wireframing through to prototyping and polished design using Figma, Adobe XD, and Sketch.
+              Hi, I'm Muhammad Ahmed. I'm a Product Designer with over three years of experience delivering user centered design solutions across web and mobile products. I am proficient in the entire end to end UX design process, from user research and wireframing through to prototyping and polished high fidelity UI in Figma, and I use AI-assisted design tools to speed up my workflow.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-12">
               Throughout my work, I build scalable design systems, conduct usability testing, and collaborate across functions with product managers and engineers in Agile and Scrum environments to ship accessible, conversion focused digital experiences.

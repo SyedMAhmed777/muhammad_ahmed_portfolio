@@ -28,8 +28,9 @@ const skillGroups = [
   {
     category: "Tools",
     skills: [
-      "Figma (Variables & Tokenization)", "Sketch", "Adobe XD",
+      "Figma (Auto Layouts & Variables)", "Sketch",
       "Adobe Illustrator", "Adobe Photoshop",
+      "Figma AI", "Midjourney", "ChatGPT", "Claude Design",
     ],
     bar: "bg-amber-500",
     cardGlow: "hover:border-amber-500/30",
